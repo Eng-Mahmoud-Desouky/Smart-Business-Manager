@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Interaction Logging</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed-dim": "#4edea3",
+                        "inverse-on-surface": "#f3effc",
+                        "on-tertiary-fixed-variant": "#7b2f00",
+                        "primary": "#3525cd",
+                        "on-primary-container": "#dad7ff",
+                        "on-secondary-container": "#00714d",
+                        "background": "#fcf8ff",
+                        "on-tertiary-fixed": "#351000",
+                        "on-secondary-fixed": "#002113",
+                        "on-background": "#1b1b24",
+                        "tertiary": "#7e3000",
+                        "tertiary-fixed": "#ffdbcc",
+                        "outline": "#777587",
+                        "surface-variant": "#e4e1ee",
+                        "surface-container": "#f0ecf9",
+                        "surface-tint": "#4d44e3",
+                        "surface-bright": "#fcf8ff",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "error": "#ba1a1a",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "surface-dim": "#dcd8e5",
+                        "on-primary-fixed": "#0f0069",
+                        "tertiary-fixed-dim": "#ffb695",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#c3c0ff",
+                        "primary-container": "#4f46e5",
+                        "primary-fixed": "#e2dfff",
+                        "inverse-surface": "#302f39",
+                        "on-error-container": "#93000a",
+                        "secondary": "#006c49",
+                        "on-surface-variant": "#464555",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed": "#6ffbbe",
+                        "secondary-container": "#6cf8bb",
+                        "on-tertiary-container": "#ffd2be",
+                        "on-surface": "#1b1b24",
+                        "surface-container-highest": "#e4e1ee",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed-variant": "#005236",
+                        "surface-container-high": "#eae6f4",
+                        "on-primary": "#ffffff",
+                        "outline-variant": "#c7c4d8",
+                        "surface-container-low": "#f5f2ff",
+                        "on-secondary": "#ffffff",
+                        "tertiary-container": "#a44100",
+                        "surface": "#fcf8ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack_lg": "24px",
+                        "container_margin": "16px",
+                        "stack_sm": "8px",
+                        "gutter": "12px",
+                        "stack_md": "16px",
+                        "unit": "4px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["Inter"],
+                        "h3": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "h2": ["Inter"],
+                        "insight-text": ["Inter"],
+                        "h1": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "h3": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "h2": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "insight-text": ["15px", { "lineHeight": "22px", "fontWeight": "500" }],
+                        "h1": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-lg min-h-screen flex flex-col antialiased">
+<!-- TopAppBar -->
+<header class="bg-white/80 dark:bg-gray-950/80 backdrop-blur-md text-indigo-600 dark:text-indigo-400 font-['Inter'] font-semibold tracking-tight docked full-width top-0 z-40 border-b border-gray-200 dark:border-gray-800 shadow-sm flex items-center justify-between px-4 h-16 w-full">
+<div class="flex items-center gap-4">
+<div class="h-8 w-8 rounded-full bg-surface-container-high overflow-hidden shrink-0">
+<img alt="User Profile Image" class="h-full w-full object-cover" data-alt="A close up portrait of a professional individual looking confident. Clean, modern aesthetic with soft, high-key lighting emphasizing a minimal, frictionless vibe perfect for a high-utility smart business tool. The color palette focuses on whites, soft grays, and natural skin tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcWkD86Fy0_VUMbUhifqUFfN7AamtNmZaUSU9IwXQb3wJ5vmVAdrUkRhDXWW0cYZYwNQoR-wpHuMfPZGal86t-NgStEx9tCqtBXzGIoUNpuhTbnYqK11P6w-xeZUxkRMdxw_CRVJSEhgBNwQiCXkLeYPqaqA8SR8o0poTTtG8ov77x4L6hM3WSPFABlUCf5yZsPddsuGQIpVLExoLHf-Md7hR9C1EEdSzGDsh-pDufTW1yrp-kC8aVoLda8vXCUCqrmjfQtGO-JH0"/>
+</div>
+<span class="text-indigo-600 dark:text-indigo-400 font-bold text-lg">Smart Manager</span>
+</div>
+<button class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors active:scale-95 duration-150 p-2 rounded-full">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">notifications</span>
+</button>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 overflow-y-auto px-container_margin py-stack_lg flex flex-col gap-stack_lg w-full max-w-2xl mx-auto pb-32">
+<div class="flex flex-col gap-stack_sm">
+<h1 class="font-h1 text-h1 text-on-background">Log Interaction</h1>
+<p class="font-body-sm text-body-sm text-outline">Quickly record meeting notes, calls, or emails.</p>
+</div>
+<!-- Interaction Type Selector -->
+<div class="bg-surface-container-lowest rounded-xl p-stack_md shadow-[0_2px_8px_rgba(0,0,0,0.04)] border border-outline-variant/30 flex flex-col gap-stack_md">
+<label class="font-label-caps text-label-caps text-on-surface-variant">Type</label>
+<div class="grid grid-cols-3 gap-gutter">
+<button class="flex flex-col items-center justify-center py-stack_md px-2 rounded-lg border-2 border-primary-container bg-primary-container/5 text-primary-container transition-colors">
+<span class="material-symbols-outlined mb-2" style="font-variation-settings: 'FILL' 1;">groups</span>
+<span class="font-body-sm text-body-sm font-medium">Meeting</span>
+</button>
+<button class="flex flex-col items-center justify-center py-stack_md px-2 rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined mb-2">call</span>
+<span class="font-body-sm text-body-sm font-medium">Call</span>
+</button>
+<button class="flex flex-col items-center justify-center py-stack_md px-2 rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined mb-2">mail</span>
+<span class="font-body-sm text-body-sm font-medium">Email</span>
+</button>
+</div>
+</div>
+<!-- Client & Subject Input -->
+<div class="flex flex-col gap-stack_md">
+<div class="flex flex-col gap-unit">
+<label class="font-label-caps text-label-caps text-on-surface-variant px-1">Client / Contact</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">person_search</span>
+<input class="w-full pl-10 pr-4 py-3 rounded-xl border border-outline-variant bg-surface-container-lowest font-body-lg text-body-lg text-on-background focus:outline-none focus:border-primary-container focus:ring-3 focus:ring-primary-container/20 transition-all" placeholder="Search clients..." type="text"/>
+</div>
+</div>
+<div class="flex flex-col gap-unit">
+<label class="font-label-caps text-label-caps text-on-surface-variant px-1">Subject</label>
+<input class="w-full px-4 py-3 rounded-xl border border-outline-variant bg-surface-container-lowest font-body-lg text-body-lg text-on-background focus:outline-none focus:border-primary-container focus:ring-3 focus:ring-primary-container/20 transition-all" placeholder="Brief summary of interaction" type="text"/>
+</div>
+</div>
+<!-- Notes Area -->
+<div class="flex flex-col gap-unit">
+<label class="font-label-caps text-label-caps text-on-surface-variant px-1">Notes</label>
+<textarea class="w-full px-4 py-3 rounded-xl border border-outline-variant bg-surface-container-lowest font-body-lg text-body-lg text-on-background resize-none focus:outline-none focus:border-primary-container focus:ring-3 focus:ring-primary-container/20 transition-all" placeholder="Record key discussion points, decisions, or action items here..." rows="6"></textarea>
+</div>
+<!-- Smart Insight AI Toggle -->
+<div class="relative rounded-xl border-l-[3px] border-l-[#8B5CF6] bg-[#8B5CF6]/[0.02] p-stack_md shadow-[0_4px_12px_rgba(139,92,246,0.05)] border border-t-outline-variant/20 border-r-outline-variant/20 border-b-outline-variant/20">
+<!-- Glow effect behind -->
+<div class="absolute -inset-1 bg-gradient-to-r from-[#8B5CF6]/10 to-[#EC4899]/10 blur-[4px] rounded-xl -z-10"></div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-full bg-gradient-to-br from-[#8B5CF6] to-[#EC4899] flex items-center justify-center text-white shrink-0">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+<div class="flex flex-col">
+<span class="font-insight-text text-insight-text text-on-background">Ask AI for next steps</span>
+<span class="font-body-sm text-body-sm text-outline">Automatically extract tasks from notes</span>
+</div>
+</div>
+<!-- Toggle Switch -->
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-surface-variant rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="flex gap-gutter pt-stack_sm mt-auto">
+<button class="flex-1 py-3 px-4 rounded-xl border border-outline-variant font-body-lg text-body-lg font-medium text-on-surface-variant hover:bg-surface-container-low transition-colors">
+                Cancel
+            </button>
+<button class="flex-1 py-3 px-4 rounded-xl bg-primary-container text-white font-body-lg text-body-lg font-medium hover:bg-primary transition-colors shadow-[0_2px_8px_rgba(79,70,225,0.3)] shadow-[inset_0_1px_0_rgba(255,255,255,0.2)]">
+                Save Interaction
+            </button>
+</div>
+</main>
+<!-- BottomNavBar (Hidden on MD up, suppressed by layout logic if strictly transactional, but included per prompt instructions if considering it a main ecosystem task. Opting to show as requested by JSON inclusion, though technically a 'task' page might suppress it. Will render as inactive overall or highlight a relevant tab if appropriate. Assuming 'Clients' is closest intent for interaction logging) -->
+<nav class="md:hidden bg-white/90 dark:bg-gray-900/90 backdrop-blur-lg text-indigo-600 dark:text-indigo-400 font-['Inter'] text-[10px] font-medium fixed bottom-0 w-full rounded-t-2xl z-50 border-t border-gray-100 dark:border-gray-800 shadow-[0_-4px_12px_rgba(79,70,225,0.06)] flex justify-around items-center h-20 px-2 pb-safe w-full">
+<a class="flex flex-col items-center justify-center text-gray-400 dark:text-gray-500 px-3 py-1 hover:text-indigo-500 dark:hover:text-indigo-300 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined mb-1">dashboard</span>
+<span>Home</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-indigo-50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 rounded-xl px-3 py-1 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">groups</span>
+<span>Clients</span>
+</a>
+<a class="flex flex-col items-center justify-center text-gray-400 dark:text-gray-500 px-3 py-1 hover:text-indigo-500 dark:hover:text-indigo-300 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined mb-1">payments</span>
+<span>Finance</span>
+</a>
+<a class="flex flex-col items-center justify-center text-gray-400 dark:text-gray-500 px-3 py-1 hover:text-indigo-500 dark:hover:text-indigo-300 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined mb-1">auto_awesome</span>
+<span>Insights</span>
+</a>
+<a class="flex flex-col items-center justify-center text-gray-400 dark:text-gray-500 px-3 py-1 hover:text-indigo-500 dark:hover:text-indigo-300 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined mb-1">settings</span>
+<span>Settings</span>
+</a>
+</nav>
+<!-- SideNav for Web (Hidden on Mobile) -->
+<aside class="hidden md:flex flex-col h-full py-6 bg-white dark:bg-gray-900 text-indigo-600 dark:text-indigo-400 font-['Inter'] text-sm h-full w-72 rounded-r-2xl divide-y divide-gray-100 dark:divide-gray-800 shadow-2xl fixed left-0 top-16 bottom-0 z-30">
+<div class="px-6 pb-6 flex items-center gap-4">
+<div class="h-10 w-10 rounded-full bg-surface-container overflow-hidden shrink-0">
+<img alt="Business Owner" class="h-full w-full object-cover" data-alt="A close up portrait of a professional individual looking confident. Clean, modern aesthetic with soft, high-key lighting emphasizing a minimal, frictionless vibe perfect for a high-utility smart business tool. The color palette focuses on whites, soft grays, and natural skin tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsmsBk5fnZYAlhwjFAS3VKs3QtY7A2Vw37ThgpS7n2hKtiwFzJBJBXzZwO3kAUrNZKYyvL7xQdcIcOwAoGLwVwvmqsKtxzqZn3tMUswN17EAc_QNqtYC7-FqK14jLowrGdXNL6AlaDiFSub4UirJQ3QTA6l03e0XYmo3tmISsvb0U7Y_XkLvoXz-byoS62IyfWtI2EoUwK190YN-1eN1fVUp0Wf7Aiv5aG4sgSyAqEz2BAbE2BErYWuRLxbHMdu9Jrnqum8SwReCk"/>
+</div>
+<div>
+<div class="font-bold text-on-surface">Business Manager</div>
+<div class="text-xs text-outline">Insightful Growth</div>
+</div>
+</div>
+<nav class="flex-1 px-4 py-6 space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span>Overview</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl bg-indigo-50 dark:bg-indigo-900/20 text-indigo-700 dark:text-indigo-300 font-semibold transition-all duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+<span>Client List</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">account_balance</span>
+<span>Revenue</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">lightbulb</span>
+<span>Recommendations</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">account_circle</span>
+<span>Profile</span>
+</a>
+</nav>
+</aside>
+</body></html>

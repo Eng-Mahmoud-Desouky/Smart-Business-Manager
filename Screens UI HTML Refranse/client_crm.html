@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Smart Manager - Client List</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed-dim": "#4edea3",
+                    "inverse-on-surface": "#f3effc",
+                    "on-tertiary-fixed-variant": "#7b2f00",
+                    "primary": "#3525cd",
+                    "on-primary-container": "#dad7ff",
+                    "on-secondary-container": "#00714d",
+                    "background": "#fcf8ff",
+                    "on-tertiary-fixed": "#351000",
+                    "on-secondary-fixed": "#002113",
+                    "on-background": "#1b1b24",
+                    "tertiary": "#7e3000",
+                    "tertiary-fixed": "#ffdbcc",
+                    "outline": "#777587",
+                    "surface-variant": "#e4e1ee",
+                    "surface-container": "#f0ecf9",
+                    "surface-tint": "#4d44e3",
+                    "surface-bright": "#fcf8ff",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-fixed-variant": "#3323cc",
+                    "error": "#ba1a1a",
+                    "primary-fixed-dim": "#c3c0ff",
+                    "surface-dim": "#dcd8e5",
+                    "on-primary-fixed": "#0f0069",
+                    "tertiary-fixed-dim": "#ffb695",
+                    "on-error": "#ffffff",
+                    "inverse-primary": "#c3c0ff",
+                    "primary-container": "#4f46e5",
+                    "primary-fixed": "#e2dfff",
+                    "inverse-surface": "#302f39",
+                    "on-error-container": "#93000a",
+                    "secondary": "#006c49",
+                    "on-surface-variant": "#464555",
+                    "error-container": "#ffdad6",
+                    "secondary-fixed": "#6ffbbe",
+                    "secondary-container": "#6cf8bb",
+                    "on-tertiary-container": "#ffd2be",
+                    "on-surface": "#1b1b24",
+                    "surface-container-highest": "#e4e1ee",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-fixed-variant": "#005236",
+                    "surface-container-high": "#eae6f4",
+                    "on-primary": "#ffffff",
+                    "outline-variant": "#c7c4d8",
+                    "surface-container-low": "#f5f2ff",
+                    "on-secondary": "#ffffff",
+                    "tertiary-container": "#a44100",
+                    "surface": "#fcf8ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack_lg": "24px",
+                    "container_margin": "16px",
+                    "stack_sm": "8px",
+                    "gutter": "12px",
+                    "stack_md": "16px",
+                    "unit": "4px"
+            },
+            "fontFamily": {
+                    "label-caps": ["Inter"],
+                    "h3": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "h2": ["Inter"],
+                    "insight-text": ["Inter"],
+                    "h1": ["Inter"]
+            },
+            "fontSize": {
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "h3": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "h2": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "insight-text": ["15px", {"lineHeight": "22px", "fontWeight": "500"}],
+                    "h1": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .ai-gradient-border {
+            border-left: 2px solid;
+            border-image: linear-gradient(to bottom, #4f46e5, #a44100) 1;
+        }
+        .ai-glow {
+            box-shadow: 0 0 8px 2px rgba(79, 70, 229, 0.1);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background h-screen flex flex-col md:flex-row overflow-hidden">
+<!-- TopAppBar (Web & Mobile) -->
+<header class="md:hidden bg-white/80 dark:bg-gray-950/80 backdrop-blur-md text-indigo-600 dark:text-indigo-400 font-['Inter'] font-semibold tracking-tight docked full-width top-0 z-40 border-b border-gray-200 dark:border-gray-800 shadow-sm flex items-center justify-between px-4 h-16 w-full shrink-0">
+<div class="flex items-center gap-3">
+<img alt="User Profile Image" class="w-8 h-8 rounded-full object-cover" data-alt="A close up professional headshot of a business manager, crisp lighting, high quality, light mode aesthetic, modern minimalist context" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAELmIc2h_RAA6ZE-bnbYJPpYcrrnfbXSlV5kGtYppz0RJq1y5DevicsWUtLEb0BRwE5S-fn3rfjFNiTumhqB0pCbaVviWtpFA9b5-_bdi1Uh7tCbF0iikcyzw-skdei0ZJ9o9ZUev9XMGwu-ZRDwQvXnvbLVdNxqw1LnA9GIyJjTKlm7SmTCuuGaF3Wmdl7yxJ5BtHB2xns6GnbhjNmqZCvbmDZgMAiUbO0Psltk9D6W1on9U6aGjmygjQqDM0HruN4GzPDUKt-qY"/>
+<span class="text-indigo-600 dark:text-indigo-400 font-bold text-lg">Smart Manager</span>
+</div>
+<button class="hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors active:scale-95 duration-150 p-2 rounded-full text-gray-500 dark:text-gray-400">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</header>
+<!-- NavigationDrawer (Web) -->
+<nav class="hidden md:flex bg-white dark:bg-gray-900 text-indigo-600 dark:text-indigo-400 font-['Inter'] text-sm h-full w-72 rounded-r-2xl divide-y divide-gray-100 dark:divide-gray-800 shadow-2xl flex-col py-6 shrink-0 z-40">
+<div class="px-6 pb-6 flex items-center gap-4">
+<img alt="Business Owner" class="w-12 h-12 rounded-full object-cover" data-alt="A close up professional headshot of a business manager, crisp lighting, high quality, light mode aesthetic, modern minimalist context" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSNEegtIPEAA8fnoubkiZFNVhThiYLVRG1Qq-gKGbVwYzCiTK69mu_WotrB9A-HZx4LxjloCehrYH4NkQxuQ-0oUNmsSBDoZ3X_4w1XYnIPAgz-jsXR9_hE5sSeffqHgxaOVB0Fndax83JqXZ78T9xeLaX36j4NcKHqfyHYqB9TXZg2AR0fc7B1PJG95t7B4w-JZqsCmkzjdCxBfKq2loCtu6_X0WUYpo95LZCEIu9qiYpg54djq7Xs5FF5oJX2hzuBQ5vCRjEgj0"/>
+<div>
+<h2 class="text-indigo-600 font-bold">Business Manager</h2>
+<p class="text-xs text-gray-500">Insightful Growth</p>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto pt-4 space-y-1 px-4">
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span>Overview</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl bg-indigo-50 dark:bg-indigo-900/20 text-indigo-700 dark:text-indigo-300 font-semibold transition-all duration-200" href="#">
+<span class="material-symbols-outlined">person</span>
+<span>Client List</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">account_balance</span>
+<span>Revenue</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">lightbulb</span>
+<span>Recommendations</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">account_circle</span>
+<span>Profile</span>
+</a>
+</div>
+</nav>
+<!-- Main Canvas -->
+<main class="flex-1 overflow-y-auto p-container_margin md:p-stack_lg pb-32 md:pb-stack_lg">
+<div class="max-w-5xl mx-auto space-y-stack_lg">
+<!-- Header & Search -->
+<div class="space-y-stack_md">
+<div>
+<h1 class="font-h1 text-h1 text-on-surface">Client List</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-1">Manage and monitor client relationships.</p>
+</div>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-12 pr-4 py-3 bg-surface-container-lowest border border-outline-variant rounded-xl text-on-surface placeholder:text-outline focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 transition-all font-body-lg text-body-lg shadow-sm" placeholder="Search clients..." type="text"/>
+</div>
+</div>
+<!-- Client Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-container_margin">
+<!-- Client Card: Healthy -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-stack_md shadow-[0_2px_8px_-2px_rgba(79,70,229,0.05)] hover:shadow-[0_8px_16px_-4px_rgba(79,70,229,0.08)] transition-all flex flex-col gap-stack_sm cursor-pointer relative group">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-primary-container font-h3 text-h3">
+                                A
+                            </div>
+<div>
+<h3 class="font-h3 text-h3 text-on-surface group-hover:text-primary-container transition-colors">Acme Corp</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Last contact: Today</p>
+</div>
+</div>
+<span class="px-3 py-1 bg-secondary-container/20 text-on-secondary-container rounded-full font-label-caps text-label-caps">Healthy</span>
+</div>
+</div>
+<!-- Client Card: Needs Attention (Smart Insight) -->
+<div class="bg-primary-container/5 ai-gradient-border rounded-xl p-stack_md shadow-[0_4px_12px_-2px_rgba(79,70,229,0.08)] hover:shadow-[0_8px_20px_-4px_rgba(79,70,229,0.12)] transition-all flex flex-col gap-stack_sm cursor-pointer relative group ai-glow">
+<div class="absolute top-4 right-4 text-primary-container">
+<span class="material-symbols-outlined" data-weight="fill" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-primary-container font-h3 text-h3">
+                                G
+                            </div>
+<div>
+<h3 class="font-h3 text-h3 text-on-surface group-hover:text-primary-container transition-colors">Globex Inc</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Last contact: 14 days ago</p>
+</div>
+</div>
+<span class="px-3 py-1 bg-tertiary-container/10 text-tertiary-container rounded-full font-label-caps text-label-caps mr-6">Needs Attention</span>
+</div>
+<div class="mt-2 bg-surface-container-lowest/80 backdrop-blur-sm rounded-lg p-3">
+<p class="font-insight-text text-insight-text text-on-surface">Suggested action: Follow up on Q3 proposal. Likelihood of closing drops 15% after tomorrow.</p>
+<button class="mt-3 w-full bg-primary-container text-on-primary py-2 rounded-lg font-label-caps text-label-caps shadow-sm active:scale-95 transition-transform flex justify-center items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">mail</span> Draft Email
+                        </button>
+</div>
+</div>
+<!-- Client Card: At Risk -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-stack_md shadow-[0_2px_8px_-2px_rgba(79,70,229,0.05)] hover:shadow-[0_8px_16px_-4px_rgba(79,70,229,0.08)] transition-all flex flex-col gap-stack_sm cursor-pointer relative group">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-primary-container font-h3 text-h3">
+                                I
+                            </div>
+<div>
+<h3 class="font-h3 text-h3 text-on-surface group-hover:text-primary-container transition-colors">Initech</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Last contact: 45 days ago</p>
+</div>
+</div>
+<span class="px-3 py-1 bg-error-container/30 text-on-error-container rounded-full font-label-caps text-label-caps">At Risk</span>
+</div>
+</div>
+<!-- Client Card: Healthy -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-stack_md shadow-[0_2px_8px_-2px_rgba(79,70,229,0.05)] hover:shadow-[0_8px_16px_-4px_rgba(79,70,229,0.08)] transition-all flex flex-col gap-stack_sm cursor-pointer relative group">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-primary-container font-h3 text-h3">
+                                S
+                            </div>
+<div>
+<h3 class="font-h3 text-h3 text-on-surface group-hover:text-primary-container transition-colors">Stark Industries</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Last contact: 2 days ago</p>
+</div>
+</div>
+<span class="px-3 py-1 bg-secondary-container/20 text-on-secondary-container rounded-full font-label-caps text-label-caps">Healthy</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile) -->
+<nav class="md:hidden bg-white/90 dark:bg-gray-900/90 backdrop-blur-lg text-indigo-600 dark:text-indigo-400 font-['Inter'] text-[10px] font-medium fixed bottom-0 w-full rounded-t-2xl z-50 border-t border-gray-100 dark:border-gray-800 shadow-[0_-4px_12px_rgba(79,70,225,0.06)] flex justify-around items-center h-20 px-2 pb-safe">
+<a class="flex flex-col items-center justify-center text-gray-400 dark:text-gray-500 px-3 py-1 hover:text-indigo-500 dark:hover:text-indigo-300 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Home</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-indigo-50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 rounded-xl px-3 py-1 hover:text-indigo-500 dark:hover:text-indigo-300 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span>Clients</span>
+</a>
+<a class="flex flex-col items-center justify-center text-gray-400 dark:text-gray-500 px-3 py-1 hover:text-indigo-500 dark:hover:text-indigo-300 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span>Finance</span>
+</a>
+<a class="flex flex-col items-center justify-center text-gray-400 dark:text-gray-500 px-3 py-1 hover:text-indigo-500 dark:hover:text-indigo-300 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">auto_awesome</span>
+<span>Insights</span>
+</a>
+<a class="flex flex-col items-center justify-center text-gray-400 dark:text-gray-500 px-3 py-1 hover:text-indigo-500 dark:hover:text-indigo-300 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Settings</span>
+</a>
+</nav>
+</body></html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Smart Business Manager - Authentication</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed-dim": "#4edea3",
+                    "inverse-on-surface": "#f3effc",
+                    "on-tertiary-fixed-variant": "#7b2f00",
+                    "primary": "#3525cd",
+                    "on-primary-container": "#dad7ff",
+                    "on-secondary-container": "#00714d",
+                    "background": "#fcf8ff",
+                    "on-tertiary-fixed": "#351000",
+                    "on-secondary-fixed": "#002113",
+                    "on-background": "#1b1b24",
+                    "tertiary": "#7e3000",
+                    "tertiary-fixed": "#ffdbcc",
+                    "outline": "#777587",
+                    "surface-variant": "#e4e1ee",
+                    "surface-container": "#f0ecf9",
+                    "surface-tint": "#4d44e3",
+                    "surface-bright": "#fcf8ff",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-fixed-variant": "#3323cc",
+                    "error": "#ba1a1a",
+                    "primary-fixed-dim": "#c3c0ff",
+                    "surface-dim": "#dcd8e5",
+                    "on-primary-fixed": "#0f0069",
+                    "tertiary-fixed-dim": "#ffb695",
+                    "on-error": "#ffffff",
+                    "inverse-primary": "#c3c0ff",
+                    "primary-container": "#4f46e5",
+                    "primary-fixed": "#e2dfff",
+                    "inverse-surface": "#302f39",
+                    "on-error-container": "#93000a",
+                    "secondary": "#006c49",
+                    "on-surface-variant": "#464555",
+                    "error-container": "#ffdad6",
+                    "secondary-fixed": "#6ffbbe",
+                    "secondary-container": "#6cf8bb",
+                    "on-tertiary-container": "#ffd2be",
+                    "on-surface": "#1b1b24",
+                    "surface-container-highest": "#e4e1ee",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-fixed-variant": "#005236",
+                    "surface-container-high": "#eae6f4",
+                    "on-primary": "#ffffff",
+                    "outline-variant": "#c7c4d8",
+                    "surface-container-low": "#f5f2ff",
+                    "on-secondary": "#ffffff",
+                    "tertiary-container": "#a44100",
+                    "surface": "#fcf8ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack_lg": "24px",
+                    "container_margin": "16px",
+                    "stack_sm": "8px",
+                    "gutter": "12px",
+                    "stack_md": "16px",
+                    "unit": "4px"
+            },
+            "fontFamily": {
+                    "label-caps": [
+                            "Inter"
+                    ],
+                    "h3": [
+                            "Inter"
+                    ],
+                    "body-lg": [
+                            "Inter"
+                    ],
+                    "body-sm": [
+                            "Inter"
+                    ],
+                    "h2": [
+                            "Inter"
+                    ],
+                    "insight-text": [
+                            "Inter"
+                    ],
+                    "h1": [
+                            "Inter"
+                    ]
+            },
+            "fontSize": {
+                    "label-caps": [
+                            "12px",
+                            {
+                                    "lineHeight": "16px",
+                                    "letterSpacing": "0.05em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "h3": [
+                            "20px",
+                            {
+                                    "lineHeight": "28px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "body-lg": [
+                            "16px",
+                            {
+                                    "lineHeight": "24px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "body-sm": [
+                            "14px",
+                            {
+                                    "lineHeight": "20px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "h2": [
+                            "24px",
+                            {
+                                    "lineHeight": "32px",
+                                    "letterSpacing": "-0.01em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "insight-text": [
+                            "15px",
+                            {
+                                    "lineHeight": "22px",
+                                    "fontWeight": "500"
+                            }
+                    ],
+                    "h1": [
+                            "32px",
+                            {
+                                    "lineHeight": "40px",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "700"
+                            }
+                    ]
+            }
+    },
+        },
+      }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background antialiased min-h-screen flex flex-col justify-center items-center p-container_margin">
+<div class="w-full max-w-md bg-surface-container-lowest rounded-[24px] shadow-[0_8px_32px_rgba(79,70,225,0.06),_0_2px_8px_rgba(0,0,0,0.04)] border border-surface-variant overflow-hidden relative">
+<!-- AI Magic Glow (Decorative) -->
+<div class="absolute -top-24 -right-24 w-48 h-48 bg-gradient-to-br from-primary/10 to-transparent rounded-full blur-3xl pointer-events-none"></div>
+<div class="p-8 relative z-10">
+<!-- Brand Logo Area -->
+<div class="flex flex-col items-center mb-8">
+<div class="w-12 h-12 bg-primary rounded-xl flex items-center justify-center mb-stack_sm shadow-[inset_0_2px_4px_rgba(255,255,255,0.3)]">
+<span class="material-symbols-outlined text-on-primary" style="font-variation-settings: 'FILL' 1;">analytics</span>
+</div>
+<h1 class="font-h2 text-h2 text-on-background text-center">Smart Manager</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-center mt-unit">Insightful business management.</p>
+</div>
+<!-- Tabs (Login/Register) -->
+<div class="flex border-b border-surface-variant mb-6">
+<button class="flex-1 pb-3 text-center border-b-2 border-primary text-primary font-insight-text text-insight-text">Sign In</button>
+<button class="flex-1 pb-3 text-center border-b-2 border-transparent text-on-surface-variant font-insight-text text-insight-text hover:text-primary transition-colors">Create Account</button>
+</div>
+<!-- Form Form -->
+<form class="space-y-stack_md">
+<!-- Email Input -->
+<div class="space-y-unit">
+<label class="block font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider" for="email">Email Address</label>
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline">mail</span>
+<input class="w-full pl-10 pr-4 py-3 bg-surface rounded-xl border border-outline-variant focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all font-body-sm text-body-sm placeholder:text-outline/70" id="email" placeholder="you@company.com" required="" type="email"/>
+</div>
+</div>
+<!-- Password Input -->
+<div class="space-y-unit">
+<div class="flex justify-between items-center">
+<label class="block font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider" for="password">Password</label>
+<a class="font-body-sm text-body-sm text-primary hover:underline" href="#">Forgot?</a>
+</div>
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline">lock</span>
+<input class="w-full pl-10 pr-10 py-3 bg-surface rounded-xl border border-outline-variant focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all font-body-sm text-body-sm placeholder:text-outline/70" id="password" placeholder="••••••••" required="" type="password"/>
+<button class="absolute right-3 top-1/2 -translate-y-1/2 text-outline hover:text-on-background" type="button">
+<span class="material-symbols-outlined">visibility_off</span>
+</button>
+</div>
+</div>
+<!-- Primary CTA -->
+<button class="w-full py-3 px-4 bg-primary text-on-primary rounded-xl font-insight-text text-insight-text shadow-[inset_0_1px_0_rgba(255,255,255,0.2),_0_2px_4px_rgba(79,70,225,0.2)] hover:bg-primary-fixed-variant transition-colors flex items-center justify-center gap-2" type="submit">
+                    Sign In
+                    <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+</form>
+<!-- Divider -->
+<div class="relative flex items-center py-6">
+<div class="flex-grow border-t border-surface-variant"></div>
+<span class="flex-shrink-0 mx-4 text-on-surface-variant font-label-caps text-label-caps uppercase">Or continue with</span>
+<div class="flex-grow border-t border-surface-variant"></div>
+</div>
+<!-- Social Logins -->
+<div class="grid grid-cols-2 gap-3">
+<button class="flex items-center justify-center gap-2 py-2.5 px-4 bg-surface rounded-xl border border-outline-variant hover:bg-surface-variant transition-colors font-insight-text text-insight-text text-on-background">
+<!-- Google G Icon Placeholder (Using a generic generic icon for illustration) -->
+<svg class="w-5 h-5 text-on-background" fill="currentColor" viewbox="0 0 24 24"><path d="M12.545,10.239v3.821h5.445c-0.712,2.315-2.647,3.972-5.445,3.972c-3.332,0-6.033-2.701-6.033-6.032s2.701-6.032,6.033-6.032c1.498,0,2.866,0.549,3.921,1.453l2.814-2.814C17.503,2.988,15.139,2,12.545,2C7.021,2,2.543,6.477,2.543,12s4.478,10,10.002,10c8.396,0,10.249-7.85,9.426-11.748L12.545,10.239z"></path></svg>
+                    Google
+                </button>
+<button class="flex items-center justify-center gap-2 py-2.5 px-4 bg-surface rounded-xl border border-outline-variant hover:bg-surface-variant transition-colors font-insight-text text-insight-text text-on-background">
+<svg class="w-5 h-5 text-on-background" fill="currentColor" viewbox="0 0 24 24"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.04 2.26-.8 3.59-.8 1.54.02 2.82.59 3.65 1.55-3.04 1.83-2.55 5.54.54 6.83-.8 1.94-1.8 3.66-2.86 4.59zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"></path></svg>
+                    Apple
+                </button>
+</div>
+<p class="text-center font-body-sm text-body-sm text-on-surface-variant mt-8">
+                By signing in, you agree to our <a class="text-primary hover:underline" href="#">Terms of Service</a> and <a class="text-primary hover:underline" href="#">Privacy Policy</a>.
+            </p>
+</div>
+</div>
+</body></html>

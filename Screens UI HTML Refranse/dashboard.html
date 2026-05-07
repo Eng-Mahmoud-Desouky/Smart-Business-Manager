@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Smart Business Manager - Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "secondary-fixed-dim": "#4edea3",
+                      "inverse-on-surface": "#f3effc",
+                      "on-tertiary-fixed-variant": "#7b2f00",
+                      "primary": "#3525cd",
+                      "on-primary-container": "#dad7ff",
+                      "on-secondary-container": "#00714d",
+                      "background": "#fcf8ff",
+                      "on-tertiary-fixed": "#351000",
+                      "on-secondary-fixed": "#002113",
+                      "on-background": "#1b1b24",
+                      "tertiary": "#7e3000",
+                      "tertiary-fixed": "#ffdbcc",
+                      "outline": "#777587",
+                      "surface-variant": "#e4e1ee",
+                      "surface-container": "#f0ecf9",
+                      "surface-tint": "#4d44e3",
+                      "surface-bright": "#fcf8ff",
+                      "on-tertiary": "#ffffff",
+                      "on-primary-fixed-variant": "#3323cc",
+                      "error": "#ba1a1a",
+                      "primary-fixed-dim": "#c3c0ff",
+                      "surface-dim": "#dcd8e5",
+                      "on-primary-fixed": "#0f0069",
+                      "tertiary-fixed-dim": "#ffb695",
+                      "on-error": "#ffffff",
+                      "inverse-primary": "#c3c0ff",
+                      "primary-container": "#4f46e5",
+                      "primary-fixed": "#e2dfff",
+                      "inverse-surface": "#302f39",
+                      "on-error-container": "#93000a",
+                      "secondary": "#006c49",
+                      "on-surface-variant": "#464555",
+                      "error-container": "#ffdad6",
+                      "secondary-fixed": "#6ffbbe",
+                      "secondary-container": "#6cf8bb",
+                      "on-tertiary-container": "#ffd2be",
+                      "on-surface": "#1b1b24",
+                      "surface-container-highest": "#e4e1ee",
+                      "surface-container-lowest": "#ffffff",
+                      "on-secondary-fixed-variant": "#005236",
+                      "surface-container-high": "#eae6f4",
+                      "on-primary": "#ffffff",
+                      "outline-variant": "#c7c4d8",
+                      "surface-container-low": "#f5f2ff",
+                      "on-secondary": "#ffffff",
+                      "tertiary-container": "#a44100",
+                      "surface": "#fcf8ff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "stack_lg": "24px",
+                      "container_margin": "16px",
+                      "stack_sm": "8px",
+                      "gutter": "12px",
+                      "stack_md": "16px",
+                      "unit": "4px"
+              },
+              "fontFamily": {
+                      "label-caps": ["Inter"],
+                      "h3": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "body-sm": ["Inter"],
+                      "h2": ["Inter"],
+                      "insight-text": ["Inter"],
+                      "h1": ["Inter"]
+              },
+              "fontSize": {
+                      "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "h3": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "h2": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "insight-text": ["15px", {"lineHeight": "22px", "fontWeight": "500"}],
+                      "h1": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .ai-glow-bg {
+            background: linear-gradient(135deg, rgba(79, 70, 229, 0.04) 0%, rgba(108, 248, 187, 0.04) 100%);
+        }
+        .ai-border-gradient {
+            background: linear-gradient(180deg, #3525cd 0%, #006c49 100%);
+        }
+        /* Hide scrollbar for clean aesthetic */
+        ::-webkit-scrollbar { width: 0px; background: transparent; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-lg min-h-screen flex flex-col md:flex-row antialiased">
+<!-- TopAppBar (Global Header) -->
+<header class="bg-white/80 dark:bg-gray-950/80 backdrop-blur-md shadow-sm border-b border-gray-200 dark:border-gray-800 docked full-width top-0 z-40 flex items-center justify-between px-4 h-16 w-full fixed md:hidden">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-indigo-600 dark:text-indigo-400">space_dashboard</span>
+<span class="text-indigo-600 dark:text-indigo-400 font-bold text-lg font-['Inter'] font-semibold tracking-tight">Smart Manager</span>
+</div>
+<div class="flex items-center gap-3">
+<button class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors active:scale-95 duration-150 p-2 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<img alt="User Profile Image" class="w-8 h-8 rounded-full border border-gray-200 object-cover" data-alt="A professional headshot of a business manager, smiling subtly, soft lighting, modern corporate aesthetic. Dressed in business casual." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDI-8gouPOo-DZrdcE93Xq9VNvjJ0kXxOG1HECj01ip_uDjcvZExRtwWHAn01xIyYm1gTexUjYFG2PXudzzJU5mOnqymaxlXt3LViryAjcv2rAOWfYj-GL70BvE33H2WlXD45kZZ6lFeLyW6H9I8MjYsr99Bqi-QvlO6Tth0o0My3TRkf5-1jX3LmRLivLOP-wKAJvTseZrRLXWrmrOexA6UyPdH6xsR54VwCglSl91Rjtmk1dcYL0V8KTPwAZN4inSUd8Nns0KPag"/>
+</div>
+</header>
+<!-- NavigationDrawer (Desktop SideNav) -->
+<nav class="hidden md:flex bg-white dark:bg-gray-900 h-screen w-72 rounded-r-2xl divide-y divide-gray-100 dark:divide-gray-800 shadow-2xl flex-col py-6 sticky top-0 flex-shrink-0 z-50">
+<div class="px-6 pb-6 flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-lg">BM</div>
+<div>
+<h2 class="text-indigo-600 dark:text-indigo-400 font-bold font-['Inter'] text-sm">Business Manager</h2>
+<p class="text-gray-500 text-xs">Insightful Growth</p>
+</div>
+</div>
+<div class="flex-1 px-4 py-4 space-y-1 overflow-y-auto">
+<!-- Active Tab: Overview -->
+<a class="bg-indigo-50 dark:bg-indigo-900/20 text-indigo-700 dark:text-indigo-300 font-semibold hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-all duration-200 flex items-center gap-3 px-3 py-2.5 rounded-lg" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-['Inter'] text-sm">Overview</span>
+</a>
+<!-- Inactive Tabs -->
+<a class="text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-all duration-200 flex items-center gap-3 px-3 py-2.5 rounded-lg" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-['Inter'] text-sm">Client List</span>
+</a>
+<a class="text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-all duration-200 flex items-center gap-3 px-3 py-2.5 rounded-lg" href="#">
+<span class="material-symbols-outlined">account_balance</span>
+<span class="font-['Inter'] text-sm">Revenue</span>
+</a>
+<a class="text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-all duration-200 flex items-center gap-3 px-3 py-2.5 rounded-lg" href="#">
+<span class="material-symbols-outlined">lightbulb</span>
+<span class="font-['Inter'] text-sm">Recommendations</span>
+</a>
+<a class="text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-all duration-200 flex items-center gap-3 px-3 py-2.5 rounded-lg mt-auto absolute bottom-6 w-[calc(100%-2rem)]" href="#">
+<span class="material-symbols-outlined">account_circle</span>
+<span class="font-['Inter'] text-sm">Profile</span>
+</a>
+</div>
+</nav>
+<!-- Main Canvas -->
+<main class="flex-1 w-full pt-20 md:pt-8 pb-28 md:pb-8 px-container_margin md:px-8 max-w-7xl mx-auto flex flex-col gap-stack_lg">
+<!-- Header -->
+<section class="flex flex-col gap-unit">
+<h1 class="font-h1 text-h1 text-on-surface">Focus for Today</h1>
+<p class="font-body-lg text-body-lg text-outline">Here is a summary of your key metrics and AI-driven recommendations.</p>
+</section>
+<!-- KPI Cards (Bento Grid) -->
+<section class="grid grid-cols-2 md:grid-cols-3 gap-gutter">
+<!-- Total Clients -->
+<div class="bg-surface-container-lowest rounded-xl p-stack_md shadow-[0_2px_8px_rgba(79,70,229,0.04)] border border-surface-variant flex flex-col justify-between min-h-[120px]">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Total Clients</span>
+<span class="material-symbols-outlined text-primary text-xl">groups</span>
+</div>
+<div>
+<div class="font-h2 text-h2 text-on-surface">142</div>
+<div class="font-body-sm text-body-sm text-secondary flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+<span>+4 this week</span>
+</div>
+</div>
+</div>
+<!-- Monthly Revenue -->
+<div class="bg-surface-container-lowest rounded-xl p-stack_md shadow-[0_2px_8px_rgba(79,70,229,0.04)] border border-surface-variant flex flex-col justify-between min-h-[120px]">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Monthly Rev</span>
+<span class="material-symbols-outlined text-primary text-xl">payments</span>
+</div>
+<div>
+<div class="font-h2 text-h2 text-on-surface">$24.5k</div>
+<div class="font-body-sm text-body-sm text-secondary flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+<span>+12% vs last</span>
+</div>
+</div>
+</div>
+<!-- Pending Payments (Spans 2 cols on mobile to form bento layout) -->
+<div class="col-span-2 md:col-span-1 bg-surface-container-lowest rounded-xl p-stack_md shadow-[0_2px_8px_rgba(79,70,229,0.04)] border border-surface-variant flex flex-col justify-between min-h-[120px]">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Pending</span>
+<span class="material-symbols-outlined text-tertiary text-xl">pending_actions</span>
+</div>
+<div>
+<div class="font-h2 text-h2 text-on-surface">$4,200</div>
+<div class="font-body-sm text-body-sm text-tertiary flex items-center gap-1 mt-1 bg-tertiary-fixed px-2 py-0.5 rounded-full w-max">
+<span class="material-symbols-outlined text-[14px]">warning</span>
+<span>5 Invoices</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Smart Insights Section (AI Core) -->
+<section class="flex flex-col gap-stack_sm">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<h2 class="font-h3 text-h3 text-on-surface">Smart Insights</h2>
+</div>
+<!-- AI Card 1 -->
+<div class="relative bg-surface-container-lowest rounded-xl shadow-[0_8px_24px_rgba(79,70,229,0.08)] border border-surface-variant overflow-hidden">
+<!-- AI Magic Left Border -->
+<div class="absolute left-0 top-0 bottom-0 w-[3px] ai-border-gradient"></div>
+<!-- Faint Tint Background -->
+<div class="absolute inset-0 ai-glow-bg z-0 pointer-events-none"></div>
+<div class="relative z-10 p-stack_md flex gap-4 items-start">
+<div class="bg-primary-container/10 p-2 rounded-lg flex-shrink-0">
+<span class="material-symbols-outlined text-primary">record_voice_over</span>
+</div>
+<div class="flex-1">
+<h3 class="font-insight-text text-insight-text text-on-surface mb-1">Follow up with Acme Corp</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-3">Last contact was 14 days ago regarding the Q3 proposal. They typically respond best on Tuesday mornings.</p>
+<div class="flex gap-3">
+<button class="bg-primary-container text-on-primary font-insight-text text-insight-text px-4 py-2 rounded-lg shadow-sm hover:bg-primary transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">mail</span>
+                                Draft Email
+                            </button>
+<button class="border border-outline text-on-surface font-insight-text text-insight-text px-4 py-2 rounded-lg hover:bg-surface-variant transition-colors">
+                                Dismiss
+                            </button>
+</div>
+</div>
+<span class="material-symbols-outlined text-primary/40 absolute top-4 right-4">colors_spark</span>
+</div>
+</div>
+<!-- AI Card 2 -->
+<div class="relative bg-surface-container-lowest rounded-xl shadow-[0_8px_24px_rgba(79,70,229,0.08)] border border-surface-variant overflow-hidden mt-2">
+<div class="absolute left-0 top-0 bottom-0 w-[3px] ai-border-gradient"></div>
+<div class="absolute inset-0 ai-glow-bg z-0 pointer-events-none"></div>
+<div class="relative z-10 p-stack_md flex gap-4 items-start">
+<div class="bg-error-container/20 p-2 rounded-lg flex-shrink-0">
+<span class="material-symbols-outlined text-error">trending_down</span>
+</div>
+<div class="flex-1">
+<h3 class="font-insight-text text-insight-text text-on-surface mb-1">Potential $2k revenue risk</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-3">3 invoices from long-term clients are now 7+ days overdue. Initiating an automated gentle reminder is suggested.</p>
+<button class="bg-primary-container text-on-primary font-insight-text text-insight-text px-4 py-2 rounded-lg shadow-sm hover:bg-primary transition-colors flex items-center gap-2 w-max">
+<span class="material-symbols-outlined text-[18px]">send</span>
+                            Send Reminders
+                        </button>
+</div>
+<span class="material-symbols-outlined text-primary/40 absolute top-4 right-4">colors_spark</span>
+</div>
+</div>
+</section>
+<!-- Recent Activity Feed -->
+<section class="flex flex-col gap-stack_sm mt-4">
+<h2 class="font-h3 text-h3 text-on-surface mb-2">Recent Activity</h2>
+<div class="bg-surface-container-lowest rounded-xl border border-surface-variant divide-y divide-surface-variant shadow-[0_2px_8px_rgba(79,70,229,0.02)]">
+<!-- Feed Item 1 -->
+<div class="p-stack_md flex items-center gap-4 hover:bg-surface-container-low transition-colors cursor-pointer">
+<div class="w-10 h-10 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center font-bold font-['Inter']">JD</div>
+<div class="flex-1">
+<p class="font-body-lg text-body-lg text-on-surface font-medium">New Client Signed: Jane Doe</p>
+<p class="font-body-sm text-body-sm text-outline">Premium Package • 2 hours ago</p>
+</div>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</div>
+<!-- Feed Item 2 -->
+<div class="p-stack_md flex items-center gap-4 hover:bg-surface-container-low transition-colors cursor-pointer">
+<div class="w-10 h-10 rounded-full bg-surface-variant text-on-surface-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">task_alt</span>
+</div>
+<div class="flex-1">
+<p class="font-body-lg text-body-lg text-on-surface font-medium">Payment Received: $1,250</p>
+<p class="font-body-sm text-body-sm text-outline">From TechFlow Inc • 5 hours ago</p>
+</div>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</div>
+<!-- Feed Item 3 -->
+<div class="p-stack_md flex items-center gap-4 hover:bg-surface-container-low transition-colors cursor-pointer">
+<div class="w-10 h-10 rounded-full bg-surface-variant text-on-surface-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">calendar_month</span>
+</div>
+<div class="flex-1">
+<p class="font-body-lg text-body-lg text-on-surface font-medium">Meeting Scheduled</p>
+<p class="font-body-sm text-body-sm text-outline">Onboarding with StartUp Co • Tomorrow, 10 AM</p>
+</div>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</div>
+</div>
+<button class="mt-2 text-primary font-insight-text text-insight-text self-center hover:underline">View All Activity</button>
+</section>
+</main>
+<!-- BottomNavBar (Mobile Shell) -->
+<nav class="bg-white/90 dark:bg-gray-900/90 backdrop-blur-lg border-t border-gray-100 dark:border-gray-800 shadow-[0_-4px_12px_rgba(79,70,225,0.06)] fixed bottom-0 w-full rounded-t-2xl z-50 flex justify-around items-center h-20 px-2 pb-safe md:hidden">
+<!-- Active Tab: Home -->
+<a class="flex flex-col items-center justify-center bg-indigo-50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 rounded-xl px-3 py-1 hover:text-indigo-500 dark:hover:text-indigo-300 active:scale-90 transition-transform w-16" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-['Inter'] text-[10px] font-medium mt-1">Home</span>
+</a>
+<!-- Inactive Tabs -->
+<a class="flex flex-col items-center justify-center text-gray-400 dark:text-gray-500 px-3 py-1 hover:text-indigo-500 dark:hover:text-indigo-300 active:scale-90 transition-transform w-16" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-['Inter'] text-[10px] font-medium mt-1">Clients</span>
+</a>
+<a class="flex flex-col items-center justify-center text-gray-400 dark:text-gray-500 px-3 py-1 hover:text-indigo-500 dark:hover:text-indigo-300 active:scale-90 transition-transform w-16" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-['Inter'] text-[10px] font-medium mt-1">Finance</span>
+</a>
+<a class="flex flex-col items-center justify-center text-gray-400 dark:text-gray-500 px-3 py-1 hover:text-indigo-500 dark:hover:text-indigo-300 active:scale-90 transition-transform w-16" href="#">
+<span class="material-symbols-outlined">auto_awesome</span>
+<span class="font-['Inter'] text-[10px] font-medium mt-1">Insights</span>
+</a>
+<a class="flex flex-col items-center justify-center text-gray-400 dark:text-gray-500 px-3 py-1 hover:text-indigo-500 dark:hover:text-indigo-300 active:scale-90 transition-transform w-16" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-['Inter'] text-[10px] font-medium mt-1">Settings</span>
+</a>
+</nav>
+</body></html>
