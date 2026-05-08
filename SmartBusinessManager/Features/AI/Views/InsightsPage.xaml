@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="SmartBusinessManager.Features.AI.Views.InsightsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="{Binding Title}">
+
+    <ContentPage.BindingContext>
+        <!-- Injected via DI in code-behind constructor -->
+    </ContentPage.BindingContext>
+
+    <VerticalStackLayout Padding="16">
+        <Label Text="Insights — Coming Soon" Style="{StaticResource BodyLabel}"/>
+    </VerticalStackLayout>
+
+</ContentPage>
