@@ -1,14 +1,21 @@
 <!DOCTYPE html>
 
-<html lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Financial Tracking</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Financial Tracking</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
             theme: {
@@ -98,209 +105,257 @@
             }
         }
     </script>
-<style>
-    body {
-      min-height: max(884px, 100dvh);
-    }
-  </style>
-  </head>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
 <body class="bg-background text-on-background min-h-screen flex flex-col md:flex-row">
-<!-- NavigationDrawer (Web) -->
-<nav class="hidden md:flex flex-col h-full py-6 bg-white dark:bg-gray-900 shadow-2xl h-full w-72 rounded-r-2xl divide-y divide-gray-100 dark:divide-gray-800 transition-all duration-200">
-<div class="px-6 pb-6 flex items-center gap-4">
-<img alt="Business Owner" class="w-12 h-12 rounded-full object-cover" data-alt="A close up, professional portrait of a business owner. The lighting is soft and natural, suggesting a clean, modern corporate environment. The overall aesthetic is trustworthy and capable, fitting for a sophisticated financial application." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0T6HB8tM9Z_wDTflbwCPI3gmywmjA64sFIMYYTVSlSQITq9NiVs7chfUcu0OK1JEzF3nRY9OxjSRbq3brjUs0skrjiOCZ3yyuJQyfsaIYCfFjtLysynzoykjcVbAtYj3H9GwlX_leWB7Va-sxcxx2XSlUKQmbljq6AuxbDnVBQ9Z5arN6cr62ZaKewzi9TKolLv0BbIY1rZtbvqWFsbcdsEVIP0UUOk-7ZsR27siPfVVv2lu0i0TZXoDVOPvJ78HBpqLplF4IdeU"/>
-<div>
-<div class="font-h3 text-h3 text-on-surface">Business Manager</div>
-<div class="font-body-sm text-body-sm text-outline">Insightful Growth</div>
-</div>
-</div>
-<div class="flex-1 overflow-y-auto py-4">
-<ul class="space-y-2 px-4 font-['Inter'] text-sm">
-<li>
-<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50" href="#">
-<span class="material-symbols-outlined">analytics</span>
+    <!-- NavigationDrawer (Web) -->
+    <nav
+        class="hidden md:flex flex-col h-full py-6 bg-white dark:bg-gray-900 shadow-2xl h-full w-72 rounded-r-2xl divide-y divide-gray-100 dark:divide-gray-800 transition-all duration-200">
+        <div class="px-6 pb-6 flex items-center gap-4">
+            <img alt="Business Owner" class="w-12 h-12 rounded-full object-cover"
+                data-alt="A close up, professional portrait of a business owner. The lighting is soft and natural, suggesting a clean, modern corporate environment. The overall aesthetic is trustworthy and capable, fitting for a sophisticated financial application."
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0T6HB8tM9Z_wDTflbwCPI3gmywmjA64sFIMYYTVSlSQITq9NiVs7chfUcu0OK1JEzF3nRY9OxjSRbq3brjUs0skrjiOCZ3yyuJQyfsaIYCfFjtLysynzoykjcVbAtYj3H9GwlX_leWB7Va-sxcxx2XSlUKQmbljq6AuxbDnVBQ9Z5arN6cr62ZaKewzi9TKolLv0BbIY1rZtbvqWFsbcdsEVIP0UUOk-7ZsR27siPfVVv2lu0i0TZXoDVOPvJ78HBpqLplF4IdeU" />
+            <div>
+                <div class="font-h3 text-h3 text-on-surface">Business Manager</div>
+                <div class="font-body-sm text-body-sm text-outline">Insightful Growth</div>
+            </div>
+        </div>
+        <div class="flex-1 overflow-y-auto py-4">
+            <ul class="space-y-2 px-4 font-['Inter'] text-sm">
+                <li>
+                    <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50"
+                        href="#">
+                        <span class="material-symbols-outlined">analytics</span>
                         Overview
                     </a>
-</li>
-<li>
-<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50" href="#">
-<span class="material-symbols-outlined">person</span>
+                </li>
+                <li>
+                    <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50"
+                        href="#">
+                        <span class="material-symbols-outlined">person</span>
                         Client List
                     </a>
-</li>
-<li>
-<a class="flex items-center gap-3 px-4 py-3 rounded-lg bg-indigo-50 dark:bg-indigo-900/20 text-indigo-700 dark:text-indigo-300 font-semibold" href="#">
-<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">account_balance</span>
+                </li>
+                <li>
+                    <a class="flex items-center gap-3 px-4 py-3 rounded-lg bg-indigo-50 dark:bg-indigo-900/20 text-indigo-700 dark:text-indigo-300 font-semibold"
+                        href="#">
+                        <span class="material-symbols-outlined"
+                            style="font-variation-settings: 'FILL' 1;">account_balance</span>
                         Revenue
                     </a>
-</li>
-<li>
-<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50" href="#">
-<span class="material-symbols-outlined">lightbulb</span>
+                </li>
+                <li>
+                    <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50"
+                        href="#">
+                        <span class="material-symbols-outlined">lightbulb</span>
                         Recommendations
                     </a>
-</li>
-<li>
-<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50" href="#">
-<span class="material-symbols-outlined">account_circle</span>
+                </li>
+                <li>
+                    <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50"
+                        href="#">
+                        <span class="material-symbols-outlined">account_circle</span>
                         Profile
                     </a>
-</li>
-</ul>
-</div>
-</nav>
-<div class="flex-1 flex flex-col min-h-screen">
-<!-- TopAppBar (Web/Mobile) -->
-<header class="flex items-center justify-between px-4 h-16 w-full bg-white/80 dark:bg-gray-950/80 backdrop-blur-md text-indigo-600 dark:text-indigo-400 font-['Inter'] font-semibold tracking-tight shadow-sm docked full-width top-0 z-40 md:border-b md:border-gray-200 md:dark:border-gray-800">
-<div class="flex items-center gap-3">
-<img alt="User Profile Image" class="w-8 h-8 rounded-full md:hidden" data-alt="A close up, professional portrait of a business owner. The lighting is soft and natural, suggesting a clean, modern corporate environment. The overall aesthetic is trustworthy and capable, fitting for a sophisticated financial application." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVUNOGxajpdF7vvF-KnukiMjXYy8JKvS4uypeH9nedsLgPup_b5gndSOcPwUlRjzQrVzE0vi_MkN1RXjnBYfU-c-HrcCXL2iJ1nvid0s-_UyxV71idhCRX85ZMhe5V8jNB_c8sMp97z0FW-2x-ge-Jru0lHuJbWXT_esVDpzcNwFUSlY6P--6wWivEeJIb9OjBHiSblJ7ye_SiozZiw0l1W1LusTQR676XCsCz6oBl4Mv6oecG8llp7aKgQw4lcKPoKHk8UtOfGbA"/>
-<span class="text-indigo-600 dark:text-indigo-400 font-bold text-lg">Smart Manager</span>
-</div>
-<button class="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors rounded-full active:scale-95 duration-150">
-<span class="material-symbols-outlined">notifications</span>
-</button>
-</header>
-<!-- Main Content -->
-<main class="flex-1 overflow-y-auto p-container_margin md:p-stack_lg pb-32 md:pb-stack_lg space-y-stack_lg">
-<div class="flex justify-between items-end">
-<div>
-<h1 class="font-h1 text-h1 text-on-surface">Financial Overview</h1>
-<p class="font-body-lg text-body-lg text-on-surface-variant mt-unit">Your current revenue and receivables status.</p>
-</div>
-</div>
-<!-- Bento Grid -->
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-container_margin">
-<!-- Revenue Card -->
-<div class="bg-surface-container-lowest rounded-xl p-stack_md shadow-sm border border-outline-variant/30 flex flex-col justify-between h-48 relative overflow-hidden group hover:shadow-md transition-shadow">
-<div class="flex justify-between items-start z-10 relative">
-<div class="flex items-center gap-2 text-on-surface-variant font-insight-text text-insight-text">
-<span class="material-symbols-outlined text-primary">trending_up</span>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="flex-1 flex flex-col min-h-screen">
+        <!-- TopAppBar (Web/Mobile) -->
+        <header
+            class="flex items-center justify-between px-4 h-16 w-full bg-white/80 dark:bg-gray-950/80 backdrop-blur-md text-indigo-600 dark:text-indigo-400 font-['Inter'] font-semibold tracking-tight shadow-sm docked full-width top-0 z-40 md:border-b md:border-gray-200 md:dark:border-gray-800">
+            <div class="flex items-center gap-3">
+                <img alt="User Profile Image" class="w-8 h-8 rounded-full md:hidden"
+                    data-alt="A close up, professional portrait of a business owner. The lighting is soft and natural, suggesting a clean, modern corporate environment. The overall aesthetic is trustworthy and capable, fitting for a sophisticated financial application."
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVUNOGxajpdF7vvF-KnukiMjXYy8JKvS4uypeH9nedsLgPup_b5gndSOcPwUlRjzQrVzE0vi_MkN1RXjnBYfU-c-HrcCXL2iJ1nvid0s-_UyxV71idhCRX85ZMhe5V8jNB_c8sMp97z0FW-2x-ge-Jru0lHuJbWXT_esVDpzcNwFUSlY6P--6wWivEeJIb9OjBHiSblJ7ye_SiozZiw0l1W1LusTQR676XCsCz6oBl4Mv6oecG8llp7aKgQw4lcKPoKHk8UtOfGbA" />
+                <span class="text-indigo-600 dark:text-indigo-400 font-bold text-lg">Smart Manager</span>
+            </div>
+            <button
+                class="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors rounded-full active:scale-95 duration-150">
+                <span class="material-symbols-outlined">notifications</span>
+            </button>
+        </header>
+        <!-- Main Content -->
+        <main class="flex-1 overflow-y-auto p-container_margin md:p-stack_lg pb-32 md:pb-stack_lg space-y-stack_lg">
+            <div class="flex justify-between items-end">
+                <div>
+                    <h1 class="font-h1 text-h1 text-on-surface">Financial Overview</h1>
+                    <p class="font-body-lg text-body-lg text-on-surface-variant mt-unit">Your current revenue and
+                        receivables status.</p>
+                </div>
+            </div>
+            <!-- Bento Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-container_margin">
+                <!-- Revenue Card -->
+                <div
+                    class="bg-surface-container-lowest rounded-xl p-stack_md shadow-sm border border-outline-variant/30 flex flex-col justify-between h-48 relative overflow-hidden group hover:shadow-md transition-shadow">
+                    <div class="flex justify-between items-start z-10 relative">
+                        <div
+                            class="flex items-center gap-2 text-on-surface-variant font-insight-text text-insight-text">
+                            <span class="material-symbols-outlined text-primary">trending_up</span>
                             Total Revenue (MTD)
                         </div>
-</div>
-<div class="z-10 relative">
-<div class="font-h1 text-h1 text-on-surface">$42,850.00</div>
-<div class="font-body-sm text-body-sm text-secondary mt-1 flex items-center gap-1">
-<span class="material-symbols-outlined text-[16px]">arrow_upward</span>
+                    </div>
+                    <div class="z-10 relative">
+                        <div class="font-h1 text-h1 text-on-surface">42,850.00 USD</div>
+                        <div class="font-body-sm text-body-sm text-secondary mt-1 flex items-center gap-1">
+                            <span class="material-symbols-outlined text-[16px]">arrow_upward</span>
                             12.5% vs last month
                         </div>
-</div>
-<div class="absolute -bottom-10 -right-10 w-32 h-32 bg-primary/5 rounded-full blur-2xl group-hover:bg-primary/10 transition-colors"></div>
-</div>
-<!-- Receivables Card -->
-<div class="bg-surface-container-lowest rounded-xl p-stack_md shadow-sm border border-outline-variant/30 flex flex-col justify-between h-48 relative overflow-hidden group hover:shadow-md transition-shadow">
-<div class="flex justify-between items-start z-10 relative">
-<div class="flex items-center gap-2 text-on-surface-variant font-insight-text text-insight-text">
-<span class="material-symbols-outlined text-tertiary">pending_actions</span>
+                    </div>
+                    <div
+                        class="absolute -bottom-10 -right-10 w-32 h-32 bg-primary/5 rounded-full blur-2xl group-hover:bg-primary/10 transition-colors">
+                    </div>
+                </div>
+                <!-- Receivables Card -->
+                <div
+                    class="bg-surface-container-lowest rounded-xl p-stack_md shadow-sm border border-outline-variant/30 flex flex-col justify-between h-48 relative overflow-hidden group hover:shadow-md transition-shadow">
+                    <div class="flex justify-between items-start z-10 relative">
+                        <div
+                            class="flex items-center gap-2 text-on-surface-variant font-insight-text text-insight-text">
+                            <span class="material-symbols-outlined text-tertiary">pending_actions</span>
                             Outstanding Receivables
                         </div>
-</div>
-<div class="z-10 relative">
-<div class="font-h1 text-h1 text-on-surface">$14,200.00</div>
-<div class="font-body-sm text-body-sm text-error mt-1 flex items-center gap-1">
+                    </div>
+                    <div class="z-10 relative">
+                        <div class="font-h1 text-h1 text-on-surface">14,200.00 USD</div>
+                        <div class="font-body-sm text-body-sm text-error mt-1 flex items-center gap-1">
                             5 invoices overdue
                         </div>
-</div>
-<div class="absolute -bottom-10 -right-10 w-32 h-32 bg-tertiary/5 rounded-full blur-2xl group-hover:bg-tertiary/10 transition-colors"></div>
-</div>
-<!-- Smart Insight Card -->
-<div class="bg-surface-container-low rounded-xl p-stack_md shadow-sm border-l-4 border-l-primary flex flex-col justify-between h-48 relative overflow-hidden md:col-span-2 lg:col-span-1">
-<div class="flex justify-between items-start z-10 relative">
-<div class="flex items-center gap-2 text-primary font-label-caps text-label-caps uppercase tracking-wider">
-<span class="material-symbols-outlined text-[18px]">auto_awesome</span>
+                    </div>
+                    <div
+                        class="absolute -bottom-10 -right-10 w-32 h-32 bg-tertiary/5 rounded-full blur-2xl group-hover:bg-tertiary/10 transition-colors">
+                    </div>
+                </div>
+                <!-- Smart Insight Card -->
+                <div
+                    class="bg-surface-container-low rounded-xl p-stack_md shadow-sm border-l-4 border-l-primary flex flex-col justify-between h-48 relative overflow-hidden md:col-span-2 lg:col-span-1">
+                    <div class="flex justify-between items-start z-10 relative">
+                        <div
+                            class="flex items-center gap-2 text-primary font-label-caps text-label-caps uppercase tracking-wider">
+                            <span class="material-symbols-outlined text-[18px]">auto_awesome</span>
                             Smart Insight
                         </div>
-</div>
-<div class="z-10 relative mt-4">
-<p class="font-insight-text text-insight-text text-on-surface-variant">
-                            Following up on <span class="font-semibold text-on-surface">Acme Corp's</span> overdue invoice today could improve your month-end cash flow by 15%. Would you like to send an automated reminder?
+                    </div>
+                    <div class="z-10 relative mt-4">
+                        <p class="font-insight-text text-insight-text text-on-surface-variant">
+                            Following up on <span class="font-semibold text-on-surface">Acme Corp's</span> overdue
+                            invoice today could improve your month-end cash flow by 15%. Would you like to log a manual
+                            follow-up?
                         </p>
-<button class="mt-4 px-4 py-2 bg-primary-container text-on-primary-container rounded-lg font-body-sm text-body-sm font-medium hover:bg-primary transition-colors inline-flex items-center gap-2">
-                            Send Reminder <span class="material-symbols-outlined text-[16px]">send</span>
-</button>
-</div>
-</div>
-</div>
-<!-- Transaction List -->
-<div class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant/30 overflow-hidden">
-<div class="p-stack_md border-b border-outline-variant/30 flex justify-between items-center bg-surface-bright">
-<h2 class="font-h3 text-h3 text-on-surface">Recent Activity</h2>
-<button class="text-primary font-body-sm text-body-sm font-medium hover:underline">View All</button>
-</div>
-<div class="divide-y divide-outline-variant/30">
-<!-- Transaction Row 1 (Success) -->
-<div class="p-stack_md hover:bg-surface-container-low transition-colors flex items-center justify-between cursor-pointer group">
-<div class="flex items-center gap-4">
-<div class="w-10 h-10 rounded-full bg-secondary-container/20 flex items-center justify-center text-on-secondary-container">
-<span class="material-symbols-outlined">check_circle</span>
-</div>
-<div>
-<div class="font-insight-text text-insight-text text-on-surface">TechCorp Solutions</div>
-<div class="font-body-sm text-body-sm text-on-surface-variant">Payment Received • INV-2023-081</div>
-</div>
-</div>
-<div class="text-right">
-<div class="font-insight-text text-insight-text text-on-surface">+$4,500.00</div>
-<div class="font-label-caps text-label-caps text-secondary mt-1">Paid</div>
-</div>
-</div>
-<!-- Transaction Row 2 (Pending) -->
-<div class="p-stack_md hover:bg-surface-container-low transition-colors flex items-center justify-between cursor-pointer group">
-<div class="flex items-center gap-4">
-<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface-variant">
-<span class="material-symbols-outlined">schedule</span>
-</div>
-<div>
-<div class="font-insight-text text-insight-text text-on-surface">Global Industries</div>
-<div class="font-body-sm text-body-sm text-on-surface-variant">Invoice Sent • INV-2023-082</div>
-</div>
-</div>
-<div class="text-right">
-<div class="font-insight-text text-insight-text text-on-surface">$2,100.00</div>
-<div class="font-label-caps text-label-caps text-outline mt-1">Pending</div>
-</div>
-</div>
-<!-- Transaction Row 3 (Overdue/Warning) -->
-<div class="p-stack_md hover:bg-surface-container-low transition-colors flex items-center justify-between cursor-pointer group">
-<div class="flex items-center gap-4">
-<div class="w-10 h-10 rounded-full bg-tertiary-container/10 flex items-center justify-center text-tertiary">
-<span class="material-symbols-outlined">warning</span>
-</div>
-<div>
-<div class="font-insight-text text-insight-text text-on-surface">Acme Corp</div>
-<div class="font-body-sm text-body-sm text-on-surface-variant">Overdue • INV-2023-075</div>
-</div>
-</div>
-<div class="text-right">
-<div class="font-insight-text text-insight-text text-on-surface">$8,500.00</div>
-<div class="font-label-caps text-label-caps text-tertiary mt-1">Overdue</div>
-</div>
-</div>
-</div>
-</div>
-</main>
-</div>
-<!-- BottomNavBar (Mobile) -->
-<nav class="md:hidden flex justify-around items-center h-20 px-2 pb-safe w-full bg-white/90 dark:bg-gray-900/90 backdrop-blur-lg fixed bottom-0 w-full rounded-t-2xl z-50 border-t border-gray-100 dark:border-gray-800 shadow-[0_-4px_12px_rgba(79,70,225,0.06)] font-['Inter'] text-[10px] font-medium text-gray-400 dark:text-gray-500">
-<a class="flex flex-col items-center justify-center px-3 py-1 hover:text-indigo-500 dark:hover:text-indigo-300 active:scale-90 transition-transform" href="#">
-<span class="material-symbols-outlined mb-1">dashboard</span>
+                        <button
+                            class="mt-4 px-4 py-2 bg-primary-container text-on-primary-container rounded-lg font-body-sm text-body-sm font-medium hover:bg-primary transition-colors inline-flex items-center gap-2">
+                            Log Reminder <span class="material-symbols-outlined text-[16px]">note_add</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Transaction List -->
+            <div
+                class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant/30 overflow-hidden">
+                <div
+                    class="p-stack_md border-b border-outline-variant/30 flex justify-between items-center bg-surface-bright">
+                    <h2 class="font-h3 text-h3 text-on-surface">Recent Activity</h2>
+                    <button class="text-primary font-body-sm text-body-sm font-medium hover:underline">View All</button>
+                </div>
+                <div class="divide-y divide-outline-variant/30">
+                    <!-- Transaction Row 1 (Success) -->
+                    <div
+                        class="p-stack_md hover:bg-surface-container-low transition-colors flex items-center justify-between cursor-pointer group">
+                        <div class="flex items-center gap-4">
+                            <div
+                                class="w-10 h-10 rounded-full bg-secondary-container/20 flex items-center justify-center text-on-secondary-container">
+                                <span class="material-symbols-outlined">check_circle</span>
+                            </div>
+                            <div>
+                                <div class="font-insight-text text-insight-text text-on-surface">TechCorp Solutions
+                                </div>
+                                <div class="font-body-sm text-body-sm text-on-surface-variant">Payment Received •
+                                    INV-2023-081</div>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <div class="font-insight-text text-insight-text text-on-surface">+4,500.00 USD</div>
+                            <div class="font-label-caps text-label-caps text-secondary mt-1">paid</div>
+                        </div>
+                    </div>
+                    <!-- Transaction Row 2 (Pending) -->
+                    <div
+                        class="p-stack_md hover:bg-surface-container-low transition-colors flex items-center justify-between cursor-pointer group">
+                        <div class="flex items-center gap-4">
+                            <div
+                                class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface-variant">
+                                <span class="material-symbols-outlined">schedule</span>
+                            </div>
+                            <div>
+                                <div class="font-insight-text text-insight-text text-on-surface">Global Industries</div>
+                                <div class="font-body-sm text-body-sm text-on-surface-variant">Invoice Sent •
+                                    INV-2023-082</div>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <div class="font-insight-text text-insight-text text-on-surface">2,100.00 USD</div>
+                            <div class="font-label-caps text-label-caps text-outline mt-1">pending</div>
+                        </div>
+                    </div>
+                    <!-- Transaction Row 3 (Overdue/Warning) -->
+                    <div
+                        class="p-stack_md hover:bg-surface-container-low transition-colors flex items-center justify-between cursor-pointer group">
+                        <div class="flex items-center gap-4">
+                            <div
+                                class="w-10 h-10 rounded-full bg-tertiary-container/10 flex items-center justify-center text-tertiary">
+                                <span class="material-symbols-outlined">warning</span>
+                            </div>
+                            <div>
+                                <div class="font-insight-text text-insight-text text-on-surface">Acme Corp</div>
+                                <div class="font-body-sm text-body-sm text-on-surface-variant">Overdue • INV-2023-075
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <div class="font-insight-text text-insight-text text-on-surface">8,500.00 USD</div>
+                            <div class="font-label-caps text-label-caps text-tertiary mt-1">overdue</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <!-- BottomNavBar (Mobile) -->
+    <nav
+        class="md:hidden flex justify-around items-center h-20 px-2 pb-safe w-full bg-white/90 dark:bg-gray-900/90 backdrop-blur-lg fixed bottom-0 w-full rounded-t-2xl z-50 border-t border-gray-100 dark:border-gray-800 shadow-[0_-4px_12px_rgba(79,70,225,0.06)] font-['Inter'] text-[10px] font-medium text-gray-400 dark:text-gray-500">
+        <a class="flex flex-col items-center justify-center px-3 py-1 hover:text-indigo-500 dark:hover:text-indigo-300 active:scale-90 transition-transform"
+            href="#">
+            <span class="material-symbols-outlined mb-1">dashboard</span>
             Home
         </a>
-<a class="flex flex-col items-center justify-center px-3 py-1 hover:text-indigo-500 dark:hover:text-indigo-300 active:scale-90 transition-transform" href="#">
-<span class="material-symbols-outlined mb-1">groups</span>
+        <a class="flex flex-col items-center justify-center px-3 py-1 hover:text-indigo-500 dark:hover:text-indigo-300 active:scale-90 transition-transform"
+            href="#">
+            <span class="material-symbols-outlined mb-1">groups</span>
             Clients
         </a>
-<a class="flex flex-col items-center justify-center bg-indigo-50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 rounded-xl px-3 py-1 active:scale-90 transition-transform" href="#">
-<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">payments</span>
+        <a class="flex flex-col items-center justify-center bg-indigo-50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 rounded-xl px-3 py-1 active:scale-90 transition-transform"
+            href="#">
+            <span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">payments</span>
             Finance
         </a>
-<a class="flex flex-col items-center justify-center px-3 py-1 hover:text-indigo-500 dark:hover:text-indigo-300 active:scale-90 transition-transform" href="#">
-<span class="material-symbols-outlined mb-1">auto_awesome</span>
+        <a class="flex flex-col items-center justify-center px-3 py-1 hover:text-indigo-500 dark:hover:text-indigo-300 active:scale-90 transition-transform"
+            href="#">
+            <span class="material-symbols-outlined mb-1">auto_awesome</span>
             Insights
         </a>
-<a class="flex flex-col items-center justify-center px-3 py-1 hover:text-indigo-500 dark:hover:text-indigo-300 active:scale-90 transition-transform" href="#">
-<span class="material-symbols-outlined mb-1">settings</span>
+        <a class="flex flex-col items-center justify-center px-3 py-1 hover:text-indigo-500 dark:hover:text-indigo-300 active:scale-90 transition-transform"
+            href="#">
+            <span class="material-symbols-outlined mb-1">settings</span>
             Settings
         </a>
-</nav>
-</body></html>
+    </nav>
+</body>
+
+</html>
