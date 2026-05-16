@@ -1,4 +1,4 @@
-# Smart Business Manager — System Blueprint v1.0
+# Smart Business Manager — System Blueprint v1.1
 
 > Single Source of Truth · Technical Reference · AI-Ready
 
@@ -8,9 +8,9 @@
 
 | Field   | Value                            |
 | ------- | -------------------------------- |
-| Version | 1.0.0                            |
+| Version | 1.1.0                            |
 | Status  | Active — Locked for Development  |
-| Stack   | MAUI · Supabase · Edge Functions |
+| Stack   | MAUI · Supabase · SQL Instructions |
 | Pattern | Manual MVVM · Shell Navigation   |
 | Date    | 2026                             |
 
@@ -45,7 +45,7 @@ A cross-platform mobile application (iOS & Android) that enables small business 
 | D-03 | MVVM Implementation | Manual INotifyPropertyChanged  | No extra dependency, full control |
 | D-04 | Navigation          | AppShell (Shell Navigation)    | Built-in MAUI, route-based        |
 | D-05 | Supabase Client     | HttpClient (REST calls)        | No SDK dependency, transparent    |
-| D-06 | AI Engine           | Rule-Based Edge Functions      | Deterministic, no LLM cost        |
+| D-06 | AI Engine           | SQL Instructions (Database)      | Deterministic, executes inside DB |
 | D-07 | Offline Support     | None (Online only)             | MVP scope reduction               |
 | D-08 | Currency            | USD only (fixed)               | MVP simplification                |
 | D-09 | Design Reference    | Figma (external)               | Blueprint defines tokens only     |
@@ -72,7 +72,7 @@ A cross-platform mobile application (iOS & Android) that enables small business 
 | --------------------- | ------------------------------------------------------------ | ------------------------- |
 | PostgreSQL (DB)       | All data storage — clients, payments, interactions, insights | REST API via HttpClient   |
 | Auth (GoTrue)         | User registration & login (JWT tokens)                       | REST API via HttpClient   |
-| Edge Functions (Deno) | AI insight generation — Rule-Based logic                     | HTTP POST from app        |
+| SQL Instructions (Database) | AI insight generation — Rule-Based logic                     | Database internal execution |
 | Row Level Security    | Every table has RLS — users see only their data              | Auto-enforced by Supabase |
 
 ---
@@ -259,7 +259,7 @@ CREATE TYPE insight_type AS ENUM (
 | priority     | smallint     | NOT NULL DEFAULT 3, 1–5       | 1 = highest priority        |
 | is_read      | boolean      | NOT NULL DEFAULT false        |                             |
 | generated_at | timestamptz  | NOT NULL DEFAULT now()        |                             |
-| expires_at   | timestamptz  | nullable                      | Edge Function sets this     |
+| expires_at   | timestamptz  | nullable                      | SQL Instruction sets this     |
 
 > **Schema Bug Fixed:** currency column type was `character` (1 char). Corrected to `varchar(3)` to support ISO codes.
 
@@ -394,9 +394,6 @@ public static class Constants
 
     public const string SupabaseAnonKey =
         "YOUR_ANON_KEY";
-
-    public const string EdgeFunctionUrl =
-        SupabaseUrl + "/functions/v1/generate-insights";
 }
 ```
 
@@ -490,7 +487,7 @@ public class SupabaseService : ISupabaseService
 
 ## 7.1 How It Works
 
-The AI module is a Supabase Edge Function (Deno/TypeScript) that runs deterministic business rules on the user's data. It does NOT call any LLM API. It reads data from the database and writes structured insights back to the `ai_insights` table.
+The AI module is powered by SQL Instructions executed directly within the Supabase database (e.g., using Postgres functions or triggers). It does NOT call any LLM API. It evaluates data within the database and maintains structured insights in the `ai_insights` table. The MAUI application simply reads from this table to display insights.
 
 ---
 
@@ -506,96 +503,43 @@ The AI module is a Supabase Edge Function (Deno/TypeScript) that runs determinis
 
 ---
 
-## 7.3 Edge Function Structure
+## 7.3 SQL Instruction Structure
 
-```ts
-// supabase/functions/generate-insights/index.ts
+```sql
+-- Example Postgres function to generate insights (Runs periodically or via trigger)
+CREATE OR REPLACE FUNCTION generate_ai_insights()
+RETURNS void AS $$
+BEGIN
+  -- Clear expired or old insights
+  DELETE FROM ai_insights WHERE expires_at < now();
 
-import { serve } from 'https://deno.land/std/http/server.ts'
-import { createClient } from 'https://esm.sh/@supabase/supabase-js'
+  -- Rule: follow_up_needed
+  INSERT INTO ai_insights (client_id, owner_id, insight_type, message, priority, expires_at)
+  SELECT 
+    id, owner_id, 'follow_up_needed', 
+    name || ' hasn''t been contacted for over 14 days. Consider following up.', 
+    2, now() + interval '7 days'
+  FROM clients
+  WHERE status = 'active' AND last_contacted_at < now() - interval '14 days'
+  ON CONFLICT DO NOTHING;
 
-serve(async (req) => {
-    const { owner_id } = await req.json();
-
-    const supabase = createClient(
-        Deno.env.get('URL'),
-        Deno.env.get('SERVICE_KEY')
-    );
-
-    // 1. Fetch all active clients for this owner
-    const { data: clients } = await supabase
-        .from('clients')
-        .select('*, payments(*), interactions(*)')
-        .eq('owner_id', owner_id);
-
-    const insights = [];
-    const now = new Date();
-
-    for (const client of clients) {
-
-        // Rule: follow_up_needed
-        const daysSinceContact =
-            daysDiff(client.last_contacted_at, now);
-
-        if (
-            daysSinceContact > 14 &&
-            client.status === 'active'
-        ) {
-            insights.push({
-                client_id: client.id,
-                owner_id,
-                insight_type: 'follow_up_needed',
-                message:
-                    `${client.name} hasn't been contacted for ${daysSinceContact} days.`,
-                priority: 2,
-                expires_at:
-                    new Date(now.getTime() + 7 * 86400000),
-            });
-        }
-
-        // ... (repeat for each rule)
-    }
-
-    // 2. Upsert insights, clear old ones
-    await supabase
-        .from('ai_insights')
-        .delete()
-        .eq('owner_id', owner_id)
-        .lt('expires_at', now.toISOString());
-
-    if (insights.length > 0)
-        await supabase
-            .from('ai_insights')
-            .insert(insights);
-
-    return new Response(
-        JSON.stringify({ count: insights.length }),
-        {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }
-    );
-});
+  -- ... (repeat for each rule)
+END;
+$$ LANGUAGE plpgsql;
 ```
 
 ---
 
 ## 7.4 Trigger Point (MAUI App Side)
 
-Call the Edge Function once when the user opens the `Insights` page (`InsightsViewModel.cs`):
+Since the insights are generated inside the database, the MAUI app only needs to fetch the available results when the user opens the `Insights` page (`InsightsViewModel.cs`):
 
 ```csharp
 public async Task RefreshInsightsAsync()
 {
     IsBusy = true;
 
-    // 1. Trigger insight generation
-    await _aiService.GenerateInsightsAsync(
-        _session.CurrentUserId
-    );
-
-    // 2. Fetch the results
+    // Fetch the pre-generated results directly from the database
     Insights = await _supabaseService.GetInsightsAsync();
 
     IsBusy = false;
@@ -990,9 +934,9 @@ docs(blueprint): update DI registration section
 | Client Module    | Client Module        | CRUD + Interactions + Client History          |
 | Financial Module | Financial Module     | Payments CRUD + Status Management             |
 | Dashboard Module | Dashboard Module     | KPIs + Recent Activity Feed                   |
-| AI Module        | AI Module            | Insights Page + Edge Function call            |
+| AI Module        | AI Module            | Insights Page + SQL Instructions              |
 | Core / Shared    | Core / Shared Module | BaseViewModel, Services, Constants, Helpers   |
-| Backend          | Backend              | Supabase Schema, RLS Policies, Edge Functions |
+| Backend          | Backend              | Supabase Schema, RLS Policies, SQL Instructions |
 
 > **If your task touches another module's files — check with that module's owner FIRST.**
 
@@ -1002,4 +946,5 @@ docs(blueprint): update DI registration section
 
 | Version | Date | Change                                    | Author    |
 | ------- | ---- | ----------------------------------------- | --------- |
+| 1.1.0   | 2026 | Switched AI Module from Edge Functions to SQL Instructions. | Team Lead |
 | 1.0.0   | 2026 | Initial Blueprint — all decisions locked. | Team Lead |
