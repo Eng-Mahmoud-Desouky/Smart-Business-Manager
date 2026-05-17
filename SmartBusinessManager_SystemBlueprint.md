@@ -1,4 +1,4 @@
-# Smart Business Manager — System Blueprint v1.1
+# Smart Business Manager — System Blueprint v1.2
 
 > Single Source of Truth · Technical Reference · AI-Ready
 
@@ -8,7 +8,7 @@
 
 | Field   | Value                            |
 | ------- | -------------------------------- |
-| Version | 1.1.0                            |
+| Version | 1.2.0                            |
 | Status  | Active — Locked for Development  |
 | Stack   | MAUI · Supabase · SQL Instructions |
 | Pattern | Manual MVVM · Shell Navigation   |
@@ -49,6 +49,7 @@ A cross-platform mobile application (iOS & Android) that enables small business 
 | D-07 | Offline Support     | None (Online only)             | MVP scope reduction               |
 | D-08 | Currency            | USD only (fixed)               | MVP simplification                |
 | D-09 | Design Reference    | Figma (external)               | Blueprint defines tokens only     |
+| D-10 | Shared UI Library   | Stateless Custom Controls      | MVVM-friendly, zero-dependency    |
 
 ---
 
@@ -131,6 +132,14 @@ SmartBusinessManager/
 │   └── Styles/
 │       ├── Colors.xaml
 │       └── Styles.xaml
+│
+├── Shared/
+│   └── Components/
+│       ├── Cards/          
+│       ├── Common/         
+│       ├── Forms/          
+│       ├── Navigation/     
+│       └── Views/          
 │
 ├── AppShell.xaml
 └── MauiProgram.cs
@@ -935,7 +944,7 @@ docs(blueprint): update DI registration section
 | Financial Module | Financial Module     | Payments CRUD + Status Management             |
 | Dashboard Module | Dashboard Module     | KPIs + Recent Activity Feed                   |
 | AI Module        | AI Module            | Insights Page + SQL Instructions              |
-| Core / Shared    | Core / Shared Module | BaseViewModel, Services, Constants, Helpers   |
+| Core / Shared    | Core / Shared Module | BaseViewModel, Services, Constants, Helpers, UI Components |
 | Backend          | Backend              | Supabase Schema, RLS Policies, SQL Instructions |
 
 > **If your task touches another module's files — check with that module's owner FIRST.**
@@ -946,5 +955,6 @@ docs(blueprint): update DI registration section
 
 | Version | Date | Change                                    | Author    |
 | ------- | ---- | ----------------------------------------- | --------- |
+| 1.2.0   | 2026 | Implemented core Shared UI Components (Stateless, MVVM-ready library). | Team Lead |
 | 1.1.0   | 2026 | Switched AI Module from Edge Functions to SQL Instructions. | Team Lead |
 | 1.0.0   | 2026 | Initial Blueprint — all decisions locked. | Team Lead |
