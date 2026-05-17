@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:forms="clr-namespace:SmartBusinessManager.Shared.Components.Forms"
+             x:Class="SmartBusinessManager.Shared.Components.Views.EmptyStateView"
+             x:Name="self"
+             BackgroundColor="Transparent"
+             VerticalOptions="CenterAndExpand"
+             HorizontalOptions="CenterAndExpand">
+
+    <VerticalStackLayout Spacing="16"
+                         Padding="24"
+                         MaximumWidthRequest="320"
+                         HorizontalOptions="Center"
+                         VerticalOptions="Center">
+
+        <!-- 1. Large Decorative Emblem Glyph -->
+        <Border HeightRequest="80"
+                WidthRequest="80"
+                StrokeThickness="0"
+                BackgroundColor="{StaticResource SurfaceDim}"
+                HorizontalOptions="Center"
+                VerticalOptions="Center">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="40" /> <!-- Circular container -->
+            </Border.StrokeShape>
+
+            <Label Text="{Binding Glyph, Source={x:Reference self}}"
+                   FontSize="36"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center" />
+        </Border>
+
+        <!-- 2. Typography Details Stack -->
+        <VerticalStackLayout Spacing="6" HorizontalOptions="Center">
+            
+            <!-- Title -->
+            <Label Text="{Binding Title, Source={x:Reference self}}"
+                   FontFamily="OpenSansSemibold"
+                   FontSize="18"
+                   TextColor="{StaticResource OnBackground}"
+                   HorizontalTextAlignment="Center"
+                   LineBreakMode="WordWrap" />
+
+            <!-- Description Sub-label -->
+            <Label Text="{Binding Description, Source={x:Reference self}}"
+                   FontFamily="OpenSansRegular"
+                   FontSize="13"
+                   TextColor="{StaticResource Outline}"
+                   HorizontalTextAlignment="Center"
+                   LineBreakMode="WordWrap" />
+        </VerticalStackLayout>
+
+        <!-- 3. Integrated Action Prompt Button -->
+        <forms:PrimaryButton Text="{Binding ActionButtonText, Source={x:Reference self}}"
+                             Command="{Binding ActionButtonCommand, Source={x:Reference self}}"
+                             CommandParameter="{Binding ActionButtonCommandParameter, Source={x:Reference self}}"
+                             IsVisible="{Binding ActionButtonText, Source={x:Reference self}, Converter={StaticResource StringNotNullOrEmptyConverter}}"
+                             Margin="0,8,0,0"
+                             HorizontalOptions="Fill" />
+
+    </VerticalStackLayout>
+</ContentView>

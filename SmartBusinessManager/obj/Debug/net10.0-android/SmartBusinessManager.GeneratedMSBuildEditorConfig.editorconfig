@@ -167,3 +167,103 @@ build_metadata.AdditionalFiles.Inflator = SourceGen
 build_metadata.AdditionalFiles.NoWarn = 
 build_metadata.AdditionalFiles.EnableDiagnostics = 
 build_metadata.AdditionalFiles.LineInfo = 
+
+[C:/Users/IT/MAUI Projects/SmartBusinessManager/Shared/Components/Cards/AiInsightCard.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = SmartBusinessManager.Shared.Components.Cards.AiInsightCard.xaml
+build_metadata.AdditionalFiles.TargetPath = Shared\Components\Cards\AiInsightCard.xaml
+build_metadata.AdditionalFiles.RelativePath = Shared\Components\Cards\AiInsightCard.xaml
+build_metadata.AdditionalFiles.Inflator = SourceGen
+build_metadata.AdditionalFiles.NoWarn = 
+build_metadata.AdditionalFiles.EnableDiagnostics = 
+build_metadata.AdditionalFiles.LineInfo = 
+
+[C:/Users/IT/MAUI Projects/SmartBusinessManager/Shared/Components/Cards/ClientSummaryCard.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = SmartBusinessManager.Shared.Components.Cards.ClientSummaryCard.xaml
+build_metadata.AdditionalFiles.TargetPath = Shared\Components\Cards\ClientSummaryCard.xaml
+build_metadata.AdditionalFiles.RelativePath = Shared\Components\Cards\ClientSummaryCard.xaml
+build_metadata.AdditionalFiles.Inflator = SourceGen
+build_metadata.AdditionalFiles.NoWarn = 
+build_metadata.AdditionalFiles.EnableDiagnostics = 
+build_metadata.AdditionalFiles.LineInfo = 
+
+[C:/Users/IT/MAUI Projects/SmartBusinessManager/Shared/Components/Cards/PaymentRecordCard.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = SmartBusinessManager.Shared.Components.Cards.PaymentRecordCard.xaml
+build_metadata.AdditionalFiles.TargetPath = Shared\Components\Cards\PaymentRecordCard.xaml
+build_metadata.AdditionalFiles.RelativePath = Shared\Components\Cards\PaymentRecordCard.xaml
+build_metadata.AdditionalFiles.Inflator = SourceGen
+build_metadata.AdditionalFiles.NoWarn = 
+build_metadata.AdditionalFiles.EnableDiagnostics = 
+build_metadata.AdditionalFiles.LineInfo = 
+
+[C:/Users/IT/MAUI Projects/SmartBusinessManager/Shared/Components/Common/StatusBadge.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = SmartBusinessManager.Shared.Components.Common.StatusBadge.xaml
+build_metadata.AdditionalFiles.TargetPath = Shared\Components\Common\StatusBadge.xaml
+build_metadata.AdditionalFiles.RelativePath = Shared\Components\Common\StatusBadge.xaml
+build_metadata.AdditionalFiles.Inflator = SourceGen
+build_metadata.AdditionalFiles.NoWarn = 
+build_metadata.AdditionalFiles.EnableDiagnostics = 
+build_metadata.AdditionalFiles.LineInfo = 
+
+[C:/Users/IT/MAUI Projects/SmartBusinessManager/Shared/Components/Forms/FormInputField.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = SmartBusinessManager.Shared.Components.Forms.FormInputField.xaml
+build_metadata.AdditionalFiles.TargetPath = Shared\Components\Forms\FormInputField.xaml
+build_metadata.AdditionalFiles.RelativePath = Shared\Components\Forms\FormInputField.xaml
+build_metadata.AdditionalFiles.Inflator = SourceGen
+build_metadata.AdditionalFiles.NoWarn = 
+build_metadata.AdditionalFiles.EnableDiagnostics = 
+build_metadata.AdditionalFiles.LineInfo = 
+
+[C:/Users/IT/MAUI Projects/SmartBusinessManager/Shared/Components/Forms/PrimaryButton.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = SmartBusinessManager.Shared.Components.Forms.PrimaryButton.xaml
+build_metadata.AdditionalFiles.TargetPath = Shared\Components\Forms\PrimaryButton.xaml
+build_metadata.AdditionalFiles.RelativePath = Shared\Components\Forms\PrimaryButton.xaml
+build_metadata.AdditionalFiles.Inflator = SourceGen
+build_metadata.AdditionalFiles.NoWarn = 
+build_metadata.AdditionalFiles.EnableDiagnostics = 
+build_metadata.AdditionalFiles.LineInfo = 
+
+[C:/Users/IT/MAUI Projects/SmartBusinessManager/Shared/Components/Navigation/CustomBottomNavBar.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = SmartBusinessManager.Shared.Components.Navigation.CustomBottomNavBar.xaml
+build_metadata.AdditionalFiles.TargetPath = Shared\Components\Navigation\CustomBottomNavBar.xaml
+build_metadata.AdditionalFiles.RelativePath = Shared\Components\Navigation\CustomBottomNavBar.xaml
+build_metadata.AdditionalFiles.Inflator = SourceGen
+build_metadata.AdditionalFiles.NoWarn = 
+build_metadata.AdditionalFiles.EnableDiagnostics = 
+build_metadata.AdditionalFiles.LineInfo = 
+
+[C:/Users/IT/MAUI Projects/SmartBusinessManager/Shared/Components/Navigation/SharedAppBar.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = SmartBusinessManager.Shared.Components.Navigation.SharedAppBar.xaml
+build_metadata.AdditionalFiles.TargetPath = Shared\Components\Navigation\SharedAppBar.xaml
+build_metadata.AdditionalFiles.RelativePath = Shared\Components\Navigation\SharedAppBar.xaml
+build_metadata.AdditionalFiles.Inflator = SourceGen
+build_metadata.AdditionalFiles.NoWarn = 
+build_metadata.AdditionalFiles.EnableDiagnostics = 
+build_metadata.AdditionalFiles.LineInfo = 
+
+[C:/Users/IT/MAUI Projects/SmartBusinessManager/Shared/Components/Views/EmptyStateView.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = SmartBusinessManager.Shared.Components.Views.EmptyStateView.xaml
+build_metadata.AdditionalFiles.TargetPath = Shared\Components\Views\EmptyStateView.xaml
+build_metadata.AdditionalFiles.RelativePath = Shared\Components\Views\EmptyStateView.xaml
+build_metadata.AdditionalFiles.Inflator = SourceGen
+build_metadata.AdditionalFiles.NoWarn = 
+build_metadata.AdditionalFiles.EnableDiagnostics = 
+build_metadata.AdditionalFiles.LineInfo = 
+
+[C:/Users/IT/MAUI Projects/SmartBusinessManager/Shared/Components/Views/SkeletonLoader.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = SmartBusinessManager.Shared.Components.Views.SkeletonLoader.xaml
+build_metadata.AdditionalFiles.TargetPath = Shared\Components\Views\SkeletonLoader.xaml
+build_metadata.AdditionalFiles.RelativePath = Shared\Components\Views\SkeletonLoader.xaml
+build_metadata.AdditionalFiles.Inflator = SourceGen
+build_metadata.AdditionalFiles.NoWarn = 
+build_metadata.AdditionalFiles.EnableDiagnostics = 
+build_metadata.AdditionalFiles.LineInfo = 
