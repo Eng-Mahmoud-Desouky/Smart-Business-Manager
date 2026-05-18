@@ -1,0 +1,15 @@
+<api>
+  <jcw-types>
+    <type name="MainActivity" package="crc64b09847de3df808a3" application_java_class="android.app.Application" mono_runtime_initialization="mono.MonoPackageManager.LoadApplication (context);" extends_type="crc6488302ad6e9e4df1a.MauiAppCompatActivity" partial_assembly_qualified_name="SmartBusinessManager.MainActivity, SmartBusinessManager">
+      <constructors>
+        <constructor name="MainActivity" method="n_.ctor:()V:" jni_signature="()V" managed_parameters="" retval="void" is_dynamically_registered="True" />
+        <constructor name="MainActivity" method="n_.ctor:(I)V:" jni_signature="(I)V" managed_parameters="System.Int32, System.Private.CoreLib" params="int p0" retval="void" is_dynamically_registered="True" super_call="p0" activate_call="p0" />
+      </constructors>
+    </type>
+    <type name="MainApplication" package="crc64b09847de3df808a3" application_java_class="android.app.Application" mono_runtime_initialization="mono.MonoPackageManager.LoadApplication (context);" extends_type="crc6488302ad6e9e4df1a.MauiApplication" is_application="True" partial_assembly_qualified_name="SmartBusinessManager.MainApplication, SmartBusinessManager" application_constructor="MainApplication" />
+  </jcw-types>
+  <acw-types partial-assembly-name="SmartBusinessManager" module-name="SmartBusinessManager.dll">
+    <type assembly-qualified-name="SmartBusinessManager.MainActivity, SmartBusinessManager, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" compat-jni-name="smartbusinessmanager.MainActivity" java-key="crc64b09847de3df808a3.MainActivity" managed-key="SmartBusinessManager.MainActivity" partial-assembly-qualified-name="SmartBusinessManager.MainActivity, SmartBusinessManager" />
+    <type assembly-qualified-name="SmartBusinessManager.MainApplication, SmartBusinessManager, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" compat-jni-name="smartbusinessmanager.MainApplication" java-key="crc64b09847de3df808a3.MainApplication" managed-key="SmartBusinessManager.MainApplication" partial-assembly-qualified-name="SmartBusinessManager.MainApplication, SmartBusinessManager" />
+  </acw-types>
+</api>

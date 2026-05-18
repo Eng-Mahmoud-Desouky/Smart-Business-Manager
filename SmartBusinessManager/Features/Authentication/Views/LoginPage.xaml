@@ -1,16 +1,230 @@
-<?xml version="1.0" encoding="utf-8" ?>
+ï»¿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
     x:Class="SmartBusinessManager.Features.Authentication.Views.LoginPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodel="clr-namespace:SmartBusinessManager.Features.Authentication.ViewModels"
+    x:DataType="viewmodel:LoginViewModel"
+    BackgroundColor="{StaticResource Surface}"
     Title="{Binding Title}">
 
-    <ContentPage.BindingContext>
-        <!-- Injected via DI in code-behind constructor -->
-    </ContentPage.BindingContext>
+    <Grid HorizontalOptions="Fill" VerticalOptions="Fill">
+        
+        <ScrollView VerticalOptions="Center" HorizontalOptions="Center">
+            
+            <Grid WidthRequest="360" Margin="16" VerticalOptions="Center" HorizontalOptions="Center">
+                
+                <Border BackgroundColor="{StaticResource White}"
+                        Stroke="{StaticResource Border}"
+                        StrokeThickness="1"
+                        StrokeShape="RoundRectangle 24"
+                        Padding="28">
+                    
+                    <Border.Shadow>
+                        <Shadow Offset="0,8" Radius="16" Brush="#4F46E5" Opacity="0.08"/>
+                    </Border.Shadow>
+                    
+                    <Grid RowDefinitions="Auto, Auto, Auto, Auto">
+                        
+                        <Border Grid.Row="0"
+                                BackgroundColor="#153525CD"
+                                StrokeThickness="0"
+                                WidthRequest="150"
+                                HeightRequest="150"
+                                StrokeShape="RoundRectangle 75"
+                                TranslationX="75"
+                                TranslationY="-75"
+                                HorizontalOptions="End"
+                                VerticalOptions="Start"
+                                InputTransparent="True"/>
 
-    <VerticalStackLayout Padding="16">
-        <Label Text="Login — Coming Soon" Style="{StaticResource BodyLabel}"/>
-    </VerticalStackLayout>
+                        <VerticalStackLayout Grid.Row="1" Spacing="0">
+                            
+                            <Border BackgroundColor="{StaticResource Primary}"
+                                    WidthRequest="48"
+                                    HeightRequest="48"
+                                    StrokeShape="RoundRectangle 12"
+                                    HorizontalOptions="Center"
+                                    Margin="0,0,0,8"
+                                    Padding="0">
+                                <Border.Shadow>
+                                    <Shadow Offset="0,2" Radius="4" Brush="#FFFFFF" Opacity="0.3"/>
+                                </Border.Shadow>
+                                <Label Text="M"
+                                       TextColor="{StaticResource White}"
+                                       FontSize="20"
+                                       FontAttributes="Bold"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center"/>
+                            </Border>
 
+                            <Label Text="Smart Manager"
+                                   TextColor="{StaticResource TextPrimary}"
+                                   FontSize="22"
+                                   FontAttributes="Bold"
+                                   HorizontalTextAlignment="Center"/>
+
+                            <Label Text="Insightful business management."
+                                   TextColor="{StaticResource TextSecondary}"
+                                   FontSize="13"
+                                   HorizontalTextAlignment="Center"
+                                   Margin="0,4,0,24"/>
+
+                            <Grid ColumnDefinitions="*, *" ColumnSpacing="0" Margin="0,0,0,24">
+                                <Grid Grid.Column="0" RowDefinitions="Auto, Auto">
+                                    <Button Text="Sign In"
+                                            BackgroundColor="Transparent"
+                                            TextColor="{StaticResource Primary}"
+                                            FontAttributes="Bold"
+                                            FontSize="15"
+                                            HeightRequest="40"
+                                            Padding="0"
+                                            IsEnabled="{Binding IsNotBusy}"/>
+                                    <BoxView Grid.Row="1"
+                                             HeightRequest="2"
+                                             Color="{StaticResource Primary}"
+                                             HorizontalOptions="Fill"/>
+                                </Grid>
+                                <Grid Grid.Column="1" RowDefinitions="Auto, Auto">
+                                    <Button Text="Create Account"
+                                            BackgroundColor="Transparent"
+                                            TextColor="{StaticResource TextSecondary}"
+                                            FontSize="15"
+                                            HeightRequest="40"
+                                            Padding="0"
+                                            Command="{Binding NavigateToRegisterCommand}"
+                                            IsEnabled="{Binding IsNotBusy}"/>
+                                    <BoxView Grid.Row="1"
+                                             HeightRequest="2"
+                                             Color="Transparent"
+                                             HorizontalOptions="Fill"/>
+                                </Grid>
+                            </Grid>
+
+                            <Label Text="{Binding ErrorMessage}"
+                                   TextColor="{StaticResource Danger}"
+                                   FontSize="13"
+                                   HorizontalTextAlignment="Center"
+                                   IsVisible="{Binding HasError}"
+                                   FontAttributes="Bold"
+                                   Margin="0,0,0,16"/>
+
+                            <Label Text="EMAIL ADDRESS"
+                                   TextColor="{StaticResource TextSecondary}"
+                                   FontSize="11"
+                                   FontAttributes="Bold"
+                                   CharacterSpacing="1"
+                                   Margin="0,0,0,6"/>
+                            
+                            <Border Stroke="{StaticResource Border}"
+                                    StrokeThickness="1"
+                                    StrokeShape="RoundRectangle 12"
+                                    BackgroundColor="{StaticResource Surface}"
+                                    HeightRequest="48"
+                                    Padding="12,0"
+                                    Margin="0,0,0,16">
+                                <Grid ColumnDefinitions="24, *">
+                                    <Label Text="@"
+                                           TextColor="{StaticResource TextMuted}"
+                                           FontSize="15"
+                                           VerticalOptions="Center"
+                                           HorizontalOptions="Center"/>
+                                    <Entry Grid.Column="1"
+                                           Text="{Binding Email, Mode=TwoWay}"
+                                           Placeholder="you@company.com"
+                                           Keyboard="Email"
+                                           VerticalOptions="Center"
+                                           BackgroundColor="Transparent"
+                                           TextColor="{StaticResource TextPrimary}"
+                                           PlaceholderColor="{StaticResource TextMuted}"
+                                           Margin="8,0,0,0"
+                                           IsEnabled="{Binding IsNotBusy}"/>
+                                </Grid>
+                            </Border>
+
+                            <Label Text="PASSWORD"
+                                   TextColor="{StaticResource TextSecondary}"
+                                   FontSize="11"
+                                   FontAttributes="Bold"
+                                   CharacterSpacing="1"
+                                   Margin="0,0,0,6"/>
+                            
+                            <Border Stroke="{StaticResource Border}"
+                                    StrokeThickness="1"
+                                    StrokeShape="RoundRectangle 12"
+                                    BackgroundColor="{StaticResource Surface}"
+                                    HeightRequest="48"
+                                    Padding="12,0"
+                                    Margin="0,0,0,24">
+                                <Grid ColumnDefinitions="24, *, 50">
+                                    <Label Text="*"
+                                           TextColor="{StaticResource TextMuted}"
+                                           FontSize="18"
+                                           FontAttributes="Bold"
+                                           VerticalOptions="Center"
+                                           HorizontalOptions="Center"/>
+                                    <Entry Grid.Column="1"
+                                           x:Name="PasswordEntry"
+                                           Text="{Binding Password, Mode=TwoWay}"
+                                           Placeholder="********"
+                                           IsPassword="True"
+                                           VerticalOptions="Center"
+                                           BackgroundColor="Transparent"
+                                           TextColor="{StaticResource TextPrimary}"
+                                           PlaceholderColor="{StaticResource TextMuted}"
+                                           Margin="8,0,0,0"
+                                           IsEnabled="{Binding IsNotBusy}"/>
+                                    <Button Grid.Column="2"
+                                            x:Name="TogglePasswordBtn"
+                                            Text="Show"
+                                            BackgroundColor="Transparent"
+                                            TextColor="{StaticResource TextMuted}"
+                                            FontSize="12"
+                                            Padding="0"
+                                            VerticalOptions="Center"
+                                            HorizontalOptions="Center"
+                                            Clicked="TogglePassword_Clicked"
+                                            IsEnabled="{Binding IsNotBusy}"/>
+                                </Grid>
+                            </Border>
+
+                            <Button Text="Sign In"
+                                    Command="{Binding LoginCommand}"
+                                    TextColor="{StaticResource White}"
+                                    BackgroundColor="{StaticResource Primary}"
+                                    FontAttributes="Bold"
+                                    HeightRequest="48"
+                                    CornerRadius="12">
+                                <Button.Shadow>
+                                    <Shadow Offset="0,4" Radius="8" Brush="{StaticResource Primary}" Opacity="0.2"/>
+                                </Button.Shadow>
+                            </Button>
+
+                        </VerticalStackLayout>
+                        
+                    </Grid>
+                </Border>
+                
+            </Grid>
+            
+        </ScrollView>
+
+        <Grid BackgroundColor="#AAFCF8FF"
+              IsVisible="{Binding IsBusy}"
+              HorizontalOptions="Fill"
+              VerticalOptions="Fill">
+            <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="12">
+                <ActivityIndicator IsRunning="{Binding IsBusy}"
+                                   Color="{StaticResource Primary}"
+                                   HeightRequest="50"
+                                   WidthRequest="50"/>
+                <Label Text="Signing in..."
+                       TextColor="{StaticResource Primary}"
+                       FontAttributes="Bold"
+                       FontSize="14"
+                       HorizontalTextAlignment="Center"/>
+            </VerticalStackLayout>
+        </Grid>
+
+    </Grid>
 </ContentPage>
