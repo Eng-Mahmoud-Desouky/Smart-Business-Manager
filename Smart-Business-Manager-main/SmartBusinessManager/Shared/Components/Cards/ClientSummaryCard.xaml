@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:common="clr-namespace:SmartBusinessManager.Shared.Components.Common"
+             x:Class="SmartBusinessManager.Shared.Components.Cards.ClientSummaryCard"
+             x:Name="self"
+             BackgroundColor="Transparent">
+
+    <!-- Card outer container -->
+    <Border StrokeThickness="1"
+            Stroke="{StaticResource SurfaceDim}"
+            BackgroundColor="{StaticResource SurfaceContainerLowest}"
+            Margin="0,0,0,8"
+            Padding="12"
+            HorizontalOptions="Fill">
+        <Border.StrokeShape>
+            <RoundRectangle CornerRadius="16" />
+        </Border.StrokeShape>
+        <Border.Shadow>
+            <Shadow Brush="{StaticResource Primary}" Offset="0,2" Radius="6" Opacity="0.02" />
+        </Border.Shadow>
+
+        <Border.GestureRecognizers>
+            <TapGestureRecognizer Tapped="OnCardTapped" />
+        </Border.GestureRecognizers>
+
+        <Grid ColumnDefinitions="Auto,*,Auto,Auto"
+              ColumnSpacing="12"
+              VerticalOptions="Center"
+              HorizontalOptions="Fill">
+
+            <!-- 1. Client Initials Avatar (Column 0) -->
+            <Border Grid.Column="0"
+                    HeightRequest="42"
+                    WidthRequest="42"
+                    StrokeThickness="0"
+                    BackgroundColor="{StaticResource PrimaryContainer}"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="21" /> <!-- Exact circle -->
+                </Border.StrokeShape>
+
+                <Label x:Name="AvatarLabel"
+                       Text="JD"
+                       TextColor="{StaticResource OnPrimaryContainer}"
+                       FontFamily="OpenSansSemibold"
+                       FontSize="14"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center" />
+            </Border>
+
+            <!-- 2. Client Details Stack (Column 1) -->
+            <VerticalStackLayout Grid.Column="1"
+                                 VerticalOptions="Center"
+                                 Spacing="2">
+                <Label Text="{Binding ClientName, Source={x:Reference self}}"
+                       FontFamily="OpenSansSemibold"
+                       FontSize="14"
+                       TextColor="{StaticResource OnBackground}"
+                       LineBreakMode="TailTruncation" />
+                <Label Text="{Binding Company, Source={x:Reference self}}"
+                       FontFamily="OpenSansRegular"
+                       FontSize="11"
+                       TextColor="{StaticResource Outline}"
+                       LineBreakMode="TailTruncation"
+                       IsVisible="{Binding Company, Source={x:Reference self}, Converter={StaticResource StringNotNullOrEmptyConverter}}" />
+                <Label Text="{Binding Email, Source={x:Reference self}}"
+                       FontFamily="OpenSansRegular"
+                       FontSize="11"
+                       TextColor="{StaticResource Outline}"
+                       LineBreakMode="TailTruncation"
+                       IsVisible="{Binding Email, Source={x:Reference self}, Converter={StaticResource StringNotNullOrEmptyConverter}}" />
+            </VerticalStackLayout>
+
+            <!-- 3. Status Badge (Column 2) -->
+            <common:StatusBadge Grid.Column="2"
+                                Status="{Binding Status, Source={x:Reference self}}"
+                                VerticalOptions="Center" />
+
+            <!-- 4. Interactive Navigation Chevron (Column 3) -->
+            <Label Grid.Column="3"
+                   Text="›"
+                   FontFamily="OpenSansSemibold"
+                   FontSize="22"
+                   TextColor="{StaticResource Outline}"
+                   VerticalOptions="Center"
+                   Margin="4,0,0,0" />
+
+        </Grid>
+    </Border>
+</ContentView>

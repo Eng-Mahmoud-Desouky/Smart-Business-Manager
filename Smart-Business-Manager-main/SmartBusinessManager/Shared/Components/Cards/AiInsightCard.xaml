@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartBusinessManager.Shared.Components.Cards.AiInsightCard"
+             x:Name="self"
+             BackgroundColor="Transparent">
+
+    <!-- Card Outer Container -->
+    <Border StrokeThickness="1"
+            Stroke="{StaticResource SurfaceDim}"
+            BackgroundColor="#F9F8FF"
+            Margin="0,0,0,10"
+            HorizontalOptions="Fill">
+        <Border.StrokeShape>
+            <RoundRectangle CornerRadius="16" />
+        </Border.StrokeShape>
+        
+        <Border.Shadow>
+            <Shadow Brush="{StaticResource Primary}" Offset="0,2" Radius="6" Opacity="0.04" />
+        </Border.Shadow>
+
+        <Grid ColumnDefinitions="Auto,*"
+              VerticalOptions="Fill"
+              HorizontalOptions="Fill">
+
+            <!-- 1. Left Gradient Side-Accent Stripe (Column 0) -->
+            <BoxView Grid.Column="0"
+                     WidthRequest="6"
+                     VerticalOptions="Fill"
+                     HorizontalOptions="Start">
+                <BoxView.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Color="{StaticResource Primary}" Offset="0.0" />
+                        <GradientStop Color="{StaticResource PrimaryContainer}" Offset="1.0" />
+                    </LinearGradientBrush>
+                </BoxView.Background>
+            </BoxView>
+
+            <!-- 2. Inside Body Stack (Column 1) -->
+            <Grid Grid.Column="1"
+                  RowDefinitions="Auto,*,Auto"
+                  RowSpacing="6"
+                  Padding="14,12,14,12"
+                  HorizontalOptions="Fill">
+
+                <!-- Header Title & AI Sparkle Badge Row (Row 0) -->
+                <Grid Grid.Row="0" ColumnDefinitions="*,Auto" ColumnSpacing="8" HorizontalOptions="Fill">
+                    <!-- Title -->
+                    <Label Grid.Column="0"
+                           Text="{Binding Title, Source={x:Reference self}}"
+                           FontFamily="OpenSansSemibold"
+                           FontSize="14"
+                           TextColor="#311066"
+                           LineBreakMode="TailTruncation" />
+
+                    <!-- Sparkle Badge -->
+                    <Label Grid.Column="1"
+                           Text="✨"
+                           FontSize="15"
+                           TextColor="{StaticResource PrimaryContainer}"
+                           VerticalOptions="Center" />
+                </Grid>
+
+                <!-- Body Text Content & Optional Timestamp (Row 1) -->
+                <VerticalStackLayout Grid.Row="1" Spacing="4">
+                    <Label Text="{Binding InsightContent, Source={x:Reference self}}"
+                           FontFamily="OpenSansRegular"
+                           FontSize="12"
+                           TextColor="#4A4355"
+                           LineBreakMode="WordWrap" />
+                    
+                    <Label x:Name="TimestampLabel"
+                           Text="{Binding TimestampText, Source={x:Reference self}}"
+                           FontFamily="OpenSansRegular"
+                           FontSize="10"
+                           TextColor="{StaticResource Outline}"
+                           Margin="0,2,0,0" />
+                </VerticalStackLayout>
+
+                <!-- Interactive Action Link Button (Row 2) -->
+                <Grid Grid.Row="2"
+                      x:Name="ActionRow"
+                      ColumnDefinitions="*,Auto"
+                      HorizontalOptions="Fill"
+                      Margin="0,4,0,0">
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnActionTapped" />
+                    </Grid.GestureRecognizers>
+
+                    <Label Grid.Column="0"
+                           Text="{Binding ActionText, Source={x:Reference self}}"
+                           FontFamily="OpenSansSemibold"
+                           FontSize="12"
+                           TextColor="{StaticResource Primary}"
+                           VerticalOptions="Center" />
+
+                    <Label Grid.Column="1"
+                           Text="→"
+                           FontFamily="OpenSansSemibold"
+                           FontSize="14"
+                           TextColor="{StaticResource Primary}"
+                           VerticalOptions="Center"
+                           Margin="4,0,0,0" />
+                </Grid>
+
+            </Grid>
+        </Grid>
+    </Border>
+</ContentView>

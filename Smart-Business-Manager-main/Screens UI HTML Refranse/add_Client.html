@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Add/Edit Client - Smart Manager</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed-dim": "#4edea3",
+                        "inverse-on-surface": "#f3effc",
+                        "on-tertiary-fixed-variant": "#7b2f00",
+                        "primary": "#3525cd",
+                        "on-primary-container": "#dad7ff",
+                        "on-secondary-container": "#00714d",
+                        "background": "#fcf8ff",
+                        "on-tertiary-fixed": "#351000",
+                        "on-secondary-fixed": "#002113",
+                        "on-background": "#1b1b24",
+                        "tertiary": "#7e3000",
+                        "tertiary-fixed": "#ffdbcc",
+                        "outline": "#777587",
+                        "surface-variant": "#e4e1ee",
+                        "surface-container": "#f0ecf9",
+                        "surface-tint": "#4d44e3",
+                        "surface-bright": "#fcf8ff",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "error": "#ba1a1a",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "surface-dim": "#dcd8e5",
+                        "on-primary-fixed": "#0f0069",
+                        "tertiary-fixed-dim": "#ffb695",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#c3c0ff",
+                        "primary-container": "#4f46e5",
+                        "primary-fixed": "#e2dfff",
+                        "inverse-surface": "#302f39",
+                        "on-error-container": "#93000a",
+                        "secondary": "#006c49",
+                        "on-surface-variant": "#464555",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed": "#6ffbbe",
+                        "secondary-container": "#6cf8bb",
+                        "on-tertiary-container": "#ffd2be",
+                        "on-surface": "#1b1b24",
+                        "surface-container-highest": "#e4e1ee",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed-variant": "#005236",
+                        "surface-container-high": "#eae6f4",
+                        "on-primary": "#ffffff",
+                        "outline-variant": "#c7c4d8",
+                        "surface-container-low": "#f5f2ff",
+                        "on-secondary": "#ffffff",
+                        "tertiary-container": "#a44100",
+                        "surface": "#fcf8ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack_lg": "24px",
+                        "container_margin": "16px",
+                        "stack_sm": "8px",
+                        "gutter": "12px",
+                        "stack_md": "16px",
+                        "unit": "4px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["Inter"],
+                        "h3": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "h2": ["Inter"],
+                        "insight-text": ["Inter"],
+                        "h1": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "h3": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "h2": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "insight-text": ["15px", { "lineHeight": "22px", "fontWeight": "500" }],
+                        "h1": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #fcf8ff;
+        }
+
+        .ambient-shadow-1 {
+            box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.04), 0 2px 4px -1px rgba(79, 70, 229, 0.02);
+        }
+
+        .input-ring:focus-within {
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+            border-color: #4f46e5;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body class="text-on-background min-h-screen pb-safe">
+    <!-- TopAppBar -->
+    <header
+        class="bg-white/80 dark:bg-gray-950/80 backdrop-blur-md text-indigo-600 dark:text-indigo-400 font-['Inter'] font-semibold tracking-tight docked full-width top-0 z-40 border-b border-gray-200 dark:border-gray-800 shadow-sm flex items-center justify-between px-4 h-16 w-full sticky">
+        <div class="flex items-center gap-3">
+            <button
+                class="material-symbols-outlined text-gray-500 hover:bg-gray-100 transition-colors rounded-full p-2 active:scale-95 duration-150">arrow_back</button>
+            <span class="text-indigo-600 dark:text-indigo-400 font-bold text-lg">Smart Manager</span>
+        </div>
+        <div class="flex items-center">
+            <button
+                class="material-symbols-outlined text-gray-500 hover:bg-gray-100 transition-colors rounded-full p-2 active:scale-95 duration-150">notifications</button>
+        </div>
+    </header>
+    <!-- Main Content -->
+    <main class="p-container_margin md:p-stack_lg max-w-3xl mx-auto space-y-stack_lg">
+        <!-- Header -->
+        <div class="space-y-stack_sm">
+            <h1 class="font-h1 text-h1 text-on-background">Add New Client</h1>
+            <p class="font-body-lg text-body-lg text-on-surface-variant">Enter client details to create a new profile.
+            </p>
+        </div>
+        <!-- Form Form -->
+        <form class="space-y-stack_lg">
+            <!-- Section 1: Basic Info -->
+            <section
+                class="bg-surface-container-lowest rounded-xl ambient-shadow-1 border border-outline-variant/30 p-stack_md space-y-stack_md">
+                <div class="flex items-center gap-2 mb-stack_sm">
+                    <span class="material-symbols-outlined text-primary">person</span>
+                    <h3 class="font-h3 text-h3 text-on-background">Basic Information</h3>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+                    <!-- Client Name -->
+                    <div class="space-y-unit">
+                        <label class="font-label-caps text-label-caps text-on-surface-variant"
+                            for="clientName">Name</label>
+                        <div
+                            class="input-ring rounded-xl border border-outline-variant bg-surface-container-lowest transition-all">
+                            <input
+                                class="w-full bg-transparent border-none focus:ring-0 font-body-lg text-body-lg text-on-background rounded-xl py-3 px-4 placeholder:text-outline/50"
+                                id="clientName" placeholder="e.g. Acme Corp" type="text" />
+                        </div>
+                    </div>
+                    <!-- Contact Person -->
+                    <div class="space-y-unit">
+                        <label class="font-label-caps text-label-caps text-on-surface-variant"
+                            for="contactPerson">Company Name</label>
+                        <div
+                            class="input-ring rounded-xl border border-outline-variant bg-surface-container-lowest transition-all">
+                            <input
+                                class="w-full bg-transparent border-none focus:ring-0 font-body-lg text-body-lg text-on-background rounded-xl py-3 px-4 placeholder:text-outline/50"
+                                id="contactPerson" placeholder="e.g. Jane Doe" type="text" />
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+                    <!-- Email -->
+                    <div class="space-y-unit">
+                        <label class="font-label-caps text-label-caps text-on-surface-variant" for="email">Email
+                            Address</label>
+                        <div
+                            class="input-ring rounded-xl border border-outline-variant bg-surface-container-lowest transition-all">
+                            <input
+                                class="w-full bg-transparent border-none focus:ring-0 font-body-lg text-body-lg text-on-background rounded-xl py-3 px-4 placeholder:text-outline/50"
+                                id="email" placeholder="jane@acmecorp.com" type="email" />
+                        </div>
+                    </div>
+                    <!-- Phone -->
+                    <div class="space-y-unit">
+                        <label class="font-label-caps text-label-caps text-on-surface-variant" for="phone">Phone
+                            Number</label>
+                        <div
+                            class="input-ring rounded-xl border border-outline-variant bg-surface-container-lowest transition-all">
+                            <input
+                                class="w-full bg-transparent border-none focus:ring-0 font-body-lg text-body-lg text-on-background rounded-xl py-3 px-4 placeholder:text-outline/50"
+                                id="phone" placeholder="+1 (555) 000-0000" type="tel" />
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Actions -->
+            <div class="flex flex-col sm:flex-row gap-gutter justify-end pt-stack_sm">
+                <button
+                    class="px-6 py-3 rounded-xl border border-outline-variant font-body-lg text-body-lg font-medium text-on-surface-variant hover:bg-surface-container transition-colors"
+                    type="button">
+                    Cancel
+                </button>
+                <button
+                    class="px-6 py-3 rounded-xl bg-primary-container text-on-primary font-body-lg text-body-lg font-medium shadow-sm hover:opacity-90 transition-opacity bg-gradient-to-t from-primary-container to-[#635BFF]"
+                    type="submit">
+                    Save Client
+                </button>
+            </div>
+        </form>
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Profile &amp; Settings</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed-dim": "#4edea3",
+                        "inverse-on-surface": "#f3effc",
+                        "on-tertiary-fixed-variant": "#7b2f00",
+                        "primary": "#3525cd",
+                        "on-primary-container": "#dad7ff",
+                        "on-secondary-container": "#00714d",
+                        "background": "#fcf8ff",
+                        "on-tertiary-fixed": "#351000",
+                        "on-secondary-fixed": "#002113",
+                        "on-background": "#1b1b24",
+                        "tertiary": "#7e3000",
+                        "tertiary-fixed": "#ffdbcc",
+                        "outline": "#777587",
+                        "surface-variant": "#e4e1ee",
+                        "surface-container": "#f0ecf9",
+                        "surface-tint": "#4d44e3",
+                        "surface-bright": "#fcf8ff",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "error": "#ba1a1a",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "surface-dim": "#dcd8e5",
+                        "on-primary-fixed": "#0f0069",
+                        "tertiary-fixed-dim": "#ffb695",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#c3c0ff",
+                        "primary-container": "#4f46e5",
+                        "primary-fixed": "#e2dfff",
+                        "inverse-surface": "#302f39",
+                        "on-error-container": "#93000a",
+                        "secondary": "#006c49",
+                        "on-surface-variant": "#464555",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed": "#6ffbbe",
+                        "secondary-container": "#6cf8bb",
+                        "on-tertiary-container": "#ffd2be",
+                        "on-surface": "#1b1b24",
+                        "surface-container-highest": "#e4e1ee",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed-variant": "#005236",
+                        "surface-container-high": "#eae6f4",
+                        "on-primary": "#ffffff",
+                        "outline-variant": "#c7c4d8",
+                        "surface-container-low": "#f5f2ff",
+                        "on-secondary": "#ffffff",
+                        "tertiary-container": "#a44100",
+                        "surface": "#fcf8ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack_lg": "24px",
+                        "container_margin": "16px",
+                        "stack_sm": "8px",
+                        "gutter": "12px",
+                        "stack_md": "16px",
+                        "unit": "4px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["Inter"],
+                        "h3": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "h2": ["Inter"],
+                        "insight-text": ["Inter"],
+                        "h1": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "h3": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "h2": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "insight-text": ["15px", { "lineHeight": "22px", "fontWeight": "500" }],
+                        "h1": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #F9FAFB;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body class="bg-background text-on-background font-body-lg min-h-screen pb-24 md:pb-0 md:pl-72">
+    <!-- TopAppBar -->
+    <header
+        class="bg-white/80 dark:bg-gray-950/80 backdrop-blur-md text-indigo-600 dark:text-indigo-400 font-['Inter'] font-semibold tracking-tight docked full-width top-0 z-40 border-b border-gray-200 dark:border-gray-800 shadow-sm flex items-center justify-between px-4 h-16 w-full fixed md:hidden">
+        <div class="flex items-center gap-3">
+            <img alt="User Profile Image" class="w-8 h-8 rounded-full object-cover"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAN5QdK0-qWLAF4e88p124NLyA6ZrK-4H-tKH0WHvtIcj6SmxTUNqWQvqHNP-hOnk_EDhJF8It_yR91fX43FS80qQatgDVza1wEq_Eq86o6ZiVCVOPgv4HTuK9n47mFPZuIsAUX7Ke4ypXrTrw9bdcuVt3UmHDTwUElGYAuCA3sFl1kcrDpG8pAKntuIYNZ2DAtiM5KlIXZwRyaYlXeL1Fr-4-bRQ9nP5fKnB301WmS97QAuLOoDAp2CLBhL5RXPjl4oIgQio7hv-c" />
+            <span class="text-indigo-600 dark:text-indigo-400 font-bold text-lg">Smart Manager</span>
+        </div>
+        <button
+            class="hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors active:scale-95 duration-150 p-2 rounded-full">
+            <span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+        </button>
+    </header>
+    <!-- NavigationDrawer (Web) -->
+    <nav
+        class="hidden md:flex flex-col h-full py-6 bg-white dark:bg-gray-900 text-indigo-600 dark:text-indigo-400 font-['Inter'] text-sm h-screen w-72 rounded-r-2xl divide-y divide-gray-100 dark:divide-gray-800 shadow-2xl fixed left-0 top-0 z-50">
+        <div class="px-6 pb-6 flex items-center gap-4">
+            <img alt="Business Owner" class="w-12 h-12 rounded-full object-cover"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcNTsG6kbkEkXFLhXlDGbwl3isXm5A7PCc74Z-PlERhQ2PH6RDg2e2tbOVduw6vFgNyPNWD4xTTpTb90sSLm71dSr_a06mFehUMfM13mOKXZAGMSXtNiKNFXqcbqCf_gc5DhlgB2Xb6OABKRrVeAr2w2vyy9hHWHwyg1osp2NCI_pGgtyNHaCUsZlP7dsvOjtLvY5UddncsBx3ezJe4968Iv1AzhC2tSHUDb6vjoC3RDUuR-G2SYIXS41MQs265akyiNiZxisPlZ0" />
+            <div>
+                <h2 class="text-indigo-600 font-bold font-h3 text-h3">Business Manager</h2>
+                <p class="text-gray-500 text-xs">Insightful Growth</p>
+            </div>
+        </div>
+        <div class="flex-1 px-4 py-6 space-y-2">
+            <a class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-all duration-200"
+                href="#">
+                <span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+                <span>Overview</span>
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-all duration-200"
+                href="#">
+                <span class="material-symbols-outlined" data-icon="person">person</span>
+                <span>Client List</span>
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-all duration-200"
+                href="#">
+                <span class="material-symbols-outlined" data-icon="account_balance">account_balance</span>
+                <span>Revenue</span>
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-all duration-200"
+                href="#">
+                <span class="material-symbols-outlined" data-icon="lightbulb">lightbulb</span>
+                <span>Recommendations</span>
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 rounded-xl bg-indigo-50 dark:bg-indigo-900/20 text-indigo-700 dark:text-indigo-300 font-semibold transition-all duration-200"
+                href="#">
+                <span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+                <span>Profile</span>
+            </a>
+        </div>
+    </nav>
+    <!-- Main Content -->
+    <main class="pt-20 md:pt-8 px-container_margin max-w-4xl mx-auto space-y-stack_lg">
+        <header class="mb-8">
+            <h1 class="font-h1 text-h1 text-on-surface">Profile &amp; Settings</h1>
+            <p class="font-body-lg text-body-lg text-on-surface-variant mt-2">Manage your account details and
+                application preferences.</p>
+        </header>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-container_margin">
+            <!-- User Info Card -->
+            <div class="md:col-span-1 space-y-container_margin">
+                <div
+                    class="bg-surface-container-lowest rounded-xl border border-outline-variant/30 shadow-[0_2px_8px_rgba(79,70,225,0.04)] p-6 flex flex-col items-center text-center">
+                    <div class="relative mb-4">
+                        <img alt="User Avatar"
+                            class="w-24 h-24 rounded-full object-cover border-4 border-surface-container-lowest shadow-sm"
+                            data-alt="A professional headshot of a business manager. High quality, well-lit, modern corporate setting. Neutral background, conveying trust and expertise."
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbTduggGS9u32zlqWvDwDNUg2IecvhPqWZZVlqE2nds6QVRVuGLlvnIgCILyTXFh9PNOOSUMbjYRLBQ6AQdsA8797nZVHLgb11ZPkLjiZ1lVRJxIDV6fWbV5Z_UpzRudk1CvIu_t2a9fi0GCdgENIX4edWIB4dZw3m93VQGJQnOHZv5wfkdzukV6fGoW1QEIOH27vWpscyhhUXYPIs8afDup8HhIB7onpiFcWtoOuerQcf-MpB0W4KAOcLtFdhWNph4cpb5xDe3DU" />
+                        <button
+                            class="absolute bottom-0 right-0 bg-primary-container text-on-primary rounded-full p-2 shadow-md hover:bg-primary transition-colors">
+                            <span class="material-symbols-outlined text-sm" data-icon="edit">edit</span>
+                        </button>
+                    </div>
+                    <h2 class="font-h2 text-h2 text-on-surface">Alex Mercer</h2>
+                    <p class="font-body-sm text-body-sm text-on-surface-variant mb-4">alex.mercer@example.com</p>
+                </div>
+            </div>
+            <!-- Settings Sections -->
+            <div class="md:col-span-2 space-y-stack_md">
+                <!-- Account Details -->
+                <div
+                    class="bg-surface-container-lowest rounded-xl border border-outline-variant/30 shadow-[0_2px_8px_rgba(79,70,225,0.04)] overflow-hidden">
+                    <div class="p-6 border-b border-outline-variant/30">
+                        <h3 class="font-h3 text-h3 text-on-surface">Account Details</h3>
+                    </div>
+                    <div class="p-6 space-y-stack_md">
+                        <div>
+                            <label class="font-label-caps text-label-caps text-on-surface-variant block mb-2">Full
+                                Name</label>
+                            <input
+                                class="w-full rounded-lg border border-outline-variant bg-surface-bright px-4 py-2 font-body-lg text-on-surface focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 outline-none transition-all"
+                                type="text" value="Alex Mercer" />
+                        </div>
+                        <div>
+                            <label class="font-label-caps text-label-caps text-on-surface-variant block mb-2">Email
+                                Address</label>
+                            <input
+                                class="w-full rounded-lg border border-outline-variant bg-surface-bright px-4 py-2 font-body-lg text-on-surface focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 outline-none transition-all"
+                                type="email" value="alex.mercer@example.com" />
+                        </div>
+                        <div class="pt-4 flex justify-end">
+                            <button
+                                class="bg-primary-container text-on-primary font-insight-text text-insight-text px-6 py-2 rounded-lg shadow-sm hover:opacity-90 transition-opacity">Save
+                                Changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- BottomNavBar (Mobile) -->
+    <nav
+        class="flex justify-around items-center h-20 px-2 pb-safe w-full bg-white/90 dark:bg-gray-900/90 backdrop-blur-lg text-indigo-600 dark:text-indigo-400 font-['Inter'] text-[10px] font-medium fixed bottom-0 w-full rounded-t-2xl z-50 md:hidden">
+        <a class="flex flex-col items-center justify-center text-gray-400 dark:text-gray-500 px-3 py-1 hover:text-indigo-500 dark:hover:text-indigo-300 active:scale-90 transition-transform"
+            href="#">
+            <span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+            <span>Home</span>
+        </a>
+        <a class="flex flex-col items-center justify-center text-gray-400 dark:text-gray-500 px-3 py-1 hover:text-indigo-500 dark:hover:text-indigo-300 active:scale-90 transition-transform"
+            href="#">
+            <span class="material-symbols-outlined" data-icon="groups">groups</span>
+            <span>Clients</span>
+        </a>
+        <a class="flex flex-col items-center justify-center text-gray-400 dark:text-gray-500 px-3 py-1 hover:text-indigo-500 dark:hover:text-indigo-300 active:scale-90 transition-transform"
+            href="#">
+            <span class="material-symbols-outlined" data-icon="payments">payments</span>
+            <span>Finance</span>
+        </a>
+        <a class="flex flex-col items-center justify-center text-gray-400 dark:text-gray-500 px-3 py-1 hover:text-indigo-500 dark:hover:text-indigo-300 active:scale-90 transition-transform"
+            href="#">
+            <span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
+            <span>Insights</span>
+        </a>
+        <a class="flex flex-col items-center justify-center bg-indigo-50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 rounded-xl px-3 py-1 hover:text-indigo-500 dark:hover:text-indigo-300 active:scale-90 transition-transform"
+            href="#">
+            <span class="material-symbols-outlined" data-icon="settings">settings</span>
+            <span>Settings</span>
+        </a>
+    </nav>
+</body>
+
+</html>
