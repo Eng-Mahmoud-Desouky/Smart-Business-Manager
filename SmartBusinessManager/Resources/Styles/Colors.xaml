@@ -23,4 +23,20 @@
     <Color x:Key="Surface">#fcf8ff</Color>
     <Color x:Key="White">#ffffff</Color>
 
+    <!-- Added Missing Colors -->
+    <Color x:Key="OnSurfaceVariant">#49454f</Color>
+    <Color x:Key="SurfaceDim">#ded8e1</Color>
+    <Color x:Key="SurfaceContainerLowest">#ffffff</Color>
+    <Color x:Key="Error">#ba1a1a</Color>
+    <Color x:Key="Outline">#79747e</Color>
+    <Color x:Key="OnBackground">#1d1b20</Color>
+    <Color x:Key="PrimaryContainer">#eaddff</Color>
+    <Color x:Key="OnPrimaryContainer">#21005d</Color>
+    <Color x:Key="SecondaryContainer">#e8def8</Color>
+    
+    <!-- More Missing Colors -->
+    <Color x:Key="OnPrimary">#ffffff</Color>
+    <Color x:Key="PrimaryFixedDim">#cbc2ff</Color>
+    <Color x:Key="Secondary">#5e5c71</Color>
+
 </ResourceDictionary>

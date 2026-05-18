@@ -11,6 +11,7 @@ using SmartBusinessManager.Features.Finance.ViewModels;
 using SmartBusinessManager.Features.Finance.Views;
 using SmartBusinessManager.Features.AI.ViewModels;
 using SmartBusinessManager.Features.AI.Views;
+using SmartBusinessManager.Features.TempShowcase.Views;
 
 namespace SmartBusinessManager;
 
@@ -18,6 +19,12 @@ public static class MauiProgram
 {
     public static MauiApp CreateMauiApp()
     {
+        AppDomain.CurrentDomain.UnhandledException += (sender, error) =>
+        {
+            System.Diagnostics.Debug.WriteLine($"\n\n====================\nFATAL MAUI CRASH: {error.ExceptionObject}\n====================\n\n");
+            Console.WriteLine($"\n\n====================\nFATAL MAUI CRASH: {error.ExceptionObject}\n====================\n\n");
+        };
+
         var builder = MauiApp.CreateBuilder();
 
         builder
@@ -55,6 +62,7 @@ public static class MauiProgram
         builder.Services.AddTransient<PaymentListPage>();
         builder.Services.AddTransient<AddPaymentPage>();
         builder.Services.AddTransient<InsightsPage>();
+        builder.Services.AddTransient<ComponentShowcasePage>();
 
         return builder.Build();
     }

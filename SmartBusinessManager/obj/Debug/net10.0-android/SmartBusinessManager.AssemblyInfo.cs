@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SmartBusinessManager")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+cf73cf8484a16544885f06d2a825a6e4a469bedc")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+b6aa9fa05fd6996302e1697653003be3404fd01e")]
 [assembly: System.Reflection.AssemblyProductAttribute("SmartBusinessManager")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SmartBusinessManager")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

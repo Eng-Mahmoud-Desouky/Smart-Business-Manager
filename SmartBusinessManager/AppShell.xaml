@@ -8,10 +8,17 @@
     xmlns:clients="clr-namespace:SmartBusinessManager.Features.Clients.Views"
     xmlns:finance="clr-namespace:SmartBusinessManager.Features.Finance.Views"
     xmlns:ai="clr-namespace:SmartBusinessManager.Features.AI.Views"
+    xmlns:showcase="clr-namespace:SmartBusinessManager.Features.TempShowcase.Views"
     Shell.FlyoutBehavior="Disabled">
 
-    <!-- ── Auth (no tab bar) ──────────────────────────── -->
+
     <ShellContent
+    Route="showcase"
+    ContentTemplate="{DataTemplate showcase:ComponentShowcasePage}"
+    Shell.TabBarIsVisible="true"/>
+
+    <!-- ── Auth (no tab bar) ──────────────────────────── -->
+    <!-- <ShellContent
         Route="login"
         ContentTemplate="{DataTemplate auth:LoginPage}"
         Shell.TabBarIsVisible="False"/>
@@ -19,9 +26,9 @@
     <ShellContent
         Route="register"
         ContentTemplate="{DataTemplate auth:RegisterPage}"
-        Shell.TabBarIsVisible="False"/>
+        Shell.TabBarIsVisible="False"/> -->
 
-    <!-- ── Main Tab Bar ──────────────────────────────── -->
+    <!-- ── Main Tab Bar ────────────────────────────────
     <TabBar>
         <Tab Title="Dashboard" Icon="icon_dashboard.png">
             <ShellContent
@@ -47,5 +54,6 @@
                 ContentTemplate="{DataTemplate ai:InsightsPage}"/>
         </Tab>
     </TabBar>
+    -->
 
 </Shell>

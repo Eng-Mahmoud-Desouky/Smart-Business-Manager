@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartBusinessManager.Features.TempShowcase.Views.ComponentShowcasePage"
+             xmlns:SharedForms="clr-namespace:SmartBusinessManager.Shared.Components.Forms"
+             xmlns:SharedCards="clr-namespace:SmartBusinessManager.Shared.Components.Cards"
+             xmlns:SharedCommon="clr-namespace:SmartBusinessManager.Shared.Components.Common"
+             xmlns:SharedNavigation="clr-namespace:SmartBusinessManager.Shared.Components.Navigation"
+             xmlns:SharedViews="clr-namespace:SmartBusinessManager.Shared.Components.Views"
+             Title="Component Showcase">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <!-- Defining OutlineVariant locally to prevent crashes since it's not in Colors.xaml -->
+            <Color x:Key="OutlineVariant">#777587</Color>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="Auto,*,Auto" BackgroundColor="{StaticResource Surface}">
+        
+        <!-- Pinned SharedAppBar at the top -->
+        <SharedNavigation:SharedAppBar Grid.Row="0" 
+                                       Title="🧪 Component Showcase" 
+                                       ShowBackButton="False" />
+        
+        <!-- ScrollView fills the remaining space -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="16" Spacing="24">
+                
+                <!-- 1. FORMS -->
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="FORMS"
+                           FontSize="13"
+                           TextColor="{StaticResource OutlineVariant}"
+                           FontFamily="OpenSansSemibold"
+                           Margin="0,0,0,4" />
+                    
+                    <SharedForms:FormInputField Label="Full Name" 
+                                                Placeholder="Enter your name" />
+                    
+                    <SharedForms:FormInputField Label="Password" 
+                                                Placeholder="••••••••" 
+                                                IsPassword="True" />
+                    
+                    <SharedForms:PrimaryButton Text="Submit" />
+                    
+                    <SharedForms:PrimaryButton Text="Loading…" 
+                                               IsBusy="True" />
+                    
+                    <SharedForms:PrimaryButton Text="Disabled" 
+                                               IsEnabled="False" />
+                </VerticalStackLayout>
+
+                <!-- 2. STATUS BADGES -->
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="STATUS BADGES"
+                           FontSize="13"
+                           TextColor="{StaticResource OutlineVariant}"
+                           FontFamily="OpenSansSemibold"
+                           Margin="0,0,0,4" />
+                    
+                    <FlexLayout Wrap="Wrap" 
+                                Direction="Row" 
+                                JustifyContent="Start" 
+                                AlignItems="Center" 
+                                AlignContent="Start">
+                        <SharedCommon:StatusBadge Status="active" Margin="0,0,8,8" />
+                        <SharedCommon:StatusBadge Status="inactive" Margin="0,0,8,8" />
+                        <SharedCommon:StatusBadge Status="lead" Margin="0,0,8,8" />
+                        <SharedCommon:StatusBadge Status="pending" Margin="0,0,8,8" />
+                        <SharedCommon:StatusBadge Status="paid" Margin="0,0,8,8" />
+                        <SharedCommon:StatusBadge Status="overdue" Margin="0,0,8,8" />
+                        <SharedCommon:StatusBadge Status="cancelled" Margin="0,0,8,8" />
+                    </FlexLayout>
+                </VerticalStackLayout>
+
+                <!-- 3. CARDS -->
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="CARDS"
+                           FontSize="13"
+                           TextColor="{StaticResource OutlineVariant}"
+                           FontFamily="OpenSansSemibold"
+                           Margin="0,0,0,4" />
+                    
+                    <!-- ClientSummaryCard 1 -->
+                    <SharedCards:ClientSummaryCard ClientName="Jane Doe" 
+                                                   Email="jane@example.com" 
+                                                   Status="active" 
+                                                   Company="+1 555 0100" />
+                    
+                    <!-- ClientSummaryCard 2 -->
+                    <SharedCards:ClientSummaryCard ClientName="Ahmed Ali" 
+                                                   Status="inactive" />
+                    
+                    <!-- PaymentRecordCard 1 -->
+                    <SharedCards:PaymentRecordCard ClientName="Sara Hassan" 
+                                                   AmountText="$500" 
+                                                   Status="overdue" 
+                                                   DateText="Due: 2026-05-01 (Invoice #1042)" />
+                    
+                    <!-- PaymentRecordCard 2 -->
+                    <SharedCards:PaymentRecordCard ClientName="Khaled Omar" 
+                                                   AmountText="$1200" 
+                                                   Status="paid" />
+                </VerticalStackLayout>
+
+                <!-- 4. AI INSIGHTS -->
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="AI INSIGHTS"
+                           FontSize="13"
+                           TextColor="{StaticResource OutlineVariant}"
+                           FontFamily="OpenSansSemibold"
+                           Margin="0,0,0,4" />
+                    
+                    <!-- AiInsightCard 1 -->
+                    <SharedCards:AiInsightCard Title="overdue_payment" 
+                                               InsightContent="Sara has an overdue payment of $500. Follow up now." 
+                                               TimestampText="Priority 1" />
+                    
+                    <!-- AiInsightCard 2 -->
+                    <SharedCards:AiInsightCard Title="follow_up_needed" 
+                                               InsightContent="Ahmed hasn't been contacted for 14 days." 
+                                               TimestampText="Priority 2" />
+                </VerticalStackLayout>
+
+                <!-- 5. STATES -->
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="STATES"
+                           FontSize="13"
+                           TextColor="{StaticResource OutlineVariant}"
+                           FontFamily="OpenSansSemibold"
+                           Margin="0,0,0,4" />
+                    
+                    <SharedViews:SkeletonLoader />
+                    
+                    <SharedViews:EmptyStateView Title="No Clients Yet" 
+                                                Description="Add your first client to get started." />
+                </VerticalStackLayout>
+
+            </VerticalStackLayout>
+        </ScrollView>
+        
+        <!-- Pinned CustomBottomNavBar at the bottom -->
+        <SharedNavigation:CustomBottomNavBar Grid.Row="2" 
+                                             ActiveTab="dashboard" />
+    </Grid>
+
+</ContentPage>
