@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartBusinessManager.Shared.Components.Views.SkeletonLoader"
+             x:Name="self"
+             BackgroundColor="Transparent"
+             Loaded="OnLoaded"
+             Unloaded="OnUnloaded">
+
+    <!-- Outermost generic row template container matching client/payment card frames -->
+    <Border StrokeThickness="1"
+            Stroke="{StaticResource SurfaceDim}"
+            BackgroundColor="{StaticResource SurfaceContainerLowest}"
+            Margin="0,0,0,8"
+            Padding="12"
+            HorizontalOptions="Fill">
+        <Border.StrokeShape>
+            <RoundRectangle CornerRadius="16" />
+        </Border.StrokeShape>
+
+        <Grid ColumnDefinitions="Auto,*,Auto"
+              ColumnSpacing="12"
+              VerticalOptions="Center"
+              HorizontalOptions="Fill">
+
+            <!-- 1. Circular Avatar Rail Placeholder (Column 0) -->
+            <Border Grid.Column="0"
+                    HeightRequest="42"
+                    WidthRequest="42"
+                    StrokeThickness="0"
+                    BackgroundColor="{StaticResource SurfaceDim}"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="21" /> <!-- Exact circle -->
+                </Border.StrokeShape>
+            </Border>
+
+            <!-- 2. Dual Stack Text Rail Placeholders (Column 1) -->
+            <VerticalStackLayout Grid.Column="1"
+                                 VerticalOptions="Center"
+                                 Spacing="8">
+                
+                <!-- Main Header Line Rail -->
+                <Border HeightRequest="14"
+                        WidthRequest="140"
+                        StrokeThickness="0"
+                        BackgroundColor="{StaticResource SurfaceDim}"
+                        HorizontalOptions="Start"
+                        VerticalOptions="Center">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="4" />
+                    </Border.StrokeShape>
+                </Border>
+
+                <!-- Sub-Label Detail Line Rail -->
+                <Border HeightRequest="10"
+                        WidthRequest="90"
+                        StrokeThickness="0"
+                        BackgroundColor="{StaticResource SurfaceDim}"
+                        HorizontalOptions="Start"
+                        VerticalOptions="Center">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="3" />
+                    </Border.StrokeShape>
+                </Border>
+            </VerticalStackLayout>
+
+            <!-- 3. Mini Right-aligned Action Indicator Rail (Column 2) -->
+            <Border Grid.Column="2"
+                    HeightRequest="20"
+                    WidthRequest="50"
+                    StrokeThickness="0"
+                    BackgroundColor="{StaticResource SurfaceDim}"
+                    HorizontalOptions="End"
+                    VerticalOptions="Center">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10" /> <!-- Small Pill -->
+                </Border.StrokeShape>
+            </Border>
+
+        </Grid>
+    </Border>
+</ContentView>

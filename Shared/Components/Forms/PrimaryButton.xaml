@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartBusinessManager.Shared.Components.Forms.PrimaryButton"
+             x:Name="self"
+             BackgroundColor="Transparent">
+
+    <Grid HeightRequest="48"
+          HorizontalOptions="Fill">
+        
+        <!-- Action Button -->
+        <Button x:Name="ActionButton"
+                Text="{Binding Text, Source={x:Reference self}}"
+                Command="{Binding Command, Source={x:Reference self}}"
+                CommandParameter="{Binding CommandParameter, Source={x:Reference self}}"
+                IsEnabled="{Binding IsEnabled, Source={x:Reference self}}"
+                TextColor="{StaticResource OnPrimary}"
+                BackgroundColor="{StaticResource Primary}"
+                CornerRadius="12"
+                FontFamily="OpenSansSemibold"
+                FontSize="15"
+                CharacterSpacing="0.5"
+                Padding="16,0"
+                HorizontalOptions="Fill"
+                VerticalOptions="Fill">
+            
+            <Button.Shadow>
+                <Shadow Brush="{StaticResource Primary}" Offset="0,2" Radius="4" Opacity="0.1" />
+            </Button.Shadow>
+
+            <Button.Triggers>
+                <!-- Loading State Trigger: Hide text and disable tapping to prevent double-submits -->
+                <DataTrigger TargetType="Button" Binding="{Binding IsBusy, Source={x:Reference self}}" Value="True">
+                    <Setter Property="TextColor" Value="Transparent" />
+                    <Setter Property="IsEnabled" Value="False" />
+                    <Setter Property="BackgroundColor" Value="{StaticResource PrimaryFixedDim}" />
+                </DataTrigger>
+                
+                <!-- Disabled State Trigger -->
+                <DataTrigger TargetType="Button" Binding="{Binding IsEnabled, Source={x:Reference self}}" Value="False">
+                    <Setter Property="BackgroundColor" Value="{StaticResource SurfaceDim}" />
+                    <Setter Property="TextColor" Value="{StaticResource Outline}" />
+                </DataTrigger>
+            </Button.Triggers>
+        </Button>
+
+        <!-- Spinner Loading Overlay -->
+        <ActivityIndicator IsRunning="{Binding IsBusy, Source={x:Reference self}}"
+                           IsVisible="{Binding IsBusy, Source={x:Reference self}}"
+                           Color="{StaticResource OnPrimary}"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           HeightRequest="24"
+                           WidthRequest="24" />
+
+    </Grid>
+</ContentView>

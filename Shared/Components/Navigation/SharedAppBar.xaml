@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartBusinessManager.Shared.Components.Navigation.SharedAppBar"
+             x:Name="self"
+             BackgroundColor="Transparent">
+
+    <Grid x:Name="MainAppBarGrid"
+          HeightRequest="56"
+          Padding="16,0"
+          ColumnDefinitions="Auto,*,Auto"
+          RowDefinitions="*,Auto">
+
+        <!-- Visual Background Container (Allows styling and gradient transitions) -->
+        <Border Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" Grid.RowSpan="2"
+                StrokeThickness="0"
+                BackgroundColor="{StaticResource SurfaceContainerLowest}">
+            <Border.StrokeShape>
+                <Rectangle />
+            </Border.StrokeShape>
+            
+            <!-- Triggers to apply AI Magic theme background tint -->
+            <Border.Triggers>
+                <DataTrigger TargetType="Border" Binding="{Binding HasAiTheme, Source={x:Reference self}}" Value="True">
+                    <Setter Property="BackgroundColor" Value="#F5F2FF" /> <!-- 2% Lavender/Indigo tint equivalent -->
+                </DataTrigger>
+            </Border.Triggers>
+        </Border>
+
+        <!-- Back Button (Column 0) -->
+        <Button Grid.Column="0" Grid.Row="0"
+                x:Name="BackButton"
+                Text="←"
+                FontFamily="OpenSansSemibold"
+                FontSize="20"
+                TextColor="{StaticResource Primary}"
+                BackgroundColor="Transparent"
+                BorderWidth="0"
+                HeightRequest="40"
+                WidthRequest="40"
+                Padding="0"
+                Margin="0,0,12,0"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                IsVisible="{Binding ShowBackButton, Source={x:Reference self}}"
+                Clicked="OnBackButtonClicked" />
+
+        <!-- Title & Subtitle (Column 1) -->
+        <VerticalStackLayout Grid.Column="1" Grid.Row="0"
+                             VerticalOptions="Center"
+                             Spacing="2">
+            
+            <Label Text="{Binding Title, Source={x:Reference self}}"
+                   FontFamily="OpenSansSemibold"
+                   FontSize="18"
+                   TextColor="{StaticResource OnBackground}"
+                   LineBreakMode="TailTruncation"
+                   VerticalOptions="Center">
+                <Label.Triggers>
+                    <!-- Make title bold and distinct in AI theme -->
+                    <DataTrigger TargetType="Label" Binding="{Binding HasAiTheme, Source={x:Reference self}}" Value="True">
+                        <Setter Property="TextColor" Value="{StaticResource Primary}" />
+                    </DataTrigger>
+                </Label.Triggers>
+            </Label>
+
+            <Label x:Name="SubtitleLabel"
+                   Text="{Binding Subtitle, Source={x:Reference self}}"
+                   FontFamily="OpenSansRegular"
+                   FontSize="12"
+                   TextColor="{StaticResource Secondary}"
+                   LineBreakMode="TailTruncation" />
+        </VerticalStackLayout>
+
+        <!-- Right Action Button (Column 2) -->
+        <Button Grid.Column="2" Grid.Row="0"
+                x:Name="ActionButton"
+                Text="{Binding RightActionIcon, Source={x:Reference self}}"
+                FontFamily="OpenSansSemibold"
+                FontSize="18"
+                TextColor="{StaticResource Primary}"
+                BackgroundColor="Transparent"
+                BorderWidth="0"
+                HeightRequest="40"
+                WidthRequest="40"
+                Padding="0"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Command="{Binding RightActionCommand, Source={x:Reference self}}"
+                CommandParameter="{Binding RightActionCommandParameter, Source={x:Reference self}}" />
+
+        <!-- Divider / Custom Stroke (Row 1) -->
+        <BoxView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"
+                 HeightRequest="1"
+                 HorizontalOptions="Fill"
+                 VerticalOptions="End"
+                 BackgroundColor="{StaticResource SurfaceDim}">
+            <BoxView.Triggers>
+                <!-- Triggers to swap out bottom divider with the AI gradient glow line -->
+                <DataTrigger TargetType="BoxView" Binding="{Binding HasAiTheme, Source={x:Reference self}}" Value="True">
+                    <Setter Property="HeightRequest" Value="2" />
+                    <!-- Visual glow accent using Primary Container and Secondary Container in MAUI -->
+                    <Setter Property="BackgroundColor" Value="{StaticResource PrimaryContainer}" /> 
+                </DataTrigger>
+            </BoxView.Triggers>
+        </BoxView>
+
+    </Grid>
+</ContentView>
