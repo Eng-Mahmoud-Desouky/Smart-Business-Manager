@@ -3,8 +3,8 @@ namespace SmartBusinessManager.Core.Helpers;
 public static class Constants
 {
     // ── Supabase ──────────────────────────────────────────
-    public const string SupabaseUrl     = "https://YOUR_PROJECT_ID.supabase.co";
-    public const string SupabaseAnonKey = "YOUR_ANON_KEY_HERE";
+    public const string SupabaseUrl     = "https://htiqetrzfbdseqborjxw.supabase.co";
+    public const string SupabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh0aXFldHJ6ZmJkc2VxYm9yanh3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc3MDQ2NzUsImV4cCI6MjA5MzI4MDY3NX0.s0nfewie5VgH2MjoJA3ghCCOQeILQULu-XLNHvCVOCY";
 
     // ── Edge Functions ────────────────────────────────────
     public const string EdgeFunctionGenerateInsights =

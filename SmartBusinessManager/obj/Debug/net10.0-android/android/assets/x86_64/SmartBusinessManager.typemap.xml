@@ -1,0 +1,10 @@
+<api type="debug" assembly-name="SmartBusinessManager" mvid="90a27d01d8674f38a6ef02095dfa7df0">
+  <java-to-managed>
+    <entry java-name="crc64b09847de3df808a3/MainActivity" managed-name="SmartBusinessManager.MainActivity, SmartBusinessManager" managed-type-token-id="33554456" />
+    <entry java-name="crc64b09847de3df808a3/MainApplication" managed-name="SmartBusinessManager.MainApplication, SmartBusinessManager" managed-type-token-id="33554457" />
+  </java-to-managed>
+  <managed-to-java>
+    <entry java-name="crc64b09847de3df808a3/MainActivity" managed-name="SmartBusinessManager.MainActivity, SmartBusinessManager" managed-type-token-id="33554456" />
+    <entry java-name="crc64b09847de3df808a3/MainApplication" managed-name="SmartBusinessManager.MainApplication, SmartBusinessManager" managed-type-token-id="33554457" />
+  </managed-to-java>
+</api>
