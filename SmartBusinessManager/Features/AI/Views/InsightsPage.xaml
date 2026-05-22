@@ -3,14 +3,90 @@
     x:Class="SmartBusinessManager.Features.AI.Views.InsightsPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="{Binding Title}">
+    xmlns:vm="clr-namespace:SmartBusinessManager.Features.AI.ViewModels"
+    xmlns:aiModels="clr-namespace:SmartBusinessManager.Features.AI.Models"
+    xmlns:cards="clr-namespace:SmartBusinessManager.Shared.Components.Cards"
+    xmlns:views="clr-namespace:SmartBusinessManager.Shared.Components.Views"
+    xmlns:nav="clr-namespace:SmartBusinessManager.Shared.Components.Navigation"
+    Title="AI Insights"
+    BackgroundColor="{StaticResource Surface}"
+    Shell.TabBarIsVisible="False"
+    Shell.NavBarIsVisible="False">
 
-    <ContentPage.BindingContext>
-        <!-- Injected via DI in code-behind constructor -->
-    </ContentPage.BindingContext>
+    <Grid RowDefinitions="*, Auto">
+        <Grid Grid.Row="0" Margin="16">
+        <!-- Main Layout Grid -->
+        <Grid RowDefinitions="Auto, Auto, *" RowSpacing="16">
+            
+            <!-- Page Header -->
+            <VerticalStackLayout Grid.Row="0" Spacing="4">
+                <Label Text="AI CRM Recommendations" FontSize="26" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}" />
+                <Label Text="Automated revenue intelligence and task optimizations" FontSize="14" TextColor="{StaticResource TextSecondary}" />
+            </VerticalStackLayout>
 
-    <VerticalStackLayout Padding="16">
-        <Label Text="Insights — Coming Soon" Style="{StaticResource BodyLabel}"/>
-    </VerticalStackLayout>
+            <!-- Filters Pill Bar -->
+            <Grid Grid.Row="1" ColumnDefinitions="*, Auto" VerticalOptions="Center">
+                <ScrollView Grid.Column="0" Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
+                    <HorizontalStackLayout Spacing="8">
+                        <Button Text="All" Command="{Binding SelectFilterCommand}" CommandParameter="All" BackgroundColor="{StaticResource PrimaryLight}" TextColor="{StaticResource PrimaryDark}" CornerRadius="18" Padding="12,0" HeightRequest="36" />
+                        <Button Text="High Priority" Command="{Binding SelectFilterCommand}" CommandParameter="High Priority" BackgroundColor="{StaticResource PrimaryLight}" TextColor="{StaticResource PrimaryDark}" CornerRadius="18" Padding="12,0" HeightRequest="36" />
+                        <Button Text="Payments" Command="{Binding SelectFilterCommand}" CommandParameter="Payments" BackgroundColor="{StaticResource PrimaryLight}" TextColor="{StaticResource PrimaryDark}" CornerRadius="18" Padding="12,0" HeightRequest="36" />
+                        <Button Text="Activity" Command="{Binding SelectFilterCommand}" CommandParameter="Activity" BackgroundColor="{StaticResource PrimaryLight}" TextColor="{StaticResource PrimaryDark}" CornerRadius="18" Padding="12,0" HeightRequest="36" />
+                    </HorizontalStackLayout>
+                </ScrollView>
+                <Label Grid.Column="1" Text="{Binding SelectedFilter, StringFormat='Type: {0}'}" FontSize="12" FontAttributes="Bold" TextColor="{StaticResource TextSecondary}" VerticalOptions="Center" Margin="8,0,0,0" />
+            </Grid>
 
+            <!-- Content Area / Refresh / List -->
+            <Grid Grid.Row="2">
+                <!-- Standard Insights Feed -->
+                <RefreshView Command="{Binding LoadInsightsCommand}" IsRefreshing="{Binding IsBusy}">
+                    <CollectionView ItemsSource="{Binding FilteredInsights}" SelectionMode="None">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="aiModels:AiInsight">
+                                <SwipeView Threshold="80">
+                                    <!-- Right Swipe to Dismiss -->
+                                    <SwipeView.RightItems>
+                                        <SwipeItems Mode="Reveal">
+                                            <SwipeItem Text="Dismiss" 
+                                                       BackgroundColor="{StaticResource Danger}" 
+                                                       Command="{Binding Source={RelativeSource AncestorType={x:Type vm:InsightsViewModel}}, Path=DismissInsightCommand}" 
+                                                       CommandParameter="{Binding .}" />
+                                        </SwipeItems>
+                                    </SwipeView.RightItems>
+                                    
+                                    <!-- Inside Card -->
+                                    <cards:AiInsightCard 
+                                        Title="{Binding DisplayTitle}"
+                                        InsightContent="{Binding Message}"
+                                        TimestampText="{Binding DisplayTime}" 
+                                        ActionText="{Binding DisplayAction}"
+                                        ActionCommand="{Binding Source={RelativeSource AncestorType={x:Type vm:InsightsViewModel}}, Path=PerformActionCommand}"
+                                        ActionCommandParameter="{Binding .}" />
+                                </SwipeView>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </RefreshView>
+
+                <!-- Skeleton Loading State -->
+                <VerticalStackLayout IsVisible="{Binding IsBusy}" Spacing="8" BackgroundColor="{StaticResource Surface}">
+                    <views:SkeletonLoader />
+                    <views:SkeletonLoader />
+                    <views:SkeletonLoader />
+                </VerticalStackLayout>
+
+                <!-- Empty Recommendations Placeholder -->
+                <views:EmptyStateView 
+                    IsVisible="{Binding IsEmpty}"
+                    Title="All Caught Up"
+                    Description="No smart recommendations match this category. Generate new suggestions by pulling down to refresh."
+                    ActionButtonText="Scan Business Metrics"
+                    ActionButtonCommand="{Binding LoadInsightsCommand}" />
+            </Grid>
+        </Grid>
+        </Grid>
+        
+        <nav:CustomBottomNavBar Grid.Row="1" ActiveTab="insights" Margin="0" VerticalOptions="End" />
+    </Grid>
 </ContentPage>

@@ -33,4 +33,7 @@ public class Payment
 
     [JsonPropertyName("reference_number")]
     public string ReferenceNumber { get; set; }
+
+    [JsonIgnore]
+    public string ClientName { get; set; }
 }

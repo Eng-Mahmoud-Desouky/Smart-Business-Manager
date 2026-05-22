@@ -3,14 +3,195 @@
     x:Class="SmartBusinessManager.Features.Dashboard.Views.DashboardPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="{Binding Title}">
+    xmlns:vm="clr-namespace:SmartBusinessManager.Features.Dashboard.ViewModels"
+    xmlns:aiModels="clr-namespace:SmartBusinessManager.Features.AI.Models"
+    xmlns:cards="clr-namespace:SmartBusinessManager.Shared.Components.Cards"
+    xmlns:nav="clr-namespace:SmartBusinessManager.Shared.Components.Navigation"
+    Title="Dashboard"
+    BackgroundColor="{StaticResource Surface}"
+    Shell.TabBarIsVisible="False"
+    Shell.NavBarIsVisible="False">
 
-    <ContentPage.BindingContext>
-        <!-- Injected via DI in code-behind constructor -->
-    </ContentPage.BindingContext>
+    <Grid RowDefinitions="*, Auto">
+        <ScrollView Grid.Row="0">
+        <Grid Padding="16" RowDefinitions="Auto, Auto, Auto, *" RowSpacing="20">
+            
+            <!-- Page Header -->
+            <Grid Grid.Row="0" ColumnDefinitions="*, Auto" Margin="0,0,0,4">
+                <VerticalStackLayout Grid.Column="0" Spacing="4">
+                    <Label Text="Smart Business Manager" FontSize="26" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}" />
+                    <Label Text="Real-time operations dashboard" FontSize="14" TextColor="{StaticResource TextSecondary}" />
+                </VerticalStackLayout>
+                <Button Grid.Column="1" 
+                        Text="Refresh" 
+                        Command="{Binding RefreshDashboardCommand}" 
+                        BackgroundColor="Transparent" 
+                        TextColor="{StaticResource Primary}" 
+                        BorderColor="{StaticResource Border}" 
+                        BorderWidth="1" 
+                        CornerRadius="8" 
+                        HeightRequest="36" />
+            </Grid>
 
-    <VerticalStackLayout Padding="16">
-        <Label Text="Dashboard — Coming Soon" Style="{StaticResource BodyLabel}"/>
-    </VerticalStackLayout>
+            <!-- Bento Grid Stats Section -->
+            <Grid Grid.Row="1" ColumnDefinitions="*, *" RowDefinitions="Auto, Auto" ColumnSpacing="12" RowSpacing="12">
+                
+                <!-- Total Clients Card -->
+                <Border Grid.Row="0" Grid.Column="0" StrokeThickness="1" Stroke="{StaticResource Border}" BackgroundColor="{StaticResource White}" Padding="16">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="16" />
+                    </Border.StrokeShape>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NavigateToClientsCommand}" />
+                    </Border.GestureRecognizers>
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="Total Clients" FontSize="12" FontAttributes="Bold" TextColor="{StaticResource TextSecondary}" />
+                        <Label Text="{Binding TotalClientsCount}" FontSize="32" FontAttributes="Bold" TextColor="{StaticResource Primary}" />
+                        <Label Text="View Directory" FontSize="10" TextColor="{StaticResource TextMuted}" />
+                    </VerticalStackLayout>
+                </Border>
 
+                <!-- Monthly Revenue Card -->
+                <Border Grid.Row="0" Grid.Column="1" StrokeThickness="1" Stroke="{StaticResource Border}" BackgroundColor="{StaticResource White}" Padding="16">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="16" />
+                    </Border.StrokeShape>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NavigateToFinanceCommand}" />
+                    </Border.GestureRecognizers>
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="Monthly Revenue" FontSize="12" FontAttributes="Bold" TextColor="{StaticResource TextSecondary}" />
+                        <Label Text="{Binding MonthlyRevenueText}" FontSize="24" FontAttributes="Bold" TextColor="{StaticResource Success}" LineBreakMode="TailTruncation" />
+                        <Label Text="This Month (USD)" FontSize="10" TextColor="{StaticResource TextMuted}" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Pending Payments Card (Span 2) -->
+                <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" StrokeThickness="1" Stroke="{StaticResource Warning}" BackgroundColor="{StaticResource WarningBg}" Padding="16">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="16" />
+                    </Border.StrokeShape>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NavigateToFinanceCommand}" />
+                    </Border.GestureRecognizers>
+                    <Grid ColumnDefinitions="*, Auto" VerticalOptions="Center">
+                        <VerticalStackLayout Grid.Column="0" Spacing="4">
+                            <Label Text="Pending Payments" FontSize="12" FontAttributes="Bold" TextColor="{StaticResource Warning}" />
+                            <Label Text="{Binding PendingPaymentsText}" FontSize="28" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}" />
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" HorizontalOptions="End" Spacing="2">
+                            <Label Text="Outstanding" FontSize="12" FontAttributes="Bold" TextColor="{StaticResource Warning}" HorizontalOptions="End" />
+                            <Label Text="Needs Attention" FontSize="10" TextColor="{StaticResource TextSecondary}" HorizontalOptions="End" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </Border>
+
+            </Grid>
+
+            <!-- AI smart Recommendations Section -->
+            <VerticalStackLayout Grid.Row="2" Spacing="8">
+                <Grid ColumnDefinitions="*, Auto" Margin="0,0,0,4">
+                    <Label Grid.Column="0" Text="Smart AI Recommendations" FontSize="16" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}" />
+                    <Button Grid.Column="1" 
+                            Text="See All" 
+                            Command="{Binding NavigateToInsightsCommand}" 
+                            BackgroundColor="Transparent" 
+                            TextColor="{StaticResource Primary}" 
+                            FontSize="12" 
+                            Padding="0" 
+                            HeightRequest="24" />
+                </Grid>
+
+                <!-- Recommendation Cards List -->
+                <CollectionView ItemsSource="{Binding TopInsights}" SelectionMode="None">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="aiModels:AiInsight">
+                            <cards:AiInsightCard 
+                                Title="{Binding DisplayTitle}"
+                                InsightContent="{Binding Message}"
+                                TimestampText="{Binding DisplayTime}" 
+                                ActionText="{Binding DisplayAction}"
+                                ActionCommand="{Binding Source={RelativeSource AncestorType={x:Type vm:DashboardViewModel}}, Path=NavigateToInsightsCommand}" />
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <!-- No Insights Placeholder -->
+                <Border StrokeThickness="1" 
+                        Stroke="{StaticResource Border}" 
+                        BackgroundColor="{StaticResource White}" 
+                        Padding="16" 
+                        IsVisible="False">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="12" />
+                    </Border.StrokeShape>
+                    <Border.Triggers>
+                        <DataTrigger TargetType="Border" Binding="{Binding TopInsights.Count}" Value="0">
+                            <Setter Property="IsVisible" Value="True" />
+                        </DataTrigger>
+                    </Border.Triggers>
+                    <Label Text="No high priority recommendations currently. Check back later." 
+                           TextColor="{StaticResource TextSecondary}" 
+                           FontSize="12" 
+                           HorizontalOptions="Center" />
+                </Border>
+            </VerticalStackLayout>
+
+            <!-- Recent Activity Feed -->
+            <VerticalStackLayout Grid.Row="3" Spacing="8">
+                <Label Text="Recent Activity" FontSize="16" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}" Margin="0,0,0,4" />
+                
+                <CollectionView ItemsSource="{Binding RecentActivities}" SelectionMode="None">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="vm:RecentActivityItem">
+                            <Grid Padding="0,8">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:DashboardViewModel}}, Path=NavigateToClientDetailCommand}" CommandParameter="{Binding .}" />
+                                </Grid.GestureRecognizers>
+                                <Border StrokeThickness="1" Stroke="{StaticResource Border}" BackgroundColor="{StaticResource White}" Padding="12">
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="12" />
+                                    </Border.StrokeShape>
+                                    <Grid ColumnDefinitions="Auto, *, Auto" ColumnSpacing="12">
+                                        <!-- Icon Circle -->
+                                        <Border Grid.Column="0" 
+                                                HeightRequest="40" 
+                                                WidthRequest="40" 
+                                                StrokeThickness="0" 
+                                                BackgroundColor="{StaticResource PrimaryLight}">
+                                            <Border.StrokeShape>
+                                                <RoundRectangle CornerRadius="20" />
+                                            </Border.StrokeShape>
+                                            <Label Text="{Binding Icon}" 
+                                                   TextColor="{StaticResource Primary}" 
+                                                   FontSize="18" 
+                                                   HorizontalOptions="Center" 
+                                                   VerticalOptions="Center" />
+                                        </Border>
+
+                                        <!-- Text Area -->
+                                        <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                                            <Label Text="{Binding Title}" FontSize="14" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}" />
+                                            <Label Text="{Binding Subtitle}" FontSize="12" TextColor="{StaticResource TextSecondary}" LineBreakMode="TailTruncation" />
+                                        </VerticalStackLayout>
+
+                                        <!-- Timestamp / Chevron -->
+                                        <VerticalStackLayout Grid.Column="2" VerticalOptions="Center" Spacing="2" HorizontalOptions="End">
+                                            <Label Text="{Binding DisplayTime}" FontSize="10" TextColor="{StaticResource TextMuted}" HorizontalOptions="End" />
+                                            <Label Text="Details" FontSize="10" TextColor="{StaticResource Primary}" FontAttributes="Bold" HorizontalOptions="End" />
+                                        </VerticalStackLayout>
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+
+        </Grid>
+    </ScrollView>
+    
+    <nav:CustomBottomNavBar Grid.Row="1" ActiveTab="dashboard" Margin="0" VerticalOptions="End" />
+    
+    </Grid>
 </ContentPage>

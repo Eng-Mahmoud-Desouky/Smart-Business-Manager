@@ -8,7 +8,11 @@
     xmlns:clients="clr-namespace:SmartBusinessManager.Features.Clients.Views"
     xmlns:finance="clr-namespace:SmartBusinessManager.Features.Finance.Views"
     xmlns:ai="clr-namespace:SmartBusinessManager.Features.AI.Views"
-    Shell.FlyoutBehavior="Disabled">
+    Shell.FlyoutBehavior="Disabled"
+    Shell.TabBarBackgroundColor="{StaticResource OnPrimary}"
+    Shell.TabBarTitleColor="{StaticResource Primary}"
+    Shell.TabBarUnselectedColor="{StaticResource Secondary}"
+    Shell.TabBarForegroundColor="{StaticResource SecondaryContainer}">
 
     <!-- ── Auth (no tab bar) ──────────────────────────── -->
     <ShellContent
@@ -21,31 +25,24 @@
         ContentTemplate="{DataTemplate auth:RegisterPage}"
         Shell.TabBarIsVisible="False"/>
 
-    <!-- ── Main Tab Bar ──────────────────────────────── -->
-    <TabBar>
-        <Tab Title="Dashboard" Icon="icon_dashboard.png">
-            <ShellContent
-                Route="dashboard"
-                ContentTemplate="{DataTemplate dash:DashboardPage}"/>
-        </Tab>
+    <!-- ── Main App Routes (No TabBar/Flyout) ──────────────── -->
+    <ShellContent
+        Route="dashboard"
+        ContentTemplate="{DataTemplate dash:DashboardPage}"
+        Shell.TabBarIsVisible="False" />
 
-        <Tab Title="Clients" Icon="icon_clients.png">
-            <ShellContent
-                Route="clients"
-                ContentTemplate="{DataTemplate clients:ClientListPage}"/>
-        </Tab>
+    <ShellContent
+        Route="clients"
+        ContentTemplate="{DataTemplate clients:ClientListPage}"
+        Shell.TabBarIsVisible="False" />
 
-        <Tab Title="Finance" Icon="icon_finance.png">
-            <ShellContent
-                Route="payments"
-                ContentTemplate="{DataTemplate finance:PaymentListPage}"/>
-        </Tab>
+    <ShellContent
+        Route="payments"
+        ContentTemplate="{DataTemplate finance:PaymentListPage}"
+        Shell.TabBarIsVisible="False" />
 
-        <Tab Title="Insights" Icon="icon_ai.png">
-            <ShellContent
-                Route="insights"
-                ContentTemplate="{DataTemplate ai:InsightsPage}"/>
-        </Tab>
-    </TabBar>
-
+    <ShellContent
+        Route="insights"
+        ContentTemplate="{DataTemplate ai:InsightsPage}"
+        Shell.TabBarIsVisible="False" />
 </Shell>

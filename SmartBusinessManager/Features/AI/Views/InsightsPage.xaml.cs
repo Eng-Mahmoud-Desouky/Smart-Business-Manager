@@ -1,4 +1,4 @@
-﻿using SmartBusinessManager.Features.AI.ViewModels;
+using SmartBusinessManager.Features.AI.ViewModels;
 
 namespace SmartBusinessManager.Features.AI.Views;
 
@@ -7,5 +7,14 @@ public partial class InsightsPage : ContentPage
     {
         InitializeComponent();
         BindingContext = viewModel;
+    }
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        if (BindingContext is InsightsViewModel vm)
+        {
+            await vm.LoadInsightsAsync();
+        }
     }
 }

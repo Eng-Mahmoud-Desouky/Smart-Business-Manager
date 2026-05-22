@@ -5,22 +5,38 @@
     <Color x:Key="Primary">#3525cd</Color>
     <Color x:Key="PrimaryDark">#0f0069</Color>
     <Color x:Key="PrimaryLight">#e2dfff</Color>
+    <Color x:Key="PrimaryContainer">#e2dfff</Color>
+    <Color x:Key="OnPrimary">#ffffff</Color>
 
     <Color x:Key="Success">#006c49</Color>
     <Color x:Key="SuccessBg">#6cf8bb</Color>
+    <Color x:Key="SuccessContainer">#d1e7dd</Color>
 
     <Color x:Key="Warning">#7e3000</Color>
     <Color x:Key="WarningBg">#ffdbcc</Color>
+    <Color x:Key="WarningContainer">#ffdbcc</Color>
 
     <Color x:Key="Danger">#ba1a1a</Color>
     <Color x:Key="DangerBg">#ffdad6</Color>
+    <Color x:Key="Error">#ba1a1a</Color>
+    <Color x:Key="ErrorContainer">#ffdad6</Color>
 
     <Color x:Key="TextPrimary">#1b1b24</Color>
     <Color x:Key="TextSecondary">#464555</Color>
     <Color x:Key="TextMuted">#777587</Color>
+    <Color x:Key="Outline">#777587</Color>
 
     <Color x:Key="Border">#c7c4d8</Color>
     <Color x:Key="Surface">#fcf8ff</Color>
+    <Color x:Key="SurfaceDim">#ece9f2</Color>
+    <Color x:Key="SurfaceContainerLowest">#ffffff</Color>
     <Color x:Key="White">#ffffff</Color>
+
+    <Color x:Key="Secondary">#5b5d72</Color>
+    <Color x:Key="SecondaryContainer">#e0e1f9</Color>
+    <Color x:Key="OnPrimaryContainer">#08006b</Color>
+    <Color x:Key="PrimaryFixedDim">#c0c1ff</Color>
+    <Color x:Key="OnBackground">#1b1b1f</Color>
+    <Color x:Key="OnSurfaceVariant">#46464f</Color>
 
 </ResourceDictionary>

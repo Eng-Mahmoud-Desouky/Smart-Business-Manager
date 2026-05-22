@@ -63,9 +63,16 @@ public partial class CustomBottomNavBar : ContentView
             return;
 
         // Fetch colors from application resources safely
-        var primaryColor = (Color)Application.Current.Resources["Primary"];
-        var primaryContainerColor = (Color)Application.Current.Resources["PrimaryContainer"];
-        var outlineColor = (Color)Application.Current.Resources["Outline"];
+        Color primaryColor = Colors.Blue;
+        Color primaryContainerColor = Colors.LightBlue;
+        Color outlineColor = Colors.Gray;
+
+        if (Application.Current != null)
+        {
+            if (Application.Current.Resources.TryGetValue("Primary", out var p) && p is Color c1) primaryColor = c1;
+            if (Application.Current.Resources.TryGetValue("PrimaryContainer", out var p2) && p2 is Color c2) primaryContainerColor = c2;
+            if (Application.Current.Resources.TryGetValue("Outline", out var p3) && p3 is Color c3) outlineColor = c3;
+        }
 
         // Reset all tabs to inactive visual style
         ResetTab(DashboardIcon, DashboardText, DashboardIndicator, outlineColor);
@@ -88,7 +95,7 @@ public partial class CustomBottomNavBar : ContentView
                 break;
             case "insights":
             case "ai":
-                HighlightTab(InsightsIcon, InsightsText, InsightsIndicator, primaryContainerColor); // Magic glow container color
+                HighlightTab(InsightsIcon, InsightsText, InsightsIndicator, primaryColor); // Solid primary color highlighting
                 break;
         }
     }

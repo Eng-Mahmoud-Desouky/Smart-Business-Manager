@@ -3,14 +3,106 @@
     x:Class="SmartBusinessManager.Features.Clients.Views.ClientListPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="{Binding Title}">
+    xmlns:vm="clr-namespace:SmartBusinessManager.Features.Clients.ViewModels"
+    xmlns:models="clr-namespace:SmartBusinessManager.Features.Clients.Models"
+    xmlns:cards="clr-namespace:SmartBusinessManager.Shared.Components.Cards"
+    xmlns:views="clr-namespace:SmartBusinessManager.Shared.Components.Views"
+    xmlns:common="clr-namespace:SmartBusinessManager.Shared.Components.Common"
+    xmlns:nav="clr-namespace:SmartBusinessManager.Shared.Components.Navigation"
+    Title="{Binding Title}"
+    BackgroundColor="{StaticResource Surface}"
+    Shell.TabBarIsVisible="False"
+    Shell.NavBarIsVisible="False">
 
-    <ContentPage.BindingContext>
-        <!-- Injected via DI in code-behind constructor -->
-    </ContentPage.BindingContext>
+    <Grid RowDefinitions="*, Auto">
+        <Grid Grid.Row="0" Margin="16">
+        <!-- Main Layout -->
+        <Grid RowDefinitions="Auto, Auto, Auto, *" RowSpacing="12">
+            
+            <!-- Page Header -->
+            <VerticalStackLayout Grid.Row="0" Spacing="4">
+                <Label Text="Client CRM" FontSize="28" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}" />
+                <Label Text="Manage customer relationships and pipeline" FontSize="14" TextColor="{StaticResource TextSecondary}" />
+            </VerticalStackLayout>
 
-    <VerticalStackLayout Padding="16">
-        <Label Text="ClientList — Coming Soon" Style="{StaticResource BodyLabel}"/>
-    </VerticalStackLayout>
+            <!-- Search Bar -->
+            <Border Grid.Row="1" StrokeThickness="1" Stroke="{StaticResource Border}" BackgroundColor="{StaticResource White}" Padding="12,4">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="12" />
+                </Border.StrokeShape>
+                <Grid ColumnDefinitions="Auto, *">
+                    <Label Grid.Column="0" Text="Q" VerticalOptions="Center" TextColor="{StaticResource TextMuted}" Margin="0,0,8,0" />
+                    <Entry Grid.Column="1" Text="{Binding SearchText}" Placeholder="Search clients, company, email..." BackgroundColor="Transparent" HeightRequest="40" />
+                </Grid>
+            </Border>
 
+            <!-- Filters Pill Bar -->
+            <Grid Grid.Row="2" ColumnDefinitions="*, Auto" VerticalOptions="Center">
+                <ScrollView Grid.Column="0" Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
+                    <HorizontalStackLayout Spacing="8">
+                        <Button Text="All" Command="{Binding SelectFilterCommand}" CommandParameter="All" BackgroundColor="{StaticResource PrimaryLight}" TextColor="{StaticResource PrimaryDark}" CornerRadius="18" Padding="12,0" HeightRequest="36" />
+                        <Button Text="Active" Command="{Binding SelectFilterCommand}" CommandParameter="active" BackgroundColor="{StaticResource PrimaryLight}" TextColor="{StaticResource PrimaryDark}" CornerRadius="18" Padding="12,0" HeightRequest="36" />
+                        <Button Text="Lead" Command="{Binding SelectFilterCommand}" CommandParameter="lead" BackgroundColor="{StaticResource PrimaryLight}" TextColor="{StaticResource PrimaryDark}" CornerRadius="18" Padding="12,0" HeightRequest="36" />
+                        <Button Text="Inactive" Command="{Binding SelectFilterCommand}" CommandParameter="inactive" BackgroundColor="{StaticResource PrimaryLight}" TextColor="{StaticResource PrimaryDark}" CornerRadius="18" Padding="12,0" HeightRequest="36" />
+                        <Button Text="Archived" Command="{Binding SelectFilterCommand}" CommandParameter="archived" BackgroundColor="{StaticResource PrimaryLight}" TextColor="{StaticResource PrimaryDark}" CornerRadius="18" Padding="12,0" HeightRequest="36" />
+                    </HorizontalStackLayout>
+                </ScrollView>
+                <Label Grid.Column="1" Text="{Binding SelectedStatusFilter, StringFormat='Filter: {0}'}" FontSize="12" FontAttributes="Bold" TextColor="{StaticResource TextSecondary}" VerticalOptions="Center" Margin="8,0,0,0" />
+            </Grid>
+
+            <!-- Collection List / Loaders -->
+            <Grid Grid.Row="3">
+                <!-- Standard List -->
+                <RefreshView Command="{Binding LoadClientsCommand}" IsRefreshing="{Binding IsBusy}">
+                    <CollectionView ItemsSource="{Binding FilteredClients}" SelectionMode="None">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:Client">
+                                <cards:ClientSummaryCard 
+                                    ClientName="{Binding Name}"
+                                    Company="{Binding Company}"
+                                    Email="{Binding Email}"
+                                    Status="{Binding Status}"
+                                    TapCommand="{Binding Source={RelativeSource AncestorType={x:Type vm:ClientListViewModel}}, Path=NavigateToDetailCommand}"
+                                    TapCommandParameter="{Binding .}" />
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </RefreshView>
+
+                <!-- Skeleton Loading State -->
+                <VerticalStackLayout IsVisible="{Binding IsBusy}" Spacing="8" BackgroundColor="{StaticResource Surface}">
+                    <views:SkeletonLoader />
+                    <views:SkeletonLoader />
+                    <views:SkeletonLoader />
+                    <views:SkeletonLoader />
+                </VerticalStackLayout>
+
+                <!-- Empty State -->
+                <views:EmptyStateView 
+                    IsVisible="{Binding IsEmpty}"
+                    Title="No Clients Found"
+                    Description="No clients match your filter or search query."
+                    ActionButtonText="Add Client"
+                    ActionButtonCommand="{Binding NavigateToAddClientCommand}" />
+            </Grid>
+        </Grid>
+
+        <!-- Floating Add Client Button (FAB) -->
+        <Button Grid.RowSpan="4"
+                Text="+"
+                Command="{Binding NavigateToAddClientCommand}"
+                HorizontalOptions="End"
+                VerticalOptions="End"
+                Margin="16"
+                HeightRequest="56"
+                WidthRequest="56"
+                CornerRadius="28"
+                BackgroundColor="{StaticResource Primary}"
+                TextColor="{StaticResource White}"
+                FontSize="24"
+                FontAttributes="Bold" />
+        </Grid>
+        
+        <nav:CustomBottomNavBar Grid.Row="1" ActiveTab="clients" Margin="0" VerticalOptions="End" />
+    </Grid>
 </ContentPage>
