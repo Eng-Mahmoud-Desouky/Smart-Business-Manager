@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartBusinessManager.Shared.Components.Navigation.CustomBottomNavBar"
+             x:Name="self"
+             BackgroundColor="Transparent"
+             VerticalOptions="End">
+
+    <!-- Outermost container featuring Level 1 elevation (White, 1px top border, ambient shadow) -->
+    <Border StrokeThickness="1,0,1,1"
+            Stroke="{StaticResource SurfaceDim}"
+            BackgroundColor="{StaticResource SurfaceContainerLowest}"
+            HeightRequest="68"
+            Padding="8,4"
+            HorizontalOptions="Fill">
+        <Border.StrokeShape>
+            <RoundRectangle CornerRadius="16,16,0,0" /> <!-- Rounded top corners for premium card feel -->
+        </Border.StrokeShape>
+        <Border.Shadow>
+            <Shadow Brush="{StaticResource Primary}" Offset="0,-4" Radius="8" Opacity="0.04" />
+        </Border.Shadow>
+
+        <Grid ColumnDefinitions="*,*,*,*"
+              VerticalOptions="Fill"
+              HorizontalOptions="Fill">
+
+            <!-- 1. Dashboard Tab -->
+            <Grid Grid.Column="0" RowDefinitions="*,Auto" RowSpacing="2" x:Name="DashboardTab">
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnTabTapped" CommandParameter="dashboard" />
+                </Grid.GestureRecognizers>
+                
+                <VerticalStackLayout Grid.Row="0" VerticalOptions="Center" HorizontalOptions="Center" Spacing="4">
+                    <Label Text="⌂"
+                           FontSize="22"
+                           FontFamily="OpenSansSemibold"
+                           HorizontalOptions="Center"
+                           x:Name="DashboardIcon"
+                           TextColor="{StaticResource Outline}" />
+                    <Label Text="Dashboard"
+                           FontSize="10"
+                           FontFamily="OpenSansSemibold"
+                           HorizontalOptions="Center"
+                           x:Name="DashboardText"
+                           TextColor="{StaticResource Outline}" />
+                </VerticalStackLayout>
+
+                <BoxView Grid.Row="1"
+                         x:Name="DashboardIndicator"
+                         HeightRequest="3"
+                         WidthRequest="16"
+                         Color="{StaticResource Primary}"
+                         CornerRadius="1.5"
+                         HorizontalOptions="Center"
+                         IsVisible="False" />
+            </Grid>
+
+            <!-- 2. Clients Tab -->
+            <Grid Grid.Column="1" RowDefinitions="*,Auto" RowSpacing="2" x:Name="ClientsTab">
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnTabTapped" CommandParameter="clients" />
+                </Grid.GestureRecognizers>
+                
+                <VerticalStackLayout Grid.Row="0" VerticalOptions="Center" HorizontalOptions="Center" Spacing="4">
+                    <Label Text="👥"
+                           FontSize="18"
+                           FontFamily="OpenSansSemibold"
+                           HorizontalOptions="Center"
+                           x:Name="ClientsIcon"
+                           TextColor="{StaticResource Outline}" />
+                    <Label Text="Clients"
+                           FontSize="10"
+                           FontFamily="OpenSansSemibold"
+                           HorizontalOptions="Center"
+                           x:Name="ClientsText"
+                           TextColor="{StaticResource Outline}" />
+                </VerticalStackLayout>
+
+                <BoxView Grid.Row="1"
+                         x:Name="ClientsIndicator"
+                         HeightRequest="3"
+                         WidthRequest="16"
+                         Color="{StaticResource Primary}"
+                         CornerRadius="1.5"
+                         HorizontalOptions="Center"
+                         IsVisible="False" />
+            </Grid>
+
+            <!-- 3. Finance/Payments Tab -->
+            <Grid Grid.Column="2" RowDefinitions="*,Auto" RowSpacing="2" x:Name="FinanceTab">
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnTabTapped" CommandParameter="payments" />
+                </Grid.GestureRecognizers>
+                
+                <VerticalStackLayout Grid.Row="0" VerticalOptions="Center" HorizontalOptions="Center" Spacing="4">
+                    <Label Text="💳"
+                           FontSize="18"
+                           FontFamily="OpenSansSemibold"
+                           HorizontalOptions="Center"
+                           x:Name="FinanceIcon"
+                           TextColor="{StaticResource Outline}" />
+                    <Label Text="Finance"
+                           FontSize="10"
+                           FontFamily="OpenSansSemibold"
+                           HorizontalOptions="Center"
+                           x:Name="FinanceText"
+                           TextColor="{StaticResource Outline}" />
+                </VerticalStackLayout>
+
+                <BoxView Grid.Row="1"
+                         x:Name="FinanceIndicator"
+                         HeightRequest="3"
+                         WidthRequest="16"
+                         Color="{StaticResource Primary}"
+                         CornerRadius="1.5"
+                         HorizontalOptions="Center"
+                         IsVisible="False" />
+            </Grid>
+
+            <!-- 4. AI Insights Tab -->
+            <Grid Grid.Column="3" RowDefinitions="*,Auto" RowSpacing="2" x:Name="InsightsTab">
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnTabTapped" CommandParameter="insights" />
+                </Grid.GestureRecognizers>
+                
+                <Grid Grid.Row="0" HorizontalOptions="Center" VerticalOptions="Center">
+                    <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="4">
+                        <Label Text="✨"
+                               FontSize="18"
+                               FontFamily="OpenSansSemibold"
+                               HorizontalOptions="Center"
+                               x:Name="InsightsIcon"
+                               TextColor="{StaticResource Outline}" />
+                        <Label Text="Insights"
+                               FontSize="10"
+                               FontFamily="OpenSansSemibold"
+                               HorizontalOptions="Center"
+                               x:Name="InsightsText"
+                               TextColor="{StaticResource Outline}" />
+                    </VerticalStackLayout>
+
+                    <!-- Unread AI Insights Badge Overlay -->
+                    <Border x:Name="BadgeBorder"
+                            BackgroundColor="{StaticResource Error}"
+                            StrokeThickness="0"
+                            HeightRequest="16"
+                            WidthRequest="16"
+                            HorizontalOptions="End"
+                            VerticalOptions="Start"
+                            Margin="8,-2,0,0"
+                            IsVisible="False">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="8" />
+                        </Border.StrokeShape>
+                        <Label Text="{Binding InsightBadgeCount, Source={x:Reference self}}"
+                               TextColor="White"
+                               FontSize="9"
+                               FontFamily="OpenSansSemibold"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center" />
+                    </Border>
+                </Grid>
+
+                <BoxView Grid.Row="1"
+                         x:Name="InsightsIndicator"
+                         HeightRequest="3"
+                         WidthRequest="16"
+                         Color="{StaticResource PrimaryContainer}"
+                         CornerRadius="1.5"
+                         HorizontalOptions="Center"
+                         IsVisible="False" />
+            </Grid>
+
+        </Grid>
+    </Border>
+</ContentView>

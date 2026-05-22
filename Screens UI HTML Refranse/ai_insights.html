@@ -1,26 +1,23 @@
 <!DOCTYPE html>
 
-<html lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>AI Insights - Smart Manager</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<style>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Rule-Based Insights - Smart Manager</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <style>
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
-        .ai-glow {
-            box-shadow: 0 0 15px 2px rgba(79, 70, 229, 0.1);
-        }
-        .ai-gradient-border {
-            border-left: 2px solid;
-            border-image: linear-gradient(to bottom, #4f46e5, #ec4899) 1 100%;
-        }
     </style>
-<script id="tailwind-config">
+    <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
             theme: {
@@ -110,174 +107,266 @@
             }
         }
     </script>
-<style>
-    body {
-      min-height: max(884px, 100dvh);
-    }
-  </style>
-  </head>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
 <body class="bg-background text-on-background font-body-lg antialiased min-h-screen flex flex-col">
-<!-- TopAppBar -->
-<header class="bg-white/80 dark:bg-gray-950/80 backdrop-blur-md text-indigo-600 dark:text-indigo-400 font-['Inter'] font-semibold tracking-tight docked full-width top-0 z-40 border-b border-gray-200 dark:border-gray-800 shadow-sm flex items-center justify-between px-4 h-16 w-full sticky">
-<div class="flex items-center gap-3">
-<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-variant flex items-center justify-center">
-<img alt="User Profile Image" class="w-full h-full object-cover" data-alt="A professional headshot of a business manager, looking confident and approachable. Modern lighting, clean background, conveying a sense of competence and reliability in a light-mode UI context." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXhsknFKzQs2t7AgiRUYrM742u44DnHDqH-P3gQjpaRKRRTatGlyg27YmXm3uTRrsy3hp0wzKJ7TioOX8mEWhyKEp-N-am_EStgWVF2RBJj1N3XkP1Ueo0HYlxJSp7HCZyvcGPIZIZq-MGVEK4d6OIan0jD7UIACaJ6wzrzhIVM6rPgK7y3Lo7Gbfs4xs6li5gpW_tOq6svATRpCn0AwuklIMtl3YZzKmIKhmZ1VDsJm8AVKqk18GC38oPs9zwXTq_9MuOx5pilOY"/>
-</div>
-<span class="text-indigo-600 dark:text-indigo-400 font-bold text-lg">Smart Manager</span>
-</div>
-<button class="w-10 h-10 flex items-center justify-center rounded-full text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors active:scale-95 duration-150">
-<span class="material-symbols-outlined">notifications</span>
-</button>
-</header>
-<div class="flex flex-1 overflow-hidden">
-<!-- NavigationDrawer (Web) -->
-<aside class="hidden md:flex bg-white dark:bg-gray-900 text-indigo-600 dark:text-indigo-400 font-['Inter'] text-sm h-full w-72 rounded-r-2xl divide-y divide-gray-100 dark:divide-gray-800 shadow-2xl flex-col h-full py-6 flex-shrink-0">
-<div class="px-6 pb-6 flex items-center gap-4">
-<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-variant">
-<img alt="Business Owner" class="w-full h-full object-cover" data-alt="A professional headshot of a business manager, looking confident and approachable. Modern lighting, clean background, conveying a sense of competence and reliability in a light-mode UI context." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAuzgxdYywloh-n612OJHm6-i4CtCdcZY7PJpHblIisY-jC8aNwVTKUtHUlbJFIwpxuiH958x_8K-nyIy6oiXvMASZqS6pvZyhTpZatTQpkDqXGhaO9FBZd-O0z2I3hugmLUkonuKNKq5Nn8PpRBuuuq3Ztsm2CQ-P4jTK-n3JYSXlHNtXBfkaCVntVgwsEkbs6OujQ-AytXcBZcmN6HDeuTBADV_lksq4ps_7_D2X03Y-so8trnCMMgapyr261gj4aTr2z_nFNqUM"/>
-</div>
-<div>
-<div class="font-h3 text-h3 text-on-surface">Business Manager</div>
-<div class="font-body-sm text-body-sm text-outline">Insightful Growth</div>
-</div>
-</div>
-<nav class="flex-1 px-4 pt-4 space-y-2">
-<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-all duration-200" href="#">
-<span class="material-symbols-outlined">analytics</span>
+    <!-- TopAppBar -->
+    <header
+        class="bg-white/80 dark:bg-gray-950/80 backdrop-blur-md text-indigo-600 dark:text-indigo-400 font-['Inter'] font-semibold tracking-tight docked full-width top-0 z-40 border-b border-gray-200 dark:border-gray-800 shadow-sm flex items-center justify-between px-4 h-16 w-full sticky">
+        <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-full overflow-hidden bg-surface-variant flex items-center justify-center">
+                <img alt="User Profile Image" class="w-full h-full object-cover"
+                    data-alt="A professional headshot of a business manager, looking confident and approachable. Modern lighting, clean background, conveying a sense of competence and reliability in a light-mode UI context."
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXhsknFKzQs2t7AgiRUYrM742u44DnHDqH-P3gQjpaRKRRTatGlyg27YmXm3uTRrsy3hp0wzKJ7TioOX8mEWhyKEp-N-am_EStgWVF2RBJj1N3XkP1Ueo0HYlxJSp7HCZyvcGPIZIZq-MGVEK4d6OIan0jD7UIACaJ6wzrzhIVM6rPgK7y3Lo7Gbfs4xs6li5gpW_tOq6svATRpCn0AwuklIMtl3YZzKmIKhmZ1VDsJm8AVKqk18GC38oPs9zwXTq_9MuOx5pilOY" />
+            </div>
+            <span class="text-indigo-600 dark:text-indigo-400 font-bold text-lg">Smart Manager</span>
+        </div>
+        <button
+            class="w-10 h-10 flex items-center justify-center rounded-full text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors active:scale-95 duration-150">
+            <span class="material-symbols-outlined">notifications</span>
+        </button>
+    </header>
+    <div class="flex flex-1 overflow-hidden">
+        <!-- NavigationDrawer (Web) -->
+        <aside
+            class="hidden md:flex bg-white dark:bg-gray-900 text-indigo-600 dark:text-indigo-400 font-['Inter'] text-sm h-full w-72 rounded-r-2xl divide-y divide-gray-100 dark:divide-gray-800 shadow-2xl flex-col h-full py-6 flex-shrink-0">
+            <div class="px-6 pb-6 flex items-center gap-4">
+                <div class="w-12 h-12 rounded-full overflow-hidden bg-surface-variant">
+                    <img alt="Business Owner" class="w-full h-full object-cover"
+                        data-alt="A professional headshot of a business manager, looking confident and approachable. Modern lighting, clean background, conveying a sense of competence and reliability in a light-mode UI context."
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAuzgxdYywloh-n612OJHm6-i4CtCdcZY7PJpHblIisY-jC8aNwVTKUtHUlbJFIwpxuiH958x_8K-nyIy6oiXvMASZqS6pvZyhTpZatTQpkDqXGhaO9FBZd-O0z2I3hugmLUkonuKNKq5Nn8PpRBuuuq3Ztsm2CQ-P4jTK-n3JYSXlHNtXBfkaCVntVgwsEkbs6OujQ-AytXcBZcmN6HDeuTBADV_lksq4ps_7_D2X03Y-so8trnCMMgapyr261gj4aTr2z_nFNqUM" />
+                </div>
+                <div>
+                    <div class="font-h3 text-h3 text-on-surface">Business Manager</div>
+                    <div class="font-body-sm text-body-sm text-outline">Insightful Growth</div>
+                </div>
+            </div>
+            <nav class="flex-1 px-4 pt-4 space-y-2">
+                <a class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-all duration-200"
+                    href="#">
+                    <span class="material-symbols-outlined">analytics</span>
                     Overview
                 </a>
-<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-all duration-200" href="#">
-<span class="material-symbols-outlined">person</span>
+                <a class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-all duration-200"
+                    href="#">
+                    <span class="material-symbols-outlined">person</span>
                     Client List
                 </a>
-<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-all duration-200" href="#">
-<span class="material-symbols-outlined">account_balance</span>
+                <a class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-all duration-200"
+                    href="#">
+                    <span class="material-symbols-outlined">account_balance</span>
                     Revenue
                 </a>
-<a class="flex items-center gap-3 px-4 py-3 rounded-xl bg-indigo-50 dark:bg-indigo-900/20 text-indigo-700 dark:text-indigo-300 font-semibold transition-all duration-200" href="#">
-<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
-                    Recommendations
+                <a class="flex items-center gap-3 px-4 py-3 rounded-xl bg-indigo-50 dark:bg-indigo-900/20 text-indigo-700 dark:text-indigo-300 font-semibold transition-all duration-200"
+                    href="#">
+                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">rule</span>
+                    Insights
                 </a>
-<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-all duration-200" href="#">
-<span class="material-symbols-outlined">account_circle</span>
+                <a class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-all duration-200"
+                    href="#">
+                    <span class="material-symbols-outlined">account_circle</span>
                     Profile
                 </a>
-</nav>
-</aside>
-<!-- Main Content -->
-<main class="flex-1 overflow-y-auto p-container_margin pb-32 md:pb-container_margin">
-<div class="max-w-4xl mx-auto space-y-stack_lg">
-<!-- Page Header -->
-<div class="space-y-stack_sm">
-<h1 class="font-h1 text-h1 text-on-surface flex items-center gap-2">
-<span class="material-symbols-outlined text-primary-container" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
-                        AI Insights
+            </nav>
+        </aside>
+        <!-- Main Content -->
+        <main class="flex-1 overflow-y-auto p-container_margin pb-32 md:pb-container_margin">
+            <div class="max-w-4xl mx-auto space-y-stack_lg">
+                <!-- Page Header -->
+                <div class="space-y-stack_sm">
+                    <h1 class="font-h1 text-h1 text-on-surface flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary-container"
+                            style="font-variation-settings: 'FILL' 1;">rule</span>
+                        Rule-Based Insights
                     </h1>
-<p class="font-body-lg text-body-lg text-on-surface-variant">Your personalized business intelligence, analyzing data to uncover opportunities and risks.</p>
-</div>
-<!-- Bento Grid for Insights -->
-<div class="grid grid-cols-1 md:grid-cols-2 gap-container_margin">
-<!-- Insight Card: Revenue Opportunity (Green/Positive) -->
-<div class="bg-surface-container-lowest rounded-xl shadow-sm border border-surface-variant p-stack_md ai-gradient-border relative overflow-hidden ai-glow group">
-<div class="absolute inset-0 bg-gradient-to-br from-secondary-container/10 to-transparent opacity-50 pointer-events-none"></div>
-<div class="flex justify-between items-start mb-stack_sm relative z-10">
-<div class="flex items-center gap-2">
-<span class="bg-secondary-container text-on-secondary-container font-label-caps text-label-caps px-2 py-1 rounded-full flex items-center gap-1">
-<span class="material-symbols-outlined text-[14px]">trending_up</span>
-                                    Revenue Opportunity
+                    <p class="font-body-lg text-body-lg text-on-surface-variant">Simple, rule-based alerts helping you
+                        stay on top of your clients and payments.</p>
+                </div>
+                <!-- Bento Grid for Insights -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-container_margin">
+                    <!-- Insight Card: High Value Client (Secondary/Positive) -->
+                    <div
+                        class="bg-surface-container-lowest rounded-xl shadow-sm border border-surface-variant p-stack_md relative overflow-hidden group">
+                        <div class="flex justify-between items-start mb-stack_sm relative z-10">
+                            <div class="flex items-center gap-2">
+                                <span
+                                    class="bg-secondary-container text-on-secondary-container font-label-caps text-label-caps px-2 py-1 rounded-full flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-[14px]">star</span>
+                                    High Value Client
                                 </span>
-</div>
-<span class="material-symbols-outlined text-primary-container animate-pulse">auto_awesome</span>
-</div>
-<h3 class="font-h3 text-h3 text-on-surface mb-stack_sm relative z-10">Upsell potential identified for 'Pro' tier clients.</h3>
-<div class="bg-surface-container rounded-lg p-stack_sm mb-stack_md relative z-10">
-<p class="font-insight-text text-insight-text text-on-surface-variant mb-1 font-semibold">Why?</p>
-<p class="font-body-sm text-body-sm text-on-surface-variant">Analysis shows 15 clients frequently hitting usage limits on their current plan. Historical data suggests a 40% conversion rate for targeted upsells at this stage.</p>
-</div>
-<div class="relative z-10">
-<button class="w-full bg-primary-container text-on-primary rounded-lg py-3 font-body-sm text-body-sm font-semibold flex items-center justify-center gap-2 hover:bg-primary transition-colors shadow-sm">
-                                Review Upsell Candidates
-                                <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
-</button>
-</div>
-</div>
-<!-- Insight Card: Retention Risk (Red/Warning) -->
-<div class="bg-surface-container-lowest rounded-xl shadow-sm border border-surface-variant p-stack_md ai-gradient-border relative overflow-hidden ai-glow group">
-<div class="absolute inset-0 bg-gradient-to-br from-error-container/10 to-transparent opacity-50 pointer-events-none"></div>
-<div class="flex justify-between items-start mb-stack_sm relative z-10">
-<div class="flex items-center gap-2">
-<span class="bg-error-container text-on-error-container font-label-caps text-label-caps px-2 py-1 rounded-full flex items-center gap-1">
-<span class="material-symbols-outlined text-[14px]">warning</span>
-                                    Retention Risk
+                            </div>
+                        </div>
+                        <h3 class="font-h3 text-h3 text-on-surface mb-stack_sm relative z-10">Wayne Enterprises exceeded
+                            $10k in revenue this year.</h3>
+                        <div class="bg-surface-container rounded-lg p-stack_sm mb-stack_md relative z-10">
+                            <p class="font-insight-text text-insight-text text-on-surface-variant mb-1 font-semibold">
+                                Rule Triggered:</p>
+                            <p class="font-body-sm text-body-sm text-on-surface-variant">Total billed amount for this
+                                year reached $10,500.</p>
+                        </div>
+                        <div class="relative z-10">
+                            <button
+                                class="w-full bg-primary-container text-on-primary rounded-lg py-3 font-body-sm text-body-sm font-semibold flex items-center justify-center gap-2 hover:bg-primary transition-colors shadow-sm">
+                                Send Thank You Note
+                                <span class="material-symbols-outlined text-[18px]">mail</span>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Insight Card: Follow Up Needed (Tertiary/Warning) -->
+                    <div
+                        class="bg-surface-container-lowest rounded-xl shadow-sm border border-surface-variant p-stack_md relative overflow-hidden group">
+                        <div class="flex justify-between items-start mb-stack_sm relative z-10">
+                            <div class="flex items-center gap-2">
+                                <span
+                                    class="bg-tertiary-container text-on-tertiary-container font-label-caps text-label-caps px-2 py-1 rounded-full flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-[14px]">notifications_active</span>
+                                    Follow Up Needed
                                 </span>
-</div>
-<span class="material-symbols-outlined text-primary-container">auto_awesome</span>
-</div>
-<h3 class="font-h3 text-h3 text-on-surface mb-stack_sm relative z-10">Decreased engagement from 3 key accounts.</h3>
-<div class="bg-surface-container rounded-lg p-stack_sm mb-stack_md relative z-10">
-<p class="font-insight-text text-insight-text text-on-surface-variant mb-1 font-semibold">Why?</p>
-<p class="font-body-sm text-body-sm text-on-surface-variant">Logins have dropped by 60% over the last 30 days for Acme Corp, Globex, and Initech. This pattern strongly correlates with churn within 60 days.</p>
-</div>
-<div class="relative z-10">
-<button class="w-full bg-surface-container-highest text-on-surface rounded-lg py-3 font-body-sm text-body-sm font-semibold flex items-center justify-center gap-2 border border-outline-variant hover:bg-surface-dim transition-colors">
-                                Schedule Check-in Calls
-                                <span class="material-symbols-outlined text-[18px]">calendar_month</span>
-</button>
-</div>
-</div>
-<!-- Insight Card: Efficiency Tip (Yellow/Info) -->
-<div class="bg-surface-container-lowest rounded-xl shadow-sm border border-surface-variant p-stack_md ai-gradient-border relative overflow-hidden ai-glow md:col-span-2 group">
-<div class="absolute inset-0 bg-gradient-to-br from-primary-fixed/20 to-transparent opacity-50 pointer-events-none"></div>
-<div class="flex justify-between items-start mb-stack_sm relative z-10">
-<div class="flex items-center gap-2">
-<span class="bg-surface-variant text-on-surface-variant font-label-caps text-label-caps px-2 py-1 rounded-full flex items-center gap-1">
-<span class="material-symbols-outlined text-[14px]">bolt</span>
-                                    Efficiency Tip
+                            </div>
+                        </div>
+                        <h3 class="font-h3 text-h3 text-on-surface mb-stack_sm relative z-10">Follow up with Acme Corp
+                            regarding the proposal.</h3>
+                        <div class="bg-surface-container rounded-lg p-stack_sm mb-stack_md relative z-10">
+                            <p class="font-insight-text text-insight-text text-on-surface-variant mb-1 font-semibold">
+                                Rule Triggered:</p>
+                            <p class="font-body-sm text-body-sm text-on-surface-variant">It has been 7 days since the
+                                proposal was sent.</p>
+                        </div>
+                        <div class="relative z-10">
+                            <button
+                                class="w-full bg-surface-container-highest text-on-surface rounded-lg py-3 font-body-sm text-body-sm font-semibold flex items-center justify-center gap-2 border border-outline-variant hover:bg-surface-dim transition-colors">
+                                Draft Follow Up
+                                <span class="material-symbols-outlined text-[18px]">edit</span>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Insight Card: Overdue Payment (Error) -->
+                    <div
+                        class="bg-surface-container-lowest rounded-xl shadow-sm border border-surface-variant p-stack_md relative overflow-hidden group">
+                        <div class="flex justify-between items-start mb-stack_sm relative z-10">
+                            <div class="flex items-center gap-2">
+                                <span
+                                    class="bg-error-container text-on-error-container font-label-caps text-label-caps px-2 py-1 rounded-full flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-[14px]">error</span>
+                                    Overdue Payment
                                 </span>
-</div>
-<span class="material-symbols-outlined text-primary-container">auto_awesome</span>
-</div>
-<div class="md:flex gap-container_margin items-center relative z-10">
-<div class="flex-1">
-<h3 class="font-h3 text-h3 text-on-surface mb-stack_sm">Automate monthly reporting for 25 clients.</h3>
-<div class="bg-surface-container rounded-lg p-stack_sm mb-stack_md md:mb-0">
-<p class="font-insight-text text-insight-text text-on-surface-variant mb-1 font-semibold">Why?</p>
-<p class="font-body-sm text-body-sm text-on-surface-variant">You spend approximately 12 hours a month generating standard reports. Setting up automation rules can reduce this to 1 hour, saving valuable time.</p>
-</div>
-</div>
-<div class="md:w-1/3 flex-shrink-0">
-<button class="w-full bg-primary-container text-on-primary rounded-lg py-3 font-body-sm text-body-sm font-semibold flex items-center justify-center gap-2 hover:bg-primary transition-colors shadow-sm">
-                                    Setup Automation
-                                    <span class="material-symbols-outlined text-[18px]">settings</span>
-</button>
-</div>
-</div>
-</div>
-</div>
-</div>
-</main>
-</div>
-<!-- BottomNavBar (Mobile) -->
-<nav class="md:hidden bg-white/90 dark:bg-gray-900/90 backdrop-blur-lg text-indigo-600 dark:text-indigo-400 font-['Inter'] text-[10px] font-medium fixed bottom-0 w-full rounded-t-2xl z-50 border-t border-gray-100 dark:border-gray-800 shadow-[0_-4px_12px_rgba(79,70,225,0.06)] flex justify-around items-center h-20 px-2 pb-safe w-full">
-<a class="flex flex-col items-center justify-center text-gray-400 dark:text-gray-500 px-3 py-1 hover:text-indigo-500 dark:hover:text-indigo-300 active:scale-90 transition-transform" href="#">
-<span class="material-symbols-outlined mb-1">dashboard</span>
+                            </div>
+                        </div>
+                        <h3 class="font-h3 text-h3 text-on-surface mb-stack_sm relative z-10">Invoice #1024 for Globex
+                            is 5 days overdue.</h3>
+                        <div class="bg-surface-container rounded-lg p-stack_sm mb-stack_md relative z-10">
+                            <p class="font-insight-text text-insight-text text-on-surface-variant mb-1 font-semibold">
+                                Rule Triggered:</p>
+                            <p class="font-body-sm text-body-sm text-on-surface-variant">Payment of $1,200 was due on
+                                Oct 15th.</p>
+                        </div>
+                        <div class="relative z-10">
+                            <button
+                                class="w-full bg-surface-container-highest text-on-surface rounded-lg py-3 font-body-sm text-body-sm font-semibold flex items-center justify-center gap-2 border border-outline-variant hover:bg-surface-dim transition-colors">
+                                Send Reminder
+                                <span class="material-symbols-outlined text-[18px]">send</span>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Insight Card: Payment Due Soon (Info) -->
+                    <div
+                        class="bg-surface-container-lowest rounded-xl shadow-sm border border-surface-variant p-stack_md relative overflow-hidden group">
+                        <div class="flex justify-between items-start mb-stack_sm relative z-10">
+                            <div class="flex items-center gap-2">
+                                <span
+                                    class="bg-primary-container text-on-primary font-label-caps text-label-caps px-2 py-1 rounded-full flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-[14px]">schedule</span>
+                                    Payment Due Soon
+                                </span>
+                            </div>
+                        </div>
+                        <h3 class="font-h3 text-h3 text-on-surface mb-stack_sm relative z-10">Invoice #1025 for Initech
+                            is due in 3 days.</h3>
+                        <div class="bg-surface-container rounded-lg p-stack_sm mb-stack_md relative z-10">
+                            <p class="font-insight-text text-insight-text text-on-surface-variant mb-1 font-semibold">
+                                Rule Triggered:</p>
+                            <p class="font-body-sm text-body-sm text-on-surface-variant">Payment of $850 is due on Oct
+                                25th.</p>
+                        </div>
+                        <div class="relative z-10">
+                            <button
+                                class="w-full bg-surface-container-highest text-on-surface rounded-lg py-3 font-body-sm text-body-sm font-semibold flex items-center justify-center gap-2 border border-outline-variant hover:bg-surface-dim transition-colors">
+                                View Invoice
+                                <span class="material-symbols-outlined text-[18px]">receipt_long</span>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Insight Card: Inactive Client (Surface) -->
+                    <div
+                        class="bg-surface-container-lowest rounded-xl shadow-sm border border-surface-variant p-stack_md relative overflow-hidden md:col-span-2 group">
+                        <div class="flex justify-between items-start mb-stack_sm relative z-10">
+                            <div class="flex items-center gap-2">
+                                <span
+                                    class="bg-surface-variant text-on-surface-variant font-label-caps text-label-caps px-2 py-1 rounded-full flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-[14px]">hourglass_empty</span>
+                                    Inactive Client
+                                </span>
+                            </div>
+                        </div>
+                        <div class="md:flex gap-container_margin items-center relative z-10">
+                            <div class="flex-1">
+                                <h3 class="font-h3 text-h3 text-on-surface mb-stack_sm">No contact with Stark Industries
+                                    in 30 days.</h3>
+                                <div class="bg-surface-container rounded-lg p-stack_sm mb-stack_md md:mb-0">
+                                    <p
+                                        class="font-insight-text text-insight-text text-on-surface-variant mb-1 font-semibold">
+                                        Rule Triggered:</p>
+                                    <p class="font-body-sm text-body-sm text-on-surface-variant">The last logged meeting
+                                        or email was over a month ago.</p>
+                                </div>
+                            </div>
+                            <div class="md:w-1/3 flex-shrink-0">
+                                <button
+                                    class="w-full bg-primary-container text-on-primary rounded-lg py-3 font-body-sm text-body-sm font-semibold flex items-center justify-center gap-2 hover:bg-primary transition-colors shadow-sm">
+                                    Schedule Check-in
+                                    <span class="material-symbols-outlined text-[18px]">calendar_month</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <!-- BottomNavBar (Mobile) -->
+    <nav
+        class="md:hidden bg-white/90 dark:bg-gray-900/90 backdrop-blur-lg text-indigo-600 dark:text-indigo-400 font-['Inter'] text-[10px] font-medium fixed bottom-0 w-full rounded-t-2xl z-50 border-t border-gray-100 dark:border-gray-800 shadow-[0_-4px_12px_rgba(79,70,225,0.06)] flex justify-around items-center h-20 px-2 pb-safe w-full">
+        <a class="flex flex-col items-center justify-center text-gray-400 dark:text-gray-500 px-3 py-1 hover:text-indigo-500 dark:hover:text-indigo-300 active:scale-90 transition-transform"
+            href="#">
+            <span class="material-symbols-outlined mb-1">dashboard</span>
             Home
         </a>
-<a class="flex flex-col items-center justify-center text-gray-400 dark:text-gray-500 px-3 py-1 hover:text-indigo-500 dark:hover:text-indigo-300 active:scale-90 transition-transform" href="#">
-<span class="material-symbols-outlined mb-1">groups</span>
+        <a class="flex flex-col items-center justify-center text-gray-400 dark:text-gray-500 px-3 py-1 hover:text-indigo-500 dark:hover:text-indigo-300 active:scale-90 transition-transform"
+            href="#">
+            <span class="material-symbols-outlined mb-1">groups</span>
             Clients
         </a>
-<a class="flex flex-col items-center justify-center text-gray-400 dark:text-gray-500 px-3 py-1 hover:text-indigo-500 dark:hover:text-indigo-300 active:scale-90 transition-transform" href="#">
-<span class="material-symbols-outlined mb-1">payments</span>
+        <a class="flex flex-col items-center justify-center text-gray-400 dark:text-gray-500 px-3 py-1 hover:text-indigo-500 dark:hover:text-indigo-300 active:scale-90 transition-transform"
+            href="#">
+            <span class="material-symbols-outlined mb-1">payments</span>
             Finance
         </a>
-<a class="flex flex-col items-center justify-center bg-indigo-50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 rounded-xl px-3 py-1 hover:text-indigo-500 dark:hover:text-indigo-300 active:scale-90 transition-transform" href="#">
-<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+        <a class="flex flex-col items-center justify-center bg-indigo-50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 rounded-xl px-3 py-1 hover:text-indigo-500 dark:hover:text-indigo-300 active:scale-90 transition-transform"
+            href="#">
+            <span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">rule</span>
             Insights
         </a>
-<a class="flex flex-col items-center justify-center text-gray-400 dark:text-gray-500 px-3 py-1 hover:text-indigo-500 dark:hover:text-indigo-300 active:scale-90 transition-transform" href="#">
-<span class="material-symbols-outlined mb-1">settings</span>
+        <a class="flex flex-col items-center justify-center text-gray-400 dark:text-gray-500 px-3 py-1 hover:text-indigo-500 dark:hover:text-indigo-300 active:scale-90 transition-transform"
+            href="#">
+            <span class="material-symbols-outlined mb-1">settings</span>
             Settings
         </a>
-</nav>
-</body></html>
+    </nav>
+</body>
+
+</html>
