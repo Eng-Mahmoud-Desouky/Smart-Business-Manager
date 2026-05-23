@@ -86,6 +86,38 @@ public class SessionManager
         }
     }
 
+    public async Task<string> GetAccessTokenAsync()
+    {
+        if (string.IsNullOrEmpty(_accessToken))
+        {
+            try
+            {
+                _accessToken = await SecureStorage.GetAsync(Constants.AccessTokenKey);
+            }
+            catch
+            {
+                // Safe handling in case SecureStorage has platform/permission issue
+            }
+        }
+        return _accessToken;
+    }
+
+    public async Task<string> GetCurrentUserIdAsync()
+    {
+        if (string.IsNullOrEmpty(_currentUserId))
+        {
+            try
+            {
+                _currentUserId = await SecureStorage.GetAsync(Constants.UserIdKey);
+            }
+            catch
+            {
+                // Safe handling in case SecureStorage has platform/permission issue
+            }
+        }
+        return _currentUserId;
+    }
+
     public async Task SaveSessionAsync(string accessToken, string refreshToken, string userId)
     {
         try

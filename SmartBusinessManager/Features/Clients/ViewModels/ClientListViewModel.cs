@@ -2,6 +2,7 @@ using System.Collections.ObjectModel;
 using SmartBusinessManager.Core.Models;
 using SmartBusinessManager.Core.Services;
 using SmartBusinessManager.Features.Clients.Models;
+using SmartBusinessManager.Features.Clients.Views;
 
 namespace SmartBusinessManager.Features.Clients.ViewModels;
 
@@ -122,14 +123,14 @@ public class ClientListViewModel : BaseViewModel
 
     private async Task NavigateToAddClientAsync()
     {
-        await Shell.Current.GoToAsync("clients/add");
+        await Shell.Current.GoToAsync(nameof(AddClientPage));
     }
 
     private async Task NavigateToDetailAsync(Client client)
     {
         if (client == null) return;
         
-        await Shell.Current.GoToAsync("clients/detail", new Dictionary<string, object>
+        await Shell.Current.GoToAsync(nameof(ClientDetailPage), new Dictionary<string, object>
         {
             { "ClientId", client.Id }
         });

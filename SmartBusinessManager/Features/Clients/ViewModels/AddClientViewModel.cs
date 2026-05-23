@@ -1,12 +1,14 @@
 using SmartBusinessManager.Core.Models;
 using SmartBusinessManager.Core.Services;
 using SmartBusinessManager.Features.Clients.Models;
+using SmartBusinessManager.Core.Helpers;
 
 namespace SmartBusinessManager.Features.Clients.ViewModels;
 
 public class AddClientViewModel : BaseViewModel
 {
     private readonly ISupabaseService _supabaseService;
+    private readonly SessionManager _sessionManager;
 
     private string _name = string.Empty;
     public string Name
@@ -62,9 +64,10 @@ public class AddClientViewModel : BaseViewModel
     public Command SaveCommand { get; }
     public Command CancelCommand { get; }
 
-    public AddClientViewModel(ISupabaseService supabaseService)
+    public AddClientViewModel(ISupabaseService supabaseService, SessionManager sessionManager)
     {
         _supabaseService = supabaseService;
+        _sessionManager = sessionManager;
         Title = "Add Client";
 
         SaveCommand = new Command(async () => await SaveAsync());
@@ -88,6 +91,8 @@ public class AddClientViewModel : BaseViewModel
         {
             var client = new Client
             {
+                Id = Guid.NewGuid().ToString(),
+                OwnerId = await _sessionManager.GetCurrentUserIdAsync(),
                 Name = Name.Trim(),
                 Email = string.IsNullOrWhiteSpace(Email) ? null : Email.Trim(),
                 Phone = string.IsNullOrWhiteSpace(Phone) ? null : Phone.Trim(),
@@ -103,6 +108,7 @@ public class AddClientViewModel : BaseViewModel
         catch (Exception ex)
         {
             ErrorMessage = "Failed to add client. Please check your data and try again.";
+            MainThread.BeginInvokeOnMainThread(() => Application.Current.MainPage.DisplayAlert("Insert Error", ex.Message, "OK"));
         }
         finally
         {

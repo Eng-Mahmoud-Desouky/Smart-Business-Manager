@@ -3,12 +3,14 @@ using SmartBusinessManager.Core.Models;
 using SmartBusinessManager.Core.Services;
 using SmartBusinessManager.Features.Clients.Models;
 using SmartBusinessManager.Features.Finance.Models;
+using SmartBusinessManager.Core.Helpers;
 
 namespace SmartBusinessManager.Features.Finance.ViewModels;
 
 public class AddPaymentViewModel : BaseViewModel
 {
     private readonly ISupabaseService _supabaseService;
+    private readonly SessionManager _sessionManager;
 
     private ObservableCollection<Client> _clients = new();
     public ObservableCollection<Client> Clients
@@ -63,9 +65,10 @@ public class AddPaymentViewModel : BaseViewModel
     public Command SaveCommand { get; }
     public Command CancelCommand { get; }
 
-    public AddPaymentViewModel(ISupabaseService supabaseService)
+    public AddPaymentViewModel(ISupabaseService supabaseService, SessionManager sessionManager)
     {
         _supabaseService = supabaseService;
+        _sessionManager = sessionManager;
         Title = "Add Payment";
 
         LoadClientsCommand = new Command(async () => await LoadClientsAsync());
@@ -122,6 +125,8 @@ public class AddPaymentViewModel : BaseViewModel
         {
             var payment = new Payment
             {
+                Id = Guid.NewGuid().ToString(),
+                OwnerId = await _sessionManager.GetCurrentUserIdAsync(),
                 ClientId = SelectedClient.Id,
                 Amount = amount,
                 Currency = "USD", // Fixed to USD for MVP
@@ -137,6 +142,7 @@ public class AddPaymentViewModel : BaseViewModel
         catch (Exception ex)
         {
             ErrorMessage = "Failed to log payment invoice. Please try again.";
+            MainThread.BeginInvokeOnMainThread(() => Application.Current.MainPage.DisplayAlert("Insert Error", ex.Message, "OK"));
         }
         finally
         {

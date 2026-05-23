@@ -2,6 +2,7 @@ using System.Collections.ObjectModel;
 using SmartBusinessManager.Core.Models;
 using SmartBusinessManager.Core.Services;
 using SmartBusinessManager.Features.Finance.Models;
+using SmartBusinessManager.Features.Finance.Views;
 
 namespace SmartBusinessManager.Features.Finance.ViewModels;
 
@@ -171,7 +172,7 @@ public class PaymentListViewModel : BaseViewModel
 
     private async Task NavigateToAddPaymentAsync()
     {
-        await Shell.Current.GoToAsync("payments/add");
+        await Shell.Current.GoToAsync(nameof(AddPaymentPage));
     }
 
     private async Task MarkAsPaidAsync(Payment payment)

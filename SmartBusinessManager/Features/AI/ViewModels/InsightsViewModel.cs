@@ -3,6 +3,7 @@ using SmartBusinessManager.Core.Models;
 using SmartBusinessManager.Core.Services;
 using SmartBusinessManager.Features.AI.Models;
 using SmartBusinessManager.Core.Helpers;
+using SmartBusinessManager.Features.Clients.Views;
 
 namespace SmartBusinessManager.Features.AI.ViewModels;
 
@@ -145,6 +146,6 @@ public class InsightsViewModel : BaseViewModel
         if (insight == null || string.IsNullOrEmpty(insight.ClientId)) return;
 
         // Navigate directly to the client's detail page where the action should occur
-        await Shell.Current.GoToAsync($"clients/detail?ClientId={insight.ClientId}");
+        await Shell.Current.GoToAsync($"{nameof(ClientDetailPage)}?ClientId={insight.ClientId}");
     }
 }

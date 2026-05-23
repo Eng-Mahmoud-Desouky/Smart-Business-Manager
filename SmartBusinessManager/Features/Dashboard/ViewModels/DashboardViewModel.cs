@@ -4,6 +4,7 @@ using SmartBusinessManager.Core.Services;
 using SmartBusinessManager.Features.AI.Models;
 using SmartBusinessManager.Features.Clients.Models;
 using SmartBusinessManager.Features.Finance.Models;
+using SmartBusinessManager.Features.Clients.Views;
 
 namespace SmartBusinessManager.Features.Dashboard.ViewModels;
 
@@ -181,6 +182,6 @@ public class DashboardViewModel : BaseViewModel
     {
         if (item == null || string.IsNullOrEmpty(item.ClientId)) return;
 
-        await Shell.Current.GoToAsync($"clients/detail?ClientId={item.ClientId}");
+        await Shell.Current.GoToAsync($"{nameof(ClientDetailPage)}?ClientId={item.ClientId}");
     }
 }
