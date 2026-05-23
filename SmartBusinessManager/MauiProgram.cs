@@ -40,6 +40,7 @@ public static class MauiProgram
         builder.Services.AddTransient<RegisterViewModel>();
         builder.Services.AddTransient<DashboardViewModel>();
         builder.Services.AddTransient<ClientListViewModel>();
+        builder.Services.AddTransient<AddClientViewModel>();
         builder.Services.AddTransient<ClientDetailViewModel>();
         builder.Services.AddTransient<PaymentListViewModel>();
         builder.Services.AddTransient<AddPaymentViewModel>();

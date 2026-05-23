@@ -22,4 +22,8 @@ public interface ISupabaseService
     // AI Insights
     Task<List<AiInsight>> GetInsightsAsync();
     Task                  MarkInsightAsReadAsync(string insightId);
+
+    // Interactions
+    Task<List<Interaction>> GetInteractionsByClientAsync(string clientId);
+    Task                    AddInteractionAsync(Interaction interaction);
 }

@@ -3,14 +3,110 @@
     x:Class="SmartBusinessManager.Features.Clients.Views.AddClientPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="{Binding Title}">
+    xmlns:vm="clr-namespace:SmartBusinessManager.Features.Clients.ViewModels"
+    Title="{Binding Title}"
+    BackgroundColor="{StaticResource Surface}">
 
-    <ContentPage.BindingContext>
-        <!-- Injected via DI in code-behind constructor -->
-    </ContentPage.BindingContext>
+    <ScrollView>
+        <Grid Margin="16" RowDefinitions="Auto, *, Auto">
+            <!-- Header -->
+            <VerticalStackLayout Grid.Row="0" Spacing="4" Margin="0,0,0,20">
+                <Label Text="Add New Client" FontSize="28" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}" />
+                <Label Text="Enter the client profile details below" FontSize="14" TextColor="{StaticResource TextSecondary}" />
+            </VerticalStackLayout>
 
-    <VerticalStackLayout Padding="16">
-        <Label Text="AddClient — Coming Soon" Style="{StaticResource BodyLabel}"/>
-    </VerticalStackLayout>
+            <!-- Form Body -->
+            <VerticalStackLayout Grid.Row="1" Spacing="16">
+                <!-- Validation Error -->
+                <Border StrokeThickness="0" BackgroundColor="{StaticResource DangerBg}" Padding="12" Margin="0,0,0,8"
+                        IsVisible="True">
+                    <!-- Wait! MAUI converter is not defined by default, so we can just bind to IsVisible with a simple string check or just use custom VM property. Let's look at vm: it has ValidationError. Let's bind IsVisible to ValidationError directly since MAUI string-to-boolean works natively, or use simple Label with IsVisible bound to ValidationError and a custom converter, or just bind directly. MAUI Label will be hidden if empty, but to be safe, let's bind IsVisible to ValidationError. Wait, we can bind IsVisible using a DataTrigger or direct binding to ValidationError. Let's bind direct or use custom VM helper, or just use a label whose IsVisible has a simple binding. Wait! MAUI lets you use `IsVisible="{Binding ValidationError, Converter={StaticResource stringNotNilConverter}}"` but we don't have that converter. An even easier way: MAUI Label is smart. If Text is empty, it doesn't render. But we can wrap it in a Border and bind `IsVisible="{Binding ValidationError.Length, Converter={StaticResource ...}}"` or better: bind IsVisible to a boolean property on VM! Wait, AddClientViewModel has ValidationError property but no HasValidationError. Wait, can we bind IsVisible using a Trigger? Yes! -->
+                    <Border.Triggers>
+                        <DataTrigger TargetType="Border" Binding="{Binding ValidationError}" Value="{x:Null}">
+                            <Setter Property="IsVisible" Value="False" />
+                        </DataTrigger>
+                        <DataTrigger TargetType="Border" Binding="{Binding ValidationError}" Value="">
+                            <Setter Property="IsVisible" Value="False" />
+                        </DataTrigger>
+                    </Border.Triggers>
+                    <Label Text="{Binding ValidationError}" TextColor="{StaticResource Danger}" FontAttributes="Bold" FontSize="14" />
+                </Border>
 
+                <!-- Client Name -->
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="Client Name *" FontAttributes="Bold" FontSize="14" TextColor="{StaticResource TextPrimary}" />
+                    <Border StrokeThickness="1" Stroke="{StaticResource Border}" BackgroundColor="{StaticResource White}" Padding="12,0">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="12" />
+                        </Border.StrokeShape>
+                        <Entry Text="{Binding Name}" Placeholder="e.g. John Doe" HeightRequest="44" BackgroundColor="Transparent" />
+                    </Border>
+                </VerticalStackLayout>
+
+                <!-- Company -->
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="Company / Business Name" FontAttributes="Bold" FontSize="14" TextColor="{StaticResource TextPrimary}" />
+                    <Border StrokeThickness="1" Stroke="{StaticResource Border}" BackgroundColor="{StaticResource White}" Padding="12,0">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="12" />
+                        </Border.StrokeShape>
+                        <Entry Text="{Binding Company}" Placeholder="e.g. Acme Corp" HeightRequest="44" BackgroundColor="Transparent" />
+                    </Border>
+                </VerticalStackLayout>
+
+                <!-- Email -->
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="Email Address" FontAttributes="Bold" FontSize="14" TextColor="{StaticResource TextPrimary}" />
+                    <Border StrokeThickness="1" Stroke="{StaticResource Border}" BackgroundColor="{StaticResource White}" Padding="12,0">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="12" />
+                        </Border.StrokeShape>
+                        <Entry Text="{Binding Email}" Placeholder="e.g. john@example.com" Keyboard="Email" HeightRequest="44" BackgroundColor="Transparent" />
+                    </Border>
+                </VerticalStackLayout>
+
+                <!-- Phone -->
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="Phone Number" FontAttributes="Bold" FontSize="14" TextColor="{StaticResource TextPrimary}" />
+                    <Border StrokeThickness="1" Stroke="{StaticResource Border}" BackgroundColor="{StaticResource White}" Padding="12,0">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="12" />
+                        </Border.StrokeShape>
+                        <Entry Text="{Binding Phone}" Placeholder="e.g. +1 555-0199" Keyboard="Telephone" HeightRequest="44" BackgroundColor="Transparent" />
+                    </Border>
+                </VerticalStackLayout>
+
+                <!-- Status Picker -->
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="Relationship Status" FontAttributes="Bold" FontSize="14" TextColor="{StaticResource TextPrimary}" />
+                    <Border StrokeThickness="1" Stroke="{StaticResource Border}" BackgroundColor="{StaticResource White}" Padding="12,0">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="12" />
+                        </Border.StrokeShape>
+                        <Picker ItemsSource="{Binding Statuses}" SelectedItem="{Binding Status}" HeightRequest="44" Title="Select status" BackgroundColor="Transparent" />
+                    </Border>
+                </VerticalStackLayout>
+
+                <!-- Notes -->
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="Notes / Description" FontAttributes="Bold" FontSize="14" TextColor="{StaticResource TextPrimary}" />
+                    <Border StrokeThickness="1" Stroke="{StaticResource Border}" BackgroundColor="{StaticResource White}" Padding="12" HeightRequest="120">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="12" />
+                        </Border.StrokeShape>
+                        <Editor Text="{Binding Notes}" Placeholder="Enter client background, deal status, or other context..." AutoSize="Disabled" BackgroundColor="Transparent" />
+                    </Border>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+
+            <!-- Buttons -->
+            <Grid Grid.Row="2" ColumnDefinitions="*, *" ColumnSpacing="12" Margin="0,24,0,0">
+                <Button Grid.Column="0" Text="Cancel" Command="{Binding CancelCommand}" BackgroundColor="{StaticResource Surface}" TextColor="{StaticResource TextPrimary}" BorderColor="{StaticResource Border}" BorderWidth="1" CornerRadius="12" HeightRequest="48" />
+                <Button Grid.Column="1" Text="Save Client" Command="{Binding SaveCommand}" BackgroundColor="{StaticResource Primary}" TextColor="{StaticResource White}" CornerRadius="12" HeightRequest="48" />
+            </Grid>
+
+            <!-- Busy Indicator -->
+            <ActivityIndicator Grid.RowSpan="3" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" HorizontalOptions="Center" VerticalOptions="Center" Color="{StaticResource Primary}" HeightRequest="50" WidthRequest="50" />
+        </Grid>
+    </ScrollView>
 </ContentPage>

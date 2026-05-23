@@ -1,11 +1,13 @@
 using SmartBusinessManager.Core.Models;
 using SmartBusinessManager.Core.Services;
+using SmartBusinessManager.Core.Helpers;
 
 namespace SmartBusinessManager.Features.Authentication.ViewModels;
 
 public class LoginViewModel : BaseViewModel
 {
     private readonly IAuthService _authService;
+    private readonly SessionManager _sessionManager;
 
     private string _email = string.Empty;
     public string Email
@@ -44,9 +46,10 @@ public class LoginViewModel : BaseViewModel
     public Command LoginCommand { get; }
     public Command NavigateToRegisterCommand { get; }
 
-    public LoginViewModel(IAuthService authService)
+    public LoginViewModel(IAuthService authService, SessionManager sessionManager)
     {
         _authService = authService;
+        _sessionManager = sessionManager;
         Title = "Sign In";
 
         LoginCommand = new Command(
@@ -59,6 +62,30 @@ public class LoginViewModel : BaseViewModel
             () => !IsBusy
         );
     }
+
+    public async Task CheckSessionAndRedirectAsync()
+    {
+        IsBusy = true;
+        OnPropertyChanged(nameof(IsNotBusy));
+        try
+        {
+            var hasSession = await _sessionManager.CheckSessionAsync();
+            if (hasSession)
+            {
+                await Shell.Current.GoToAsync("//dashboard");
+            }
+        }
+        catch
+        {
+            // Fail silently, let user log in manually
+        }
+        finally
+        {
+            IsBusy = false;
+            OnPropertyChanged(nameof(IsNotBusy));
+        }
+    }
+
 
     private async Task LoginAsync()
     {

@@ -1,4 +1,4 @@
-﻿using SmartBusinessManager.Features.Finance.ViewModels;
+using SmartBusinessManager.Features.Finance.ViewModels;
 
 namespace SmartBusinessManager.Features.Finance.Views;
 
@@ -7,5 +7,14 @@ public partial class PaymentListPage : ContentPage
     {
         InitializeComponent();
         BindingContext = viewModel;
+    }
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        if (BindingContext is PaymentListViewModel vm)
+        {
+            await vm.LoadPaymentsAsync();
+        }
     }
 }

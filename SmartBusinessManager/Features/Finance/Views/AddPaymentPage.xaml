@@ -3,14 +3,103 @@
     x:Class="SmartBusinessManager.Features.Finance.Views.AddPaymentPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="{Binding Title}">
+    xmlns:vm="clr-namespace:SmartBusinessManager.Features.Finance.ViewModels"
+    xmlns:clientModels="clr-namespace:SmartBusinessManager.Features.Clients.Models"
+    Title="{Binding Title}"
+    BackgroundColor="{StaticResource Surface}">
 
-    <ContentPage.BindingContext>
-        <!-- Injected via DI in code-behind constructor -->
-    </ContentPage.BindingContext>
+    <ScrollView>
+        <Grid Margin="16" RowDefinitions="Auto, *, Auto">
+            <!-- Header -->
+            <VerticalStackLayout Grid.Row="0" Spacing="4" Margin="0,0,0,20">
+                <Label Text="Create Invoice / Log Payment" FontSize="28" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}" />
+                <Label Text="Log a new payment account receivable" FontSize="14" TextColor="{StaticResource TextSecondary}" />
+            </VerticalStackLayout>
 
-    <VerticalStackLayout Padding="16">
-        <Label Text="AddPayment — Coming Soon" Style="{StaticResource BodyLabel}"/>
-    </VerticalStackLayout>
+            <!-- Form Body -->
+            <VerticalStackLayout Grid.Row="1" Spacing="16">
+                <!-- Validation Error -->
+                <Border StrokeThickness="0" BackgroundColor="{StaticResource DangerBg}" Padding="12" Margin="0,0,0,8">
+                    <Border.Triggers>
+                        <DataTrigger TargetType="Border" Binding="{Binding ValidationError}" Value="{x:Null}">
+                            <Setter Property="IsVisible" Value="False" />
+                        </DataTrigger>
+                        <DataTrigger TargetType="Border" Binding="{Binding ValidationError}" Value="">
+                            <Setter Property="IsVisible" Value="False" />
+                        </DataTrigger>
+                    </Border.Triggers>
+                    <Label Text="{Binding ValidationError}" TextColor="{StaticResource Danger}" FontAttributes="Bold" FontSize="14" />
+                </Border>
 
+                <!-- Client Picker -->
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="Select Client *" FontAttributes="Bold" FontSize="14" TextColor="{StaticResource TextPrimary}" />
+                    <Border StrokeThickness="1" Stroke="{StaticResource Border}" BackgroundColor="{StaticResource White}" Padding="12,0">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="12" />
+                        </Border.StrokeShape>
+                        <Picker ItemsSource="{Binding Clients}" SelectedItem="{Binding SelectedClient}" ItemDisplayBinding="{Binding Name}" Title="Choose a client..." HeightRequest="44" BackgroundColor="Transparent" />
+                    </Border>
+                </VerticalStackLayout>
+
+                <!-- Amount Field -->
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="Amount (USD) *" FontAttributes="Bold" FontSize="14" TextColor="{StaticResource TextPrimary}" />
+                    <Border StrokeThickness="1" Stroke="{StaticResource Border}" BackgroundColor="{StaticResource White}" Padding="12,0">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="12" />
+                        </Border.StrokeShape>
+                        <Grid ColumnDefinitions="Auto, *">
+                            <Label Grid.Column="0" Text="$" VerticalOptions="Center" TextColor="{StaticResource TextPrimary}" Margin="0,0,8,0" FontAttributes="Bold" />
+                            <Entry Grid.Column="1" Text="{Binding AmountText}" Placeholder="0.00" Keyboard="Numeric" HeightRequest="44" BackgroundColor="Transparent" />
+                        </Grid>
+                    </Border>
+                    <!-- Fixed to USD reminder -->
+                    <Label Text="Fixed in USD currency for this transaction." FontSize="11" TextColor="{StaticResource TextMuted}" />
+                </VerticalStackLayout>
+
+                <!-- Due Date -->
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="Due Date" FontAttributes="Bold" FontSize="14" TextColor="{StaticResource TextPrimary}" />
+                    <Border StrokeThickness="1" Stroke="{StaticResource Border}" BackgroundColor="{StaticResource White}" Padding="12,0">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="12" />
+                        </Border.StrokeShape>
+                        <DatePicker Date="{Binding DueDate}" Format="MMMM dd, yyyy" HeightRequest="44" BackgroundColor="Transparent" />
+                    </Border>
+                </VerticalStackLayout>
+
+                <!-- Invoice Reference Number -->
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="Invoice Reference / Number" FontAttributes="Bold" FontSize="14" TextColor="{StaticResource TextPrimary}" />
+                    <Border StrokeThickness="1" Stroke="{StaticResource Border}" BackgroundColor="{StaticResource White}" Padding="12,0">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="12" />
+                        </Border.StrokeShape>
+                        <Entry Text="{Binding ReferenceNumber}" Placeholder="e.g. INV-2026-001" HeightRequest="44" BackgroundColor="Transparent" />
+                    </Border>
+                </VerticalStackLayout>
+
+                <!-- Description -->
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="Description / Memo" FontAttributes="Bold" FontSize="14" TextColor="{StaticResource TextPrimary}" />
+                    <Border StrokeThickness="1" Stroke="{StaticResource Border}" BackgroundColor="{StaticResource White}" Padding="12" HeightRequest="100">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="12" />
+                        </Border.StrokeShape>
+                        <Editor Text="{Binding Description}" Placeholder="Enter payment purpose, milestones, or terms..." AutoSize="Disabled" BackgroundColor="Transparent" />
+                    </Border>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+
+            <!-- Buttons -->
+            <Grid Grid.Row="2" ColumnDefinitions="*, *" ColumnSpacing="12" Margin="0,24,0,0">
+                <Button Grid.Column="0" Text="Cancel" Command="{Binding CancelCommand}" BackgroundColor="{StaticResource Surface}" TextColor="{StaticResource TextPrimary}" BorderColor="{StaticResource Border}" BorderWidth="1" CornerRadius="12" HeightRequest="48" />
+                <Button Grid.Column="1" Text="Create Invoice" Command="{Binding SaveCommand}" BackgroundColor="{StaticResource Primary}" TextColor="{StaticResource White}" CornerRadius="12" HeightRequest="48" />
+            </Grid>
+
+            <!-- Busy Indicator -->
+            <ActivityIndicator Grid.RowSpan="3" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" HorizontalOptions="Center" VerticalOptions="Center" Color="{StaticResource Primary}" HeightRequest="50" WidthRequest="50" />
+        </Grid>
+    </ScrollView>
 </ContentPage>

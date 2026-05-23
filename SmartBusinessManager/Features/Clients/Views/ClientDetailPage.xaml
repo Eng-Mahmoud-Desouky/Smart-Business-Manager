@@ -3,14 +3,242 @@
     x:Class="SmartBusinessManager.Features.Clients.Views.ClientDetailPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="{Binding Title}">
+    xmlns:vm="clr-namespace:SmartBusinessManager.Features.Clients.ViewModels"
+    xmlns:models="clr-namespace:SmartBusinessManager.Features.Clients.Models"
+    xmlns:finModels="clr-namespace:SmartBusinessManager.Features.Finance.Models"
+    xmlns:cards="clr-namespace:SmartBusinessManager.Shared.Components.Cards"
+    xmlns:common="clr-namespace:SmartBusinessManager.Shared.Components.Common"
+    Title="{Binding Title}"
+    BackgroundColor="{StaticResource Surface}">
 
-    <ContentPage.BindingContext>
-        <!-- Injected via DI in code-behind constructor -->
-    </ContentPage.BindingContext>
+    <Grid>
+        <!-- Main Layout Scrollable -->
+        <ScrollView>
+            <Grid Padding="16" RowDefinitions="Auto, Auto, Auto, Auto, *" RowSpacing="16">
+                
+                <!-- 1. Client Header Info Card -->
+                <Border Grid.Row="0" StrokeThickness="1" Stroke="{StaticResource Border}" BackgroundColor="{StaticResource White}" Padding="16">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="16" />
+                    </Border.StrokeShape>
+                    <Grid RowDefinitions="Auto, Auto, Auto, Auto" ColumnDefinitions="*, Auto" RowSpacing="6">
+                        <Label Grid.Row="0" Grid.Column="0" Text="{Binding Client.Name}" FontSize="24" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}" />
+                        <common:StatusBadge Grid.Row="0" Grid.Column="1" Status="{Binding Client.Status}" VerticalOptions="Center" />
+                        
+                        <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Client.Company}" FontSize="14" FontAttributes="Italic" TextColor="{StaticResource TextSecondary}" />
+                        <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Client.Email}" FontSize="13" TextColor="{StaticResource TextMuted}" />
+                        <Label Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Client.Phone}" FontSize="13" TextColor="{StaticResource TextMuted}" />
+                    </Grid>
+                </Border>
 
-    <VerticalStackLayout Padding="16">
-        <Label Text="ClientDetail � Coming Soon" Style="{StaticResource BodyLabel}"/>
-    </VerticalStackLayout>
+                <!-- 2. Financial Bento Grid -->
+                <Grid Grid.Row="1" ColumnDefinitions="*, *" ColumnSpacing="12">
+                    <!-- Received Card -->
+                    <Border Grid.Column="0" StrokeThickness="0" BackgroundColor="{StaticResource SuccessBg}" Padding="16">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="16" />
+                        </Border.StrokeShape>
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="Revenue Received" FontSize="11" TextColor="{StaticResource Success}" FontAttributes="Bold" />
+                            <Label Text="{Binding TotalRevenue, StringFormat='{0:C}'}" FontSize="20" FontAttributes="Bold" TextColor="{StaticResource Success}" />
+                        </VerticalStackLayout>
+                    </Border>
+                    
+                    <!-- Pending Card -->
+                    <Border Grid.Column="1" StrokeThickness="0" BackgroundColor="{StaticResource WarningBg}" Padding="16">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="16" />
+                        </Border.StrokeShape>
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="Pending Payments" FontSize="11" TextColor="{StaticResource Warning}" FontAttributes="Bold" />
+                            <Label Text="{Binding PendingRevenue, StringFormat='{0:C}'}" FontSize="20" FontAttributes="Bold" TextColor="{StaticResource Warning}" />
+                        </VerticalStackLayout>
+                    </Border>
+                </Grid>
 
+                <!-- 3. Notes / CRM Actions -->
+                <Border Grid.Row="2" StrokeThickness="1" Stroke="{StaticResource Border}" BackgroundColor="{StaticResource White}" Padding="16">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="16" />
+                    </Border.StrokeShape>
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="CRM Background" FontSize="14" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}" />
+                        <Label Text="{Binding Client.Notes, TargetNullValue='No background notes recorded yet.'}" FontSize="13" TextColor="{StaticResource TextSecondary}" />
+                        
+                        <Grid ColumnDefinitions="*, *, *" ColumnSpacing="8" Margin="0,8,0,0">
+                            <Button Grid.Column="0" Text="Active" Command="{Binding UpdateClientStatusCommand}" CommandParameter="active" BackgroundColor="{StaticResource PrimaryLight}" TextColor="{StaticResource PrimaryDark}" FontSize="12" CornerRadius="8" HeightRequest="32" Padding="0" />
+                            <Button Grid.Column="1" Text="Lead" Command="{Binding UpdateClientStatusCommand}" CommandParameter="lead" BackgroundColor="{StaticResource PrimaryLight}" TextColor="{StaticResource PrimaryDark}" FontSize="12" CornerRadius="8" HeightRequest="32" Padding="0" />
+                            <Button Grid.Column="2" Text="Inactive" Command="{Binding UpdateClientStatusCommand}" CommandParameter="inactive" BackgroundColor="{StaticResource PrimaryLight}" TextColor="{StaticResource PrimaryDark}" FontSize="12" CornerRadius="8" HeightRequest="32" Padding="0" />
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- 4. Segmented Tabs -->
+                <Grid Grid.Row="3" ColumnDefinitions="*, *" ColumnSpacing="8">
+                    <!-- Interactions Tab Button -->
+                    <Button Grid.Column="0" Text="CRM Feed" Command="{Binding ToggleTabCommand}" CommandParameter="interactions" HeightRequest="40" CornerRadius="12">
+                        <Button.Triggers>
+                            <DataTrigger TargetType="Button" Binding="{Binding IsInteractionsTabSelected}" Value="True">
+                                <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+                                <Setter Property="TextColor" Value="{StaticResource White}" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="Button" Binding="{Binding IsInteractionsTabSelected}" Value="False">
+                                <Setter Property="BackgroundColor" Value="{StaticResource Surface}" />
+                                <Setter Property="TextColor" Value="{StaticResource TextSecondary}" />
+                            </DataTrigger>
+                        </Button.Triggers>
+                    </Button>
+
+                    <!-- Payments Tab Button -->
+                    <Button Grid.Column="1" Text="Invoices" Command="{Binding ToggleTabCommand}" CommandParameter="payments" HeightRequest="40" CornerRadius="12">
+                        <Button.Triggers>
+                            <DataTrigger TargetType="Button" Binding="{Binding IsPaymentsTabSelected}" Value="True">
+                                <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+                                <Setter Property="TextColor" Value="{StaticResource White}" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="Button" Binding="{Binding IsPaymentsTabSelected}" Value="False">
+                                <Setter Property="BackgroundColor" Value="{StaticResource Surface}" />
+                                <Setter Property="TextColor" Value="{StaticResource TextSecondary}" />
+                            </DataTrigger>
+                        </Button.Triggers>
+                    </Button>
+                </Grid>
+
+                <!-- 5. List Timeline Display -->
+                <Grid Grid.Row="4">
+                    
+                    <!-- Interactions Feed List -->
+                    <VerticalStackLayout IsVisible="{Binding IsInteractionsTabSelected}" Spacing="8">
+                        <Grid ColumnDefinitions="*, Auto" Margin="0,0,0,4">
+                            <Label Grid.Column="0" Text="Communication Feed" FontAttributes="Bold" FontSize="14" TextColor="{StaticResource TextPrimary}" VerticalOptions="Center" />
+                            <Button Grid.Column="1" Text="+ Log Interaction" Command="{Binding ToggleLogFormCommand}" BackgroundColor="{StaticResource Primary}" TextColor="{StaticResource White}" FontSize="12" CornerRadius="8" HeightRequest="32" Padding="12,0" />
+                        </Grid>
+                        
+                        <CollectionView ItemsSource="{Binding Interactions}" SelectionMode="None">
+                            <CollectionView.EmptyView>
+                                <Label Text="No client communications logged yet. Tap + Log Interaction above to record a call or meeting." FontSize="13" TextColor="{StaticResource TextMuted}" HorizontalOptions="Center" HorizontalTextAlignment="Center" Margin="0,20" />
+                            </CollectionView.EmptyView>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="models:Interaction">
+                                    <Border StrokeThickness="1" Stroke="{StaticResource Border}" BackgroundColor="{StaticResource White}" Margin="0,0,0,8" Padding="12">
+                                        <Border.StrokeShape>
+                                            <RoundRectangle CornerRadius="12" />
+                                        </Border.StrokeShape>
+                                        <Grid ColumnDefinitions="Auto, *" ColumnSpacing="12">
+                                            <!-- Type Icon Border -->
+                                            <Border Grid.Column="0" HeightRequest="36" WidthRequest="36" StrokeThickness="0" BackgroundColor="{StaticResource PrimaryLight}" VerticalOptions="Center">
+                                                <Border.StrokeShape>
+                                                    <RoundRectangle CornerRadius="18" />
+                                                </Border.StrokeShape>
+                                                <Label Text="{Binding Type}" FontSize="9" FontAttributes="Bold" TextColor="{StaticResource PrimaryDark}" HorizontalOptions="Center" VerticalOptions="Center" />
+                                            </Border>
+                                            
+                                            <!-- Message Info -->
+                                            <VerticalStackLayout Grid.Column="1" Spacing="2">
+                                                <Label Text="{Binding Subject}" FontAttributes="Bold" FontSize="14" TextColor="{StaticResource TextPrimary}" />
+                                                <Label Text="{Binding Notes}" FontSize="12" TextColor="{StaticResource TextSecondary}" />
+                                                <Label Text="{Binding InteractedAt, StringFormat='{0:MMM dd, yyyy h:mm tt}'}" FontSize="10" TextColor="{StaticResource TextMuted}" />
+                                            </VerticalStackLayout>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </VerticalStackLayout>
+
+                    <!-- Payments Invoices List -->
+                    <VerticalStackLayout IsVisible="{Binding IsPaymentsTabSelected}" Spacing="8">
+                        <Label Text="Client Invoices" FontAttributes="Bold" FontSize="14" TextColor="{StaticResource TextPrimary}" Margin="0,0,0,4" />
+                        
+                        <CollectionView ItemsSource="{Binding Payments}" SelectionMode="None">
+                            <CollectionView.EmptyView>
+                                <Label Text="No invoices found for this client. Create an invoice via the Finance tab." FontSize="13" TextColor="{StaticResource TextMuted}" HorizontalOptions="Center" HorizontalTextAlignment="Center" Margin="0,20" />
+                            </CollectionView.EmptyView>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="finModels:Payment">
+                                    <cards:PaymentRecordCard
+                                        ClientName="{Binding ReferenceNumber, StringFormat='Ref: {0}'}"
+                                        AmountText="{Binding Amount, StringFormat='{0:C}'}"
+                                        DateText="{Binding DueDate, StringFormat='Due: {0}'}"
+                                        Status="{Binding Status}" />
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </VerticalStackLayout>
+
+                </Grid>
+
+                <!-- Delete Action -->
+                <Button Grid.Row="5" Text="Delete Client Profile" Command="{Binding DeleteClientCommand}" BackgroundColor="{StaticResource DangerBg}" TextColor="{StaticResource Danger}" CornerRadius="12" HeightRequest="48" Margin="0,20,0,0" />
+            </Grid>
+        </ScrollView>
+
+        <!-- ── Inline Log Interaction Form Modal Overlay ── -->
+        <Grid BackgroundColor="#80000000" IsVisible="{Binding IsLogInteractionFormVisible}" Padding="20">
+            <Border VerticalOptions="Center" HorizontalOptions="Fill" StrokeThickness="1" Stroke="{StaticResource Border}" BackgroundColor="{StaticResource White}" Padding="16">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="16" />
+                </Border.StrokeShape>
+                
+                <VerticalStackLayout Spacing="12">
+                    <!-- Modal Header -->
+                    <Grid ColumnDefinitions="*, Auto" Margin="0,0,0,4">
+                        <Label Grid.Column="0" Text="Log Interaction" FontSize="18" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}" />
+                        <Button Grid.Column="1" Text="X" Command="{Binding ToggleLogFormCommand}" BackgroundColor="Transparent" TextColor="{StaticResource TextMuted}" FontSize="16" HeightRequest="32" WidthRequest="32" Padding="0" />
+                    </Grid>
+
+                    <!-- Validation Error Label -->
+                    <Label Text="{Binding LogValidationError}" TextColor="{StaticResource Danger}" FontSize="12">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding LogValidationError}" Value="{x:Null}">
+                                <Setter Property="IsVisible" Value="False" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="Label" Binding="{Binding LogValidationError}" Value="">
+                                <Setter Property="IsVisible" Value="False" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+
+                    <!-- Interaction Type Dropdown -->
+                    <VerticalStackLayout Spacing="4">
+                        <Label Text="Interaction Type" FontSize="12" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}" />
+                        <Border StrokeThickness="1" Stroke="{StaticResource Border}" BackgroundColor="{StaticResource Surface}" Padding="12,0">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="12" />
+                            </Border.StrokeShape>
+                            <Picker ItemsSource="{Binding InteractionTypes}" SelectedItem="{Binding InteractionType}" HeightRequest="40" BackgroundColor="Transparent" />
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <!-- Subject Field -->
+                    <VerticalStackLayout Spacing="4">
+                        <Label Text="Subject / Brief *" FontSize="12" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}" />
+                        <Border StrokeThickness="1" Stroke="{StaticResource Border}" BackgroundColor="{StaticResource Surface}" Padding="12,0">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="12" />
+                            </Border.StrokeShape>
+                            <Entry Text="{Binding InteractionSubject}" Placeholder="e.g. Discussed proposal details" HeightRequest="40" BackgroundColor="Transparent" />
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <!-- Notes Editor -->
+                    <VerticalStackLayout Spacing="4">
+                        <Label Text="Detailed Notes" FontSize="12" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}" />
+                        <Border StrokeThickness="1" Stroke="{StaticResource Border}" BackgroundColor="{StaticResource Surface}" Padding="12" HeightRequest="100">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="12" />
+                            </Border.StrokeShape>
+                            <Editor Text="{Binding InteractionNotes}" Placeholder="Enter key details or follow ups..." AutoSize="Disabled" BackgroundColor="Transparent" />
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <!-- Submit Button -->
+                    <Button Text="Save Log Entry" Command="{Binding LogInteractionCommand}" BackgroundColor="{StaticResource Primary}" TextColor="{StaticResource White}" CornerRadius="12" HeightRequest="44" Margin="0,8,0,0" />
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+
+        <!-- Busy indicator overlay -->
+        <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" HorizontalOptions="Center" VerticalOptions="Center" Color="{StaticResource Primary}" HeightRequest="50" WidthRequest="50" />
+    </Grid>
 </ContentPage>

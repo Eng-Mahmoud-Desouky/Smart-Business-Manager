@@ -3,14 +3,132 @@
     x:Class="SmartBusinessManager.Features.Finance.Views.PaymentListPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="{Binding Title}">
+    xmlns:vm="clr-namespace:SmartBusinessManager.Features.Finance.ViewModels"
+    xmlns:models="clr-namespace:SmartBusinessManager.Features.Finance.Models"
+    xmlns:cards="clr-namespace:SmartBusinessManager.Shared.Components.Cards"
+    xmlns:views="clr-namespace:SmartBusinessManager.Shared.Components.Views"
+    xmlns:common="clr-namespace:SmartBusinessManager.Shared.Components.Common"
+    xmlns:nav="clr-namespace:SmartBusinessManager.Shared.Components.Navigation"
+    Title="{Binding Title}"
+    BackgroundColor="{StaticResource Surface}"
+    Shell.TabBarIsVisible="False"
+    Shell.NavBarIsVisible="False">
 
-    <ContentPage.BindingContext>
-        <!-- Injected via DI in code-behind constructor -->
-    </ContentPage.BindingContext>
+    <Grid RowDefinitions="*, Auto">
+        <Grid Grid.Row="0" Margin="16">
+        <Grid RowDefinitions="Auto, Auto, Auto, *" RowSpacing="12">
+            
+            <!-- Page Header -->
+            <VerticalStackLayout Grid.Row="0" Spacing="4">
+                <Label Text="Finance &amp; Invoices" FontSize="28" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}" />
+                <Label Text="Track accounts receivable and invoice pipeline" FontSize="14" TextColor="{StaticResource TextSecondary}" />
+            </VerticalStackLayout>
 
-    <VerticalStackLayout Padding="16">
-        <Label Text="PaymentList — Coming Soon" Style="{StaticResource BodyLabel}"/>
-    </VerticalStackLayout>
+            <!-- Bento Stats Header -->
+            <Grid Grid.Row="1" ColumnDefinitions="*, *, *" ColumnSpacing="8">
+                <!-- Total Paid Card -->
+                <Border Grid.Column="0" StrokeThickness="0" BackgroundColor="{StaticResource SuccessBg}" Padding="12">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="12" />
+                    </Border.StrokeShape>
+                    <VerticalStackLayout Spacing="2">
+                        <Label Text="Paid Rev" FontSize="10" TextColor="{StaticResource Success}" FontAttributes="Bold" />
+                        <Label Text="{Binding TotalRevenue, StringFormat='{0:C}'}" FontSize="14" FontAttributes="Bold" TextColor="{StaticResource Success}" />
+                    </VerticalStackLayout>
+                </Border>
 
+                <!-- Pending Card -->
+                <Border Grid.Column="1" StrokeThickness="0" BackgroundColor="{StaticResource WarningBg}" Padding="12">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="12" />
+                    </Border.StrokeShape>
+                    <VerticalStackLayout Spacing="2">
+                        <Label Text="Pending" FontSize="10" TextColor="{StaticResource Warning}" FontAttributes="Bold" />
+                        <Label Text="{Binding PendingRevenue, StringFormat='{0:C}'}" FontSize="14" FontAttributes="Bold" TextColor="{StaticResource Warning}" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Overdue Card -->
+                <Border Grid.Column="2" StrokeThickness="0" BackgroundColor="{StaticResource DangerBg}" Padding="12">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="12" />
+                    </Border.StrokeShape>
+                    <VerticalStackLayout Spacing="2">
+                        <Label Text="Overdue" FontSize="10" TextColor="{StaticResource Danger}" FontAttributes="Bold" />
+                        <Label Text="{Binding OverdueCount}" FontSize="14" FontAttributes="Bold" TextColor="{StaticResource Danger}" />
+                    </VerticalStackLayout>
+                </Border>
+            </Grid>
+
+            <!-- Filters Bar -->
+            <Grid Grid.Row="2" ColumnDefinitions="*, Auto" VerticalOptions="Center">
+                <ScrollView Grid.Column="0" Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
+                    <HorizontalStackLayout Spacing="8">
+                        <Button Text="All" Command="{Binding SelectFilterCommand}" CommandParameter="All" BackgroundColor="{StaticResource PrimaryLight}" TextColor="{StaticResource PrimaryDark}" CornerRadius="18" Padding="12,0" HeightRequest="36" />
+                        <Button Text="Paid" Command="{Binding SelectFilterCommand}" CommandParameter="paid" BackgroundColor="{StaticResource PrimaryLight}" TextColor="{StaticResource PrimaryDark}" CornerRadius="18" Padding="12,0" HeightRequest="36" />
+                        <Button Text="Pending" Command="{Binding SelectFilterCommand}" CommandParameter="pending" BackgroundColor="{StaticResource PrimaryLight}" TextColor="{StaticResource PrimaryDark}" CornerRadius="18" Padding="12,0" HeightRequest="36" />
+                        <Button Text="Overdue" Command="{Binding SelectFilterCommand}" CommandParameter="overdue" BackgroundColor="{StaticResource PrimaryLight}" TextColor="{StaticResource PrimaryDark}" CornerRadius="18" Padding="12,0" HeightRequest="36" />
+                    </HorizontalStackLayout>
+                </ScrollView>
+                <Label Grid.Column="1" Text="{Binding SelectedStatusFilter, StringFormat='Status: {0}'}" FontSize="12" FontAttributes="Bold" TextColor="{StaticResource TextSecondary}" VerticalOptions="Center" Margin="8,0,0,0" />
+            </Grid>
+
+            <!-- Collection List -->
+            <Grid Grid.Row="3">
+                <RefreshView Command="{Binding LoadPaymentsCommand}" IsRefreshing="{Binding IsBusy}">
+                    <CollectionView ItemsSource="{Binding FilteredPayments}" SelectionMode="None">
+                        <CollectionView.Header>
+                            <!-- Visual Tip -->
+                            <Label Text="Tip: Tap a pending or overdue invoice card below to mark it as PAID." FontSize="11" FontAttributes="Italic" TextColor="{StaticResource TextMuted}" Margin="0,0,0,12" HorizontalOptions="Center" />
+                        </CollectionView.Header>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:Payment">
+                                <cards:PaymentRecordCard
+                                    ClientName="{Binding ClientName}"
+                                    AmountText="{Binding Amount, StringFormat='{0:C}'}"
+                                    DateText="{Binding DueDate, StringFormat='Due: {0}'}"
+                                    Status="{Binding Status}"
+                                    TapCommand="{Binding Source={RelativeSource AncestorType={x:Type vm:PaymentListViewModel}}, Path=MarkAsPaidCommand}"
+                                    TapCommandParameter="{Binding .}" />
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </RefreshView>
+
+                <!-- Skeleton Loader -->
+                <VerticalStackLayout IsVisible="{Binding IsBusy}" Spacing="8" BackgroundColor="{StaticResource Surface}">
+                    <views:SkeletonLoader />
+                    <views:SkeletonLoader />
+                    <views:SkeletonLoader />
+                    <views:SkeletonLoader />
+                </VerticalStackLayout>
+
+                <!-- Empty State -->
+                <views:EmptyStateView 
+                    IsVisible="{Binding IsEmpty}"
+                    Title="No Payments Recorded"
+                    Description="No invoice payments found matching this status filter."
+                    ActionButtonText="Log Invoice"
+                    ActionButtonCommand="{Binding NavigateToAddPaymentCommand}" />
+            </Grid>
+        </Grid>
+
+        <!-- Floating Add Payment Button (FAB) -->
+        <Button Grid.RowSpan="4"
+                Text="+"
+                Command="{Binding NavigateToAddPaymentCommand}"
+                HorizontalOptions="End"
+                VerticalOptions="End"
+                Margin="16"
+                HeightRequest="56"
+                WidthRequest="56"
+                CornerRadius="28"
+                BackgroundColor="{StaticResource Primary}"
+                TextColor="{StaticResource White}"
+                FontSize="24"
+                FontAttributes="Bold" />
+        </Grid>
+        
+        <nav:CustomBottomNavBar Grid.Row="1" ActiveTab="payments" Margin="0" VerticalOptions="End" />
+    </Grid>
 </ContentPage>
